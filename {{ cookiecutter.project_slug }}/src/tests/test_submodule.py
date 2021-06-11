@@ -8,8 +8,10 @@
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #
 import pytest
+from src import submodule
 
-
-@pytest.fixture
-def global_fixture(request):
-    return 'Test'
+def test_subfunc(global_fixture):
+    l = submodule.sub_fun()
+    assert isinstance(l, list)
+    assert isinstance(global_fixture, str)
+    
