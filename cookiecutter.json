@@ -1,14 +1,11 @@
 {
-    "full_name": "Markus Ritschel",
+    "project_author": "Markus Ritschel",
     "email": "git@markusritschel.de",
     "github_username": "markusritschel",
     "project_name": "Scientific Project Python Boilerplate",
     "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-').strip() }}",
     "project_description": "A boilerplate for scientific projects using Python",
     "project_version": "0.1.0",
-    "use_pytest": "y",
-    "command_line_interface": ["Click", "Docopt", "No command-line interface"],
-    "create_author_file": "y",
     "project_license": ["MIT license", "BSD license", "ISC license", "Apache Software License 2.0", "GNU General Public License v3", "Not open source"],
     "_copy_without_render": [
         ".github/workflows"
