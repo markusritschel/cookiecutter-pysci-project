@@ -1,20 +1,16 @@
 # Cookiecutter-python-sci-project Template
 [![License MIT](https://img.shields.io/github/license/markusritschel/cookiecutter-python-sci-project)](./LICENSE)
 
-_A CookieCutter Template for Scientific Python Projects_
+_A [CookieCutter](https://github.com/cookiecutter/cookiecutter) Template for Scientific Python Projects_
 
-## Setup
-This [CookieCutter](https://github.com/cookiecutter/cookiecutter) template is a boilerplate for scientific projects based on Python.
-
-## Installation
+## Usage
 First, install [CookieCutter](https://github.com/cookiecutter/cookiecutter) via pip or conda.
 ```bash
 $ pip install -U cookiecutter
 $ conda install -c conda-forge cookiecutter
 ```
 
-## Usage
-After installing cookiecutter, create a new cookiecutter from this template by executing one of the following commands:
+After installing cookiecutter, create a new project from this template by executing one of the following commands:
 ```bash
 $ cookiecutter gh:markusritschel/cookiecutter-python-sci-project
 $ cookiecutter https://github.com/markusritschel/cookiecutter-python-sci-project.git
