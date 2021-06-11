@@ -7,7 +7,6 @@
 # Document any rules by adding a single line starting with ## immediately before the rule.
 # ==========================================================================================
 
-## Clean logs, Python file artifacts
 clean: clean-pyc clean-logs
 
 ## Remove Python file artifacts
