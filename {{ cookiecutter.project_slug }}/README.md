@@ -88,4 +88,4 @@ For any questions or issues, please contact me via {{ cookiecutter.email }} or o
 
 
 ---
-&copy; {{ cookiecutter.full_name }} {% now 'local', '%Y' %}
+&copy; {{ cookiecutter.project_author }} {% now 'local', '%Y' %}

@@ -2,7 +2,7 @@
 # -*- coding utf-8 -*-
 #
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-# Author: {{ cookiecutter.full_name }}
+# Author: {{ cookiecutter.project_author }}
 # eMail:  {{ cookiecutter.email }}
 # Date:   {% now 'local', '%Y-%m-%d' %}
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
