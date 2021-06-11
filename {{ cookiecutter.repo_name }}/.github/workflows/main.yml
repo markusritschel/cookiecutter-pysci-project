@@ -1,0 +1,33 @@
+name: CI
+
+on: 
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build: 
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [3.6, 3.7, 3.8, 3.9]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python }}
+    
+    - name: Install Dependencies
+      run: |
+        pip install requirements.txt
+
+    - name: Run PyTest
+      run: |
+        source $HOME/.peotry/env
+        poetry run pytest
+
