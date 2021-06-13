@@ -2,3 +2,4 @@ python-dotenv
 pytest
 docopt
 click
+jupyter-book
