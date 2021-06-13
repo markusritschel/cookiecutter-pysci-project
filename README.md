@@ -88,9 +88,7 @@ The script will ask you some questions based on the entries in the `cookiecutter
 The following files are for demonstration purposes only and, if not needed, can be deleted safely:
 
     ├── notebooks/01-minimal-example.ipynb
-    │
     ├── reports/book/*
-    │
     ├── scripts/01-test.py
     └── src
         ├── tests/*
