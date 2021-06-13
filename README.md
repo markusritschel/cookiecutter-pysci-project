@@ -4,7 +4,7 @@
 _Just another [CookieCutter](https://github.com/cookiecutter/cookiecutter) Template for Scientific Python Projects._
 
 ## What is it good for?
-[CookieCutter](https://github.com/cookiecutter/cookiecutter) is a templating engine for creating directory structures including pre-defined files based on a question catalogue that are being asked during the setup.<br>
+[CookieCutter](https://github.com/cookiecutter/cookiecutter) is a templating engine for creating directory structures including pre-defined files based on a question catalogue that is being asked during the setup.<br>
 By running `cookiecutter` with this repository, a new directory will be created with a pre-defined structure and some basic files, making you all ready for starting a new scientific python project.
 
 ## About this template
