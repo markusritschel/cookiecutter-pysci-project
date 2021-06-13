@@ -11,6 +11,7 @@ base_dir = Path(__file__).resolve().parents[1]
 data_dir = base_dir / 'data'
 log_dir  = base_dir / 'logs'
 plot_dir = base_dir / 'reports/figures'
+jupyter_startup_script = base_dir / 'notebooks/jupyter_startup.ipy'
 
 # find .env automagically by walking up directories until it's found
 dotenv_path = find_dotenv()
