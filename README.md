@@ -14,6 +14,9 @@ This template provides a boilerplate for small to medium-size (scientific) data 
 For an overview of the structure have a look at the section further below.
 The redundant parts (mainly for demonstration purposes) are only few and are listed in the section after the one describing the project structure.
 
+Once set up, a git repository is automatically initialized. 
+If you want to connect it with a remote repository on GitHub (or any other hosted git service) you need to add the respective remote repository to your local repository.
+
 ## Requirements
 You need to have python installed as well as the python package `cookiecutter`.
 You can do this either via pip or conda.
@@ -91,6 +94,15 @@ The following files are for demonstration purposes only and, if not needed, can 
     └── src
         ├── tests/*
         └── submodule.py
+
+
+## Sources of inspiration
+Other great sources of inspiration for creating this template:
+- https://drivendata.github.io/cookiecutter-data-science
+- https://github.com/drivendata/cookiecutter-data-science
+- https://github.com/audreyfeldroy/cookiecutter-pypackage
+- https://github.com/hackalog/easydata
+- https://github.com/aubricus/cookiecutter-python-package
 
 
 ## Maintainer
