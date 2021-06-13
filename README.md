@@ -4,7 +4,15 @@
 _Just another [CookieCutter](https://github.com/cookiecutter/cookiecutter) Template for Scientific Python Projects._
 
 CookieCutter is a templating engine for creating directory structures including pre-defined files based on a question catalogue that are being asked during the setup.<br>
-By running `cookiecutter` with this repository, a new directory will be created with a pre-defined file structure and some basic files, making you all ready for starting a new scientific python project.<br>
+By running `cookiecutter` with this repository, a new directory will be created with a pre-defined file structure and some basic files, making you all ready for starting a new scientific python project.
+
+## About this template
+There exist tons of different `cookiecutter` templates for all different kinds of projects.
+However, according to my experience, many of them are very complex in their structure and therefore often a bit overkill, especially for new-comers or projects of a rather modest size.
+<br>
+This template shall provide a boilerplate for small to medium-size (scientific) data projects, e.g. for a thesis, group project or similar.
+For an overview of the structure have a look at the section further below.
+The redundant parts (mainly for demonstration purposes) are only few and are listed in the section after the one describing the project structure.
 
 ## Requirements
 You need to have python installed as well as the python package `cookiecutter`.
@@ -86,7 +94,7 @@ The following files are for demonstration purposes only and, if not needed, can 
 
 
 ## Maintainer
-- [markusritschel](https://github.com/markusritschel)
+- [Markus Ritschel](https://github.com/markusritschel)
 
 ## Contributing
 Issues & pull-requests accepted.
