@@ -7,10 +7,10 @@ CookieCutter is a templating engine for creating directory structures including 
 By running `cookiecutter` with this repository, a new directory will be created with a pre-defined file structure and some basic files, making you all ready for starting a new scientific python project.
 
 ## About this template
-There exist tons of different `cookiecutter` templates for all different kinds of projects.
+There exist tons of different CookieCutter templates for all different kinds of projects.
 However, according to my experience, many of them are very complex in their structure and therefore often a bit overkill, especially for new-comers or projects of a rather modest size.
 <br>
-This template shall provide a boilerplate for small to medium-size (scientific) data projects, e.g. for a thesis, group project or similar.
+This template provides a boilerplate for small to medium-size (scientific) data projects, e.g. a thesis, a group project, or similar.
 For an overview of the structure have a look at the section further below.
 The redundant parts (mainly for demonstration purposes) are only few and are listed in the section after the one describing the project structure.
 
@@ -24,7 +24,7 @@ $ conda install -c conda-forge cookiecutter
 Besides that, there is no need to clone or download anything from this repository. Just follow the next step :-)
 
 ## Usage
-After having cookiecutter installed, create a new project from this template by executing one of the following commands:
+After having `cookiecutter` installed, create a new project from this template by executing one of the following commands:
 ```bash
 $ cookiecutter gh:markusritschel/cookiecutter-pysci-project
 $ cookiecutter https://github.com/markusritschel/cookiecutter-pysci-project.git
