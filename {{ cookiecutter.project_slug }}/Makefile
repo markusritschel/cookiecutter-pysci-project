@@ -3,11 +3,15 @@
 # https://gist.github.com/klmr/575726c7e05d8780505a
 # https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 
-# ======= Put your targets etc. here and before the line starting with .DEFAULT_GOAL =======
-# Document any rules by adding a single line starting with ## immediately before the rule.
-# ==========================================================================================
+# ======= Put your targets etc. between here and the line which is starting with ".DEFAULT_GOAL" =======
+# Document any rules by adding a single line starting with ## right before the rule (see examples below)
+# ======================================================================================================
 
-clean: clean-pyc clean-logs
+clean: clean-pyc clean-logs clean-jupyter-book
+
+clean-jupyter-book:
+	jb clean --all docs/
+	jb clean --all reports/book/
 
 ## Remove Python file artifacts
 clean-pyc:
@@ -36,8 +40,20 @@ save_requirements:
 	pip freeze > requirements.txt
 
 
+## Install Python Dependencies via pip
+requirements:
+	python -m pip install -U pip setuptools wheel
+	python -m pip install -r requirements.txt
+
+
+## Check if all packages listed in requirements.txt are installed in the current environment
+test_requirements:
+	@echo "Check if all packages listed in requirements.txt are installed in the current environment:"
+	python -m pip -vvv freeze -r requirements.txt | grep "not installed"
+
+
 ## Run pytest for the source code
-tests:
+tests: test_requirements
 	pytest src/tests/ --doctest-modules -v
 
 
