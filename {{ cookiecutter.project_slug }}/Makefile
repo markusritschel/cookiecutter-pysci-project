@@ -48,7 +48,7 @@ requirements:
 ## Check if all packages listed in requirements.txt are installed in the current environment
 test_requirements:
 	@echo "Check if all packages listed in requirements.txt are installed in the current environment:"
-	@# the "|| true" prevents the command returning an error if grep does not find a match
+	# the "|| true" prevents the command returning an error if grep does not find a match
 	python -m pip -vvv freeze -r requirements.txt | grep "not installed" || true
 
 
