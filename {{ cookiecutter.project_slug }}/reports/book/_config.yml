@@ -11,27 +11,6 @@
 
 
 ###############################################################################
-# Other settings
-
-# Information about where the book exists on the web
-repository:
-    url                       : https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}  # Online location of your book
-    path_to_book              : reports/book  # Optional path to your book, relative to the repository root
-    branch                    : main  # Which branch of the repository should be used when creating links (optional)
-
-# Launch button settings
-launch_buttons:
-    notebook_interface: "jupyterlab"
-    binderhub_url: "https://mybinder.org"
-    colab_url: "https://colab.research.google.com"
-    thebe: true
-
-bibtex_bibfiles:
-  - references.bib
-bibtex_reference_style: author_year
-
-
-###############################################################################
 # HTML-specific settings
 html:
     home_page_in_navbar: true
@@ -92,3 +71,24 @@ sphinx:
         - jupyterbook_latex
     config:
         language: "en"
+
+
+###############################################################################
+# Other settings
+
+# Information about where the book exists on the web
+repository:
+    url                       : https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}  # Online location of your book
+    path_to_book              : reports/book  # Optional path to your book, relative to the repository root
+    branch                    : main  # Which branch of the repository should be used when creating links (optional)
+
+# Launch button settings
+launch_buttons:
+    notebook_interface: "jupyterlab"
+    binderhub_url: "https://mybinder.org"
+    colab_url: "https://colab.research.google.com"
+    thebe: true
+
+bibtex_bibfiles:
+  - references.bib
+bibtex_reference_style: author_year
