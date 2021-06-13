@@ -96,7 +96,7 @@ The following files are for demonstration purposes only and, if not needed, can 
 
 
 ## Sources of inspiration
-Other great sources of inspiration for creating this template:
+Some great sources of inspiration and orientation when I created this template:
 - https://drivendata.github.io/cookiecutter-data-science
 - https://github.com/drivendata/cookiecutter-data-science
 - https://github.com/audreyfeldroy/cookiecutter-pypackage
