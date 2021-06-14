@@ -41,7 +41,7 @@ The script will ask you some questions based on the entries in the `cookiecutter
 ### Using the Makefile
 The Makefile in the project directory provides some default routines like cleanup, testing, installing requirements etc.
 <br>
-Even though for many people using make seems to be a bit old-fashioned, I would recommend you making use of `make`'s great capability of dealing with dependencies.
+Even though for many people using make seems to be a bit old-fashioned, I would recommend you making use of Make's great capability of dealing with dependencies.
 This is in particular useful if, for example, the first step in your data-processing pipeline takes a long time to process your raw data and generate the interim product.
 We would like
 <br>
@@ -60,6 +60,8 @@ process_interim_data: $(wildcard data/interim/**/*)
     python scripts/process-interim-data.py
 ```
 This way, the last step is only executed if the data it depends on have changed since the last time of execution.
+
+For further information, have a look at Make's documentation: https://www.gnu.org/software/make/manual/html_node/Rules.html
 
 
 ## Project Structure
