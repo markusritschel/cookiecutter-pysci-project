@@ -3,3 +3,5 @@ pytest
 docopt
 click
 jupyter-book
+jupyternotify
+markdown
