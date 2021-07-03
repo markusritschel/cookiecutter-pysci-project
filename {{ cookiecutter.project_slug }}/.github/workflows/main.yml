@@ -28,6 +28,5 @@ jobs:
 
     - name: Run PyTest
       run: |
-        source $HOME/.peotry/env
-        poetry run pytest
+        pytest src/ --doctest-modules --doctest-continue-on-failure -ra -v
 
