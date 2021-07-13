@@ -1,0 +1,39 @@
+name: CI
+
+on: 
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build: 
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [3.9]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python }}
+    
+    - name: Install CookieCutter & run setup
+      run: |
+        pip install cookiecutter
+        cookiecutter . --no-input
+
+    - name: Install dependencies
+      working-directory: ./scientific-project-python-boilerplate
+      run: pip install -r requirements.txt
+      
+    - name: Run tests
+      working-directory: ./scientific-project-python-boilerplate
+      run: |
+        pytest src/ --doctest-modules --doctest-continue-on-failure -ra -v
+        
+      
