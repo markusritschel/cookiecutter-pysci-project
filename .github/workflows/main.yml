@@ -22,12 +22,11 @@ jobs:
       with:
         python-version: ${{ matrix.python }}
     
-    - name: Install cookiecutter
-      run: |
-        pip install cookiecutter
+    - name: Install CookieCutter
+      run: pip install cookiecutter
+        
     - name: Setup CookieCutter
-      run: |
-        cookiecutter . --no-input
+      run: cookiecutter . --no-input
 
     - name: Install dependencies
       working-directory: ./scientific-project-python-boilerplate
