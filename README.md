@@ -1,4 +1,5 @@
 # Cookiecutter PySci-project Template
+![build](https://github.com/markusritschel/cookiecutter-pysci-project/workflows/build/badge.svg)
 [![License MIT](https://img.shields.io/github/license/markusritschel/cookiecutter-pysci-project)](./LICENSE)
 
 _Just another [CookieCutter](https://github.com/cookiecutter/cookiecutter) Template for Scientific Python Projects._
