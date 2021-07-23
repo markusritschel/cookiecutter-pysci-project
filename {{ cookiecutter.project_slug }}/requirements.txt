@@ -1,0 +1,11 @@
+python-dotenv
+pytest
+docopt
+click
+jupyter-book
+jupyternotify
+markdown
+sphinx
+rinohtype
+sphinx-book-theme
+pydata-sphinx-theme
