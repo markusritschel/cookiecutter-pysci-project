@@ -64,15 +64,18 @@ def setup_logger(level=None, logfile=True):
         fh.setFormatter(formatter)
         fh.setLevel(level)
         logger.addHandler(fh)
+        logger.logfile = logfile
+    else:
+        logger.logfile = None
 
     ch = logging.StreamHandler()
     ch.setFormatter(formatter)
     logger.addHandler(ch)
 
-    logger.info("="*(17+len(caller_file)))
-    logger.info("Calling routine: %s", caller_file)
-    if logfile:
-        logger.info("Log file: %s", logfile)
-    logger.info("-"*(17+len(caller_file))+"\n")
+#     logger.info("="*(17+len(caller_file)))
+#     logger.info("Calling routine: %s", caller_file)
+#     if logfile:
+#         logger.info("Log file: %s", logfile)
+#     logger.info("-"*(17+len(caller_file))+"\n")
 
     return logger
