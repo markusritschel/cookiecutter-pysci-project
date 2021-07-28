@@ -64,7 +64,7 @@ def setup_logger(level=None, logfile=True):
         fh.setFormatter(formatter)
         fh.setLevel(level)
         logger.addHandler(fh)
-        logger.logfile = logfile
+        logger.logfile = logfile.as_posix()
     else:
         logger.logfile = None
 
