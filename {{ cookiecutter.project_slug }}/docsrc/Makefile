@@ -21,7 +21,7 @@ help:
 github:
 	@make html
 	@mkdir -p ../docs
-	@cp -a $(BUILDDIR)html/. ../docs
+	@cp -a $(BUILDDIR)/html/. ../docs
 
 clean:
 	rm -rf $(BUILDDIR)/* $(AUTODOCDIR)
