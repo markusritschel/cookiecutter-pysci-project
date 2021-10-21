@@ -158,3 +158,4 @@ data/interim/
 data/processed/
 
 reports/book/_build/
+docsrc/_build/
