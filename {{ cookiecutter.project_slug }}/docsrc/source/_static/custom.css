@@ -1,0 +1,19 @@
+.rst-content dl:not(.docutils) dt:first-child {
+    margin-top: 0;
+}
+.rst-content dl:not(.docutils) dt {
+    display: table;
+    margin: 6px 0;
+    font-size: 90%;
+    line-height: normal;
+    background: #e7f2fa;
+    color: #2980B9;
+    border-top: solid 3px #6ab0de;
+    padding: 6px;
+    position: relative;
+}
+
+.rst-content blockquote {
+    border-left: 8px #ddd solid;
+    padding-left: 20px;
+}
