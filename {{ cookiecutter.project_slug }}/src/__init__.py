@@ -4,6 +4,8 @@ import os
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
 
+__version__ = '{{ cookiecutter.project_version }}'
+
 # Make some of the basic directories globally available in your environment
 base_dir = Path(__file__).resolve().parents[1]
 data_dir = base_dir / 'data'
