@@ -1,3 +1,4 @@
+pip
 python-dotenv
 pytest
 docopt
@@ -6,6 +7,9 @@ jupyter-book
 jupyternotify
 markdown
 sphinx
+nbsphinx
+sphinx-issues
 rinohtype
 sphinx-book-theme
 pydata-sphinx-theme
+sphinx_rtd_theme
