@@ -12,17 +12,18 @@ To reproduce the project, clone this repository on your machine
 ```bash
 git clone https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
 ```
-As a next step, although optional, I'd highly recommended that you create a new virtual environment.
-Then, in the new, cloned directory (`cd {{ cookiecutter.project_slug }}/`) run
+As a next step, although optional, I'd highly recommended that you create a new virtual environment (e.g. `conda create -n <whatever-name> python pip`). <br>
+Tip: Although `pip` is probably already installed on your system, if you're using conda you should install `pip` in your environment to make packages that you install afterwards via `pip` only available in your virtual environment.
+
+Then, in the new, cloned directory (`cd {{ cookiecutter.project_slug }}/`) run either
 ```
 python setup.py install
 ```
-to make the source code in `src` as a package available.<br>
-Or, if you plan on making changes on the code, run
+to make the source code in `src` as a package available or, if you plan to changes on the code, run
 ```
 python setup.py develop
 ```
-instead of the prior command. That way, any changes you make in the source code should be immediately reflected in the installed version and therefore be instantly available for imports.
+instead of the prior command. That way, your package is installed in [developer mode](https://setuptools.pypa.io/en/latest/userguide/development_mode.html), meaning that any changes you make in the source code are be immediately reflected in the installed version and therefore be instantly available for imports.
 
 Next, make the raw data available or accessible under `data/` (see project structure below).
 If the project is dealing with large amounts of data that reside somewhere outside your home directory,
@@ -45,13 +46,6 @@ This way you can detach from the session (even close your terminal) without losi
 
 ## Project Structure
 
-    ├── LICENSE            <- The license used for this project
-    ├── CHANGELOG.md       <- All major changes should go in there
-    ├── Makefile           <- A self-documenting Makefile for standard CLI tasks
-    ├── README.md          <- The top-level README of this project
-    ├── .env               <- In this file, specify all your custom environment variables
-    │                         Keep this out of version control!
-    │
     ├── assets             <- A place for assets like shapefiles or config files
     │
     ├── data               <- Contains all data used for the analyses in this project.
@@ -70,6 +64,7 @@ This way you can detach from the session (even close your terminal) without losi
     │
     ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
     │   │                     and a short `-` or `_` delimited description, e.g. `01-initial-analyses`
+    │   ├── _paired        <- Optional location for your paired jupyter notebook files
     │   ├── exploratory    <- Notebooks for exploratory tasks
     │   └── reports        <- Notebooks generating reports and figures
     │
@@ -79,14 +74,24 @@ This way you can detach from the session (even close your terminal) without losi
     │   ├── book           <- A Jupyter-Book describing the project
     │   └── figures        <- Generated graphics and figures to be used in reporting
     │
+    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
+    ├── scripts            <- High-level scripts that use (low-level) source code from `src/`
+    ├── src                <- Source code (and only source code!) for use in this project
+    │   ├── tests          <- Contains tests for the code in `src/`
+    │   └── __init__.py    <- Makes src a Python module and provides some standard variables
+    │
+    ├── .env               <- In this file, specify all your custom environment variables
+    │                         Keep this out of version control!
+    ├── CHANGELOG.md       <- All major changes should go in there
+    ├── jupytext.toml      <- Configuration file for jupytext
+    ├── LICENSE            <- The license used for this project
+    ├── Makefile           <- A self-documenting Makefile for standard CLI tasks
+    ├── README.md          <- The top-level README of this project
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
     │                         generated with `pip freeze > requirements.txt`
     │
-    ├── setup.py           <- makes project pip installable (`pip install -e .`) so src can be imported
-    ├── scripts            <- High-level scripts that use (low-level) source code from `src/`
-    └── src                <- Source code (and only source code!) for use in this project
-        ├── tests          <- Contains tests for the code in `src/`
-        └── __init__.py    <- Makes src a Python module and provides some standard variables
+    └── setup.py           <- Setup python file to install your source code in your (virtual) python environment
+
 
 
 ## Dummy files
