@@ -1,0 +1,8 @@
+# Configuration file for jupytext
+# You may specify your different formats the those given here.
+# If not used via the jupyter plugin, execute the following in your terminal from your project root:
+# jupytext --sync notebooks/*.ipynb
+# More information on https://jupytext.readthedocs.io/
+[formats]                                                                                                                                                                                                                                                             
+"notebooks/" = "ipynb"                                                                                                                                                                                                                                                
+"_paired/" = "py:percent"                                                                                                                                                                                                                                             
