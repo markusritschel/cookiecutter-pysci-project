@@ -68,58 +68,59 @@ For further information, have a look at Make's documentation: https://www.gnu.or
 
 ### Write your documentation
 In my opinion it should be differentiated between two kinds of documentation: 
-1. The first kind should only document your code (similar to what you would expect when opening the online documentation of a python package or similar) and should be considered as best practice to be shipped with your code.
-2. The second is optional but, in my opinion, possibly very helpful for others (and also for yourself) to understand what is going on in your project.
+1. The first kind should only **document your code** (similar to what you would expect when opening the online documentation of a python package or similar) and should be considered as best practice to be shipped with your code.
+2. The second is optional but, in my opinion, possibly very helpful for others (and also for yourself) to understand **what is going on in your project**.
 
 
 For the first, I would recommend you to use [Sphinx](https://www.sphinx-doc.org/), which is particularly suited for documenting python code and already set up as default doc engine in this project template. It's _autodoc_ extension can also parse the doc strings of your code and process them to nice HTML output.
 
-For the second purpose you can, in principle, use whichever tool you like the most (Sphinx, MkDocs, Jekyll, etc.). I personally like the [Jupyter Book](https://jupyterbook.org/) very much as it is feature-rich and you can use a bunch of languages (Jupyter Markdown, MyST Markdown for more publishing features, reStructuredText, even your Jupyter Notebooks, or any Jupytext format).
+For the second purpose you can, in principle, use whichever tool you like the most (Sphinx, MkDocs, Jekyll, etc.). I personally like [Jupyter Book](https://jupyterbook.org/) very much as it is feature-rich and you can use a bunch of languages: Jupyter Markdown, MyST Markdown for more publishing features, reStructuredText, even your Jupyter Notebooks, or any Jupytext format.
 
 #### Using Sphinx
 For a detailed description of how to use Sphinx and how to write your documentation check out their [website](https://www.sphinx-doc.org/).
 In short: describe as much of your code as possible in the doc-strings of your functions, classes and modules.
 Sphinx can then parse these doc-strings and format them nicely in your documentation output. 
-To compile an HTML report of your Sphinx documentation, enter the `docsrc` directory and execute `make html`. Type `make` for more formats.
+To compile an HTML report of your Sphinx documentation, enter the `docsrc` directory and execute `make html` (type `make` for more formats).
 Alternatively you can run `make docs` from the root of your project.
 
-##### Write documentation on a separate branch
-I would suggest that you create a separate `docs` branch for writing your documentation to keep them separated from your code progress.
-To write on your documentation, you would then always switch to the `docs` branch (remember to always merge your current code development branch to ensure Sphinx can parse the most up-to-date version).
+##### <u>Best practise:</u> Write documentation on a separate branch
+I would suggest that you create a separate `docs` branch for writing your documentation in order to keep them separated from your code progress.
+To write on your documentation, you would then always switch to the `docs` branch. 
+Remember to always merge your current main branch to ensure Sphinx can parse the most up-to-date version!
 
-##### Publish your documentation on [Github pages](https://pages.github.com/)
+##### Publish your documentation with [Github pages](https://pages.github.com/)
 Github allows you to host static websites on their platform.
 For this to work, you need to provide your HTML files in a `docs` directory located in the root of your project.
-Add another branch `gh-pages` and add the following to the Makefile located under _docsrc/Makefile_.
+Add another branch `gh-pages` and make sure the following is added to the Makefile located under _docsrc/Makefile_.
 ```make
 github:
     @make html
     @cp -a _build/html/. ../docs
 ```
-On your `gh-pages` branch, by running `make github` from inside your `docsrc` directory, a `make html` is called first to create the HTML output of your documentation. 
+By running `make github` from inside your `docsrc` directory (make sure you are on the `gh-pages` branch!), a `make html` is called first to create the HTML output of your documentation. 
 Then, this output is copied to the `docs` directory in the root of your repository. 
 This folder should only exist on the branch `gh-pages`.
 On `gh-pages`, git add all files in `docs` directory and `git push` to the remote `gh-pages` branch.
 On Github: select `gh-pages` as branch and `docs` as source for your page content.
 
 #### Using Jupyter-Book
-To compile your jupyter book, simply execute `jb build reports/book`.
+To compile your jupyter book, simply execute `jb build reports/book` or `make book` from the root of your project.
 Alternatively to your source code documentation, you can also place the content of your compiled jupyter book to `docs/` to publish it via Github pages.
 
-#### Using both a report alongside your code documentation as Github page
-Github pages allows only one website per repository. Usually that can be accessed via the domain https://your-github-usernam.github.io/your-project.
-To use both your project html report (jupyter book) _and_ your technical code documentation, you can merge the two compiled html outputs.
+#### Using both a (Jupyter book) report alongside your code documentation as Github page
+_Github pages_ allows only one website per repository. Usually that can be accessed via the domain https://your-github-usernam.github.io/your-project.
+To use both your project html report (Jupyter book) _and_ your technical code documentation, you can merge the two compiled html outputs.
 For example, to have your project report as the main site on your repository's domain, put the content of your compiled jupyter book (found in `reports/book/_build/html`) in `./docs` (inside the repository's root) and put the Sphinx-compiled code documentation (found in `docsrc/_build/html`) into a subfolder of `.docs/` (e.g. `./docs/code-documentation`). 
 Then, your project report will be found on the repository's github page (https://your-github-usernam.github.io/your-project) and your code documentation on https://your-github-usernam.github.io/your-project/code-documentation, respectively.
 You could then link your code documentation on your jupyter-book page or make the link somewhere else available.
 
 
-### Some tips or thoughts regarding the code layout
+### Some tips and thoughts regarding the code layout
 All scripts and Jupyter notebooks that deal with either processing of the data or the creation of any kind of reports (plots, documents, etc) should reside in the `scripts/` and `notebooks/` directory, respectively.<br>
 Code under `src/` is _exclusively_ source code and is not actively executed.<br>
 Name scripts and the notebooks in a way that indicates their order of execution (examples can be found in the respective directories).
 
-A note on version controlling jupyter notebooks:
+**A note on version controlling Jupyter notebooks:**
 Jupyter notebooks are very ugly to keep under version control as they are in principle a very large JSON file, containing lots of metadata, output of your cells etc. This circumstance makes it also quite hard to collaborate on them. However, a while ago I stumbled upon _[Jupytext](https://jupytext.readthedocs.io/)_ which syncs your jupyter notebooks with another file for which you can choose a variety of formats (e.g. Markdown, R Markdown, normal python, etc.). These "paired" files can either resider alongside your jupyter notebooks or in a separate directory.
 _Jupytext_ can either be used from the command line (`jupytext --sync notebooks/*ipynb`) or as a jupyter plugin. 
 For more information, have a look on their [documentation site](https://jupytext.readthedocs.io/).
@@ -161,7 +162,9 @@ For more information, have a look on their [documentation site](https://jupytext
     │   └── __init__.py    <- Makes src a Python module and provides some standard variables
     │
     ├── .env               <- In this file, specify all your custom environment variables
-    │                         Keep this out of version control!
+    │                         Keep this out of version control! (i.e. have it in your .gitignore)
+    ├── .gitignore         <- Here, list all the files, folders (patterns allowed) that you want to keep
+    │                         out of git version control.    
     ├── CHANGELOG.md       <- All major changes should go in there
     ├── jupytext.toml      <- Configuration file for jupytext
     ├── LICENSE            <- The license used for this project
