@@ -9,6 +9,7 @@ markdown
 sphinx
 nbsphinx
 sphinx-issues
+sphinxcontrib-napoleon
 rinohtype
 sphinx-book-theme
 pydata-sphinx-theme
