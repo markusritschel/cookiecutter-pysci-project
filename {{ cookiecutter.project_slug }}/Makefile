@@ -25,10 +25,9 @@ clean-logs:
 	find ./logs -iname '*.log' -type f -exec rm {} +
 
 
-## Build the documentation with Jupyter-Book
+## Build the code documentation with Sphinx
 docs:
-	jb build ./docs
-
+	$(MAKE) -C docsrc html
 
 ## Build the project's Jupyter-Book
 book:

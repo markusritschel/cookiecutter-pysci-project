@@ -65,6 +65,53 @@ This way, the last step is only executed if the data it depends on have changed 
 
 For further information, have a look at Make's documentation: https://www.gnu.org/software/make/manual/html_node/Rules.html
 
+### Write your documentation
+In my opinion it should be differentiated between two kinds of documentation: 
+1. The first kind should only document your code (similar to what you would expect when opening the online documentation of a python package or similar) and should be considered as best practice to be shipped with your code.
+2. The second is optional but, in my opinion, possibly very helpful for others (and also for yourself) to understand what is going on in your project.
+
+
+For the first, I would recommend you to use [Sphinx](https://www.sphinx-doc.org/), which is particularly suited for documenting python code and already set up as default doc engine in this project template. It's _autodoc_ extension can also parse the doc strings of your code and process them to nice HTML output.
+
+For the second purpose you can, in principle, use whichever tool you like the most (Sphinx, MkDocs, Jekyll, etc.). I personally like the [Jupyter Book](https://jupyterbook.org/) very much as it is feature-rich and you can use a bunch of languages (Jupyter Markdown, MyST Markdown for more publishing features, reStructuredText, even your Jupyter Notebooks, or any Jupytext format).
+
+#### Using Sphinx
+For a detailed description of how to use Sphinx and how to write your documentation check out their [website](https://www.sphinx-doc.org/).
+In short: describe as much of your code as possible in the doc-strings of your functions, classes and modules.
+Sphinx can then parse these doc-strings and format them nicely in your documentation output. 
+To compile an HTML report of your Sphinx documentation, enter the `docsrc` directory and execute `make html`. Type `make` for more formats.
+Alternatively you can run `make docs` from the root of your project.
+
+##### Write documentation on a separate branch
+I would suggest that you create a separate `docs` branch for writing your documentation to keep them separated from your code progress.
+To write on your documentation, you would then always switch to the `docs` branch (remember to always merge your current code development branch to ensure Sphinx can parse the most up-to-date version).
+
+##### Publish your documentation on [Github pages](https://pages.github.com/)
+Github allows you to host static websites on their platform.
+For this to work, you need to provide your HTML files in a `docs` directory located in the root of your project.
+Add another branch `gh-pages` and add the following to the Makefile located under _docsrc/Makefile_.
+```make
+github:
+    @make html
+    @cp -a _build/html/. ../docs
+```
+On your `gh-pages` branch, by running `make github` from inside your `docsrc` directory, a `make html` is called first to create the HTML output of your documentation. 
+Then, this output is copied to the `docs` directory in the root of your repository. 
+This folder should only exist on the branch `gh-pages`.
+On `gh-pages`, git add all files in `docs` directory and `git push` to the remote `gh-pages` branch.
+On Github: select `gh-pages` as branch and `docs` as source for your page content.
+
+#### Using Jupyter-Book
+To compile your jupyter book, simply execute `jb build reports/book`.
+Alternatively to your source code documentation, you can also place the content of your compiled jupyter book to `docs/` to publish it via Github pages.
+
+#### Using both a report alongside your code documentation as Github page
+Github pages allows only one website per repository. Usually that can be accessed via the domain https://your-github-usernam.github.io/your-project.
+To use both your project html report (jupyter book) _and_ your technical code documentation, you can merge the two compiled html outputs.
+For example, to have your project report as the main site on your repository's domain, put the content of your compiled jupyter book (found in `reports/book/_build/html`) in `./docs` (inside the repository's root) and put the Sphinx-compiled code documentation (found in `docsrc/_build/html`) into a subfolder of `.docs/` (e.g. `./docs/code-documentation`). 
+Then, your project report will be found on the repository's github page (https://your-github-usernam.github.io/your-project) and your code documentation on https://your-github-usernam.github.io/your-project/code-documentation, respectively.
+You could then link your code documentation on your jupyter-book page or make the link somewhere else available.
+
 
 ## Project Structure
 
@@ -84,8 +131,8 @@ For further information, have a look at Make's documentation: https://www.gnu.or
     │   ├── processed      <- The final, processed data used for the actual analyses
     │   └── raw            <- The original, immutable(!) data
     │
-    ├── docs               <- The technical documentation (default engine: Jupyter-Book; but feel free to use 
-    │                         Sphinx or MkDocs or anything similar)
+    ├── docsrc             <- The technical documentation (default engine: Sphinx; but feel free to use 
+    │                         MkDocs, Jupyter-Book or anything similar).
     │                         This should contain only documentation of the code and the assets.
     │                         A report of the actual project should be placed in `reports/book`.
     │
@@ -116,6 +163,7 @@ For further information, have a look at Make's documentation: https://www.gnu.or
 The following files are for demonstration purposes only and, if not needed, can be deleted safely:
 
     ├── notebooks/01-minimal-example.ipynb
+    ├── docsrc/*
     ├── reports/book/*
     ├── scripts/01-test.py
     └── src
