@@ -133,7 +133,7 @@ The following files are for demonstration purposes only and, if not needed, can 
 
 
 ## Maintainer
-- [markusritschel](https://github.com/markusritschel)
+- [{{ cookiecutter.github_username }}](https://github.com/{{ cookiecutter.github_username }})
 
 
 ## Contact & Issues
@@ -141,4 +141,4 @@ For any questions or issues, please contact me via {{ cookiecutter.email }} or o
 
 
 ---
-&copy; {{ cookiecutter.project_author }} {% now 'local', '%Y' %}
+&copy; [{{ cookiecutter.project_author }}](https://github.com/{{ cookiecutter.github_username }}), {% now 'local', '%Y' %}
