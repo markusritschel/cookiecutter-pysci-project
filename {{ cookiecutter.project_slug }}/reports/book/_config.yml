@@ -65,10 +65,9 @@ execute:
 # Options to configure the Sphinx document engine
 sphinx:
     extra_extensions:
-        - sphinxcontrib.images
         - sphinxcontrib.mermaid
+        - sphinx_jupyterbook_latex
         - sphinx_tabs.tabs
-        - jupyterbook_latex
     config:
         language: "en"
 
