@@ -7,6 +7,9 @@ jupyter-book
 jupyternotify
 markdown
 sphinx
+sphinx-apidoc
+sphinxcontrib-mermaid
+jupyterbook-latex
 nbsphinx
 sphinx-issues
 sphinxcontrib-napoleon
