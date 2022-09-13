@@ -79,7 +79,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 {% elif cookiecutter.project_license == 'GNU General Public License v3' -%}
 
-GNU GENERAL PUBLIC LICENSE
+# GNU GENERAL PUBLIC LICENSE
                       Version 3, 29 June 2007
 
     {{ cookiecutter.project_short_description }}
