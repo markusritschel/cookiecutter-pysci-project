@@ -11,7 +11,6 @@ import pytest
 from src import submodule
 
 def test_subfunc(global_fixture):
-    l = submodule.sub_fun()
+    l = submodule.generate_int_list()
     assert isinstance(l, list)
     assert isinstance(global_fixture, str)
-    

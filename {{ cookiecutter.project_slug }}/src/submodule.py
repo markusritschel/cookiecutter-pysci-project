@@ -5,8 +5,9 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def sub_fun(x: int) -> list[int]:
+def generate_int_list(x: int = 3) -> list[int]:
     """This is a doctest in a docstring. You can link to other functions, e.g. :func:`src.setup_logger`.
+    Function names should be self-explanatory. 
 
     Example
     -------
