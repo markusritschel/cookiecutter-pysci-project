@@ -1,12 +1,14 @@
 # {{cookiecutter.project_name}}
 
 ![main](https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/workflows/main.yml/badge.svg)
-{% if cookiecutter.project_license != "No License" %}[![License {{ cookiecutter.project_license }}](https://img.shields.io/github/license/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }})](./LICENSE){% endif %}
+{% if cookiecutter.project_license != "No License" %}
+![License {{ cookiecutter.project_license }}](https://img.shields.io/github/license/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }})
+{% endif %}
 
 
 {{ cookiecutter.project_description}}
 
-### <u>Table of Contents <!-- omit in toc --></u>
+## <u>Table of Contents <!-- omit in toc --></u>
 - [Preparation](#preparation)
   - [Installing requirements](#installing-requirements)
   - [Make raw data available](#make-raw-data-available)

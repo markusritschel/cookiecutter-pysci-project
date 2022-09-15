@@ -10,7 +10,7 @@
 clean: clean-pyc clean-logs clean-jupyter-book
 
 clean-jupyter-book:
-	jb clean --all docs/
+	jb clean --all docsrc/
 	jb clean --all reports/book/
 
 ## Remove Python file artifacts
