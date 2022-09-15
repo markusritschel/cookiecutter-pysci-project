@@ -1,5 +1,5 @@
 {% if cookiecutter.project_license == 'MIT license' -%}
-MIT License
+# MIT License
 
 Copyright (c) {% now 'local', '%Y' %}, {{ cookiecutter.project_author }}
 
@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 {% elif cookiecutter.project_license == 'BSD license' %}
 
-BSD License
+# BSD License
 
 Copyright (c) {% now 'local', '%Y' %}, {{ cookiecutter.project_author }}
 All rights reserved.
@@ -52,7 +52,8 @@ OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGEN
 OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 OF THE POSSIBILITY OF SUCH DAMAGE.
 {% elif cookiecutter.project_license == 'ISC license' -%}
-ISC License
+
+# ISC License
 
 Copyright (c) {% now 'local', '%Y' %}, {{ cookiecutter.project_author }}
 
@@ -60,7 +61,8 @@ Permission to use, copy, modify, and/or distribute this software for any purpose
 
 THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 {% elif cookiecutter.project_license == 'Apache Software License 2.0' -%}
-Apache Software License 2.0
+
+# Apache Software License 2.0
 
 Copyright (c) {% now 'local', '%Y' %}, {{ cookiecutter.project_author }}
 
