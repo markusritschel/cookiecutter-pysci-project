@@ -6,25 +6,40 @@
 
 {{ cookiecutter.project_description}}
 
+### <u>Table of Contents <!-- omit in toc --></u>
+- [Preparation](#preparation)
+  - [Installing requirements](#installing-requirements)
+  - [Make raw data available](#make-raw-data-available)
+- [High-level & Low-level Code](#high-level--low-level-code)
+- [Testing](#testing)
+- [Project Structure](#project-structure)
+- [Dummy files](#dummy-files)
+- [Maintainer](#maintainer)
+- [Contact & Issues](#contact--issues)
 
 ## Preparation
 To reproduce the project, clone this repository on your machine
 ```bash
 git clone https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
 ```
-As a next step, although optional, I'd highly recommended that you create a new virtual environment (e.g. `conda create -n <whatever-name> python pip`). <br>
-Tip: Although `pip` is probably already installed on your system, if you're using conda you should install `pip` in your environment to make packages that you install afterwards via `pip` only available in your virtual environment.
+As a next step, although optional, I'd highly recommended that you create a new virtual environment (e.g. `conda create -n <whatever-name>`). <br>
+> **Note**:
+> I recommend that you use [Conda](https://docs.conda.io/en/latest/miniconda.html) as a package manager. For performance boost, I would even recommend using [Mamba](https://mamba.readthedocs.io/).
 
+### Installing requirements
 Then, in the new, cloned directory (`cd {{ cookiecutter.project_slug }}/`) run either
 ```
 python setup.py install
 ```
-to make the source code in `src` as a package available or, if you plan to changes on the code, run
-```
-python setup.py develop
-```
-instead of the prior command. That way, your package is installed in [developer mode](https://setuptools.pypa.io/en/latest/userguide/development_mode.html), meaning that any changes you make in the source code are be immediately reflected in the installed version and therefore be instantly available for imports.
+to make the source code in `src` as a package available. If you intend to make changes to the code and want them reflected in the installed instance, replace the `install` in the previous command with `develop`. \
+[See [here](https://setuptools.pypa.io/en/latest/userguide/development_mode.html) for an explanation]
 
+Now, install all the packages that the project's code depends on:
+```
+mamba install --file requirements.txt
+```
+
+### Make raw data available
 Next, make the raw data available or accessible under `data/` (see project structure below).
 If the project is dealing with large amounts of data that reside somewhere outside your home directory,
 I would suggest that you link the respective subdirectories inside `data/` accordingly.
@@ -33,16 +48,26 @@ The python scripts should be able to follow symlinks.
 <!-- If all is set up, you can run `make test_structure` to perform some tests before starting running the scripts or Jupyter notebooks in the respective directories. -->
 
 
-## Usage
-All scripts and Jupyter notebooks that deal with either processing of the data or the creation of any kind of reports (plots, documents, etc) are available in `scripts/` and `notebooks/`, respectively.<br>
-Code residing in `src/` is _exclusively_ source code and is not actively executed.<br>
-Both the scripts and the notebooks are named in a way that indicates their order of execution.
-For standard tasks, you might find respective commands in the Makefile. Just type `make` to see a list of available commands.
+## High-level & Low-level Code
+All _high-level_ code (i.e. the code that the user is directly interacting with) resides in the `scripts/` and the `notebooks/` directory.
+High-level code is, for example, code that produces a figure, a report, or similar.\
+Both the scripts and the notebooks should be named in a self-explanatory way that indicates their order of execution and their purpose.
+
+Code residing in `src/` is _exclusively_ source code or _low-level_ code and is not actively executed.
+<!-- For standard tasks, you might find respective commands in the Makefile. Just type `make` to see a list of available commands. -->
 
 <u>A recommendation for long-running tasks:</u><br>
 Some tasks like data processing will need a long time. 
-It is highly recommended that you use a detachable terminal environment like `screen` or `tmux`.
+It is highly recommended that you use a detachable terminal environment like `screen` or [`tmux`](https://github.com/tmux/tmux/wiki).
 This way you can detach from the session (even close your terminal) without losing or ending the process.
+
+
+## Testing
+To test your code, run `make tests` in the root directory.
+This will execute both the unit tests and docstring examples using `pytest`.
+
+<!-- Run `make coverage` to generate a test coverage report and `make lint` to check code style consistency. -->
+
 
 ## Project Structure
 
@@ -98,23 +123,13 @@ This way you can detach from the session (even close your terminal) without losi
 The following files are for demonstration purposes only and, if not needed, can be deleted safely:
 
     ├── notebooks/01-minimal-example.ipynb
-    ├── docsrc/*
+    ├── docsrc/source/*
     ├── reports/book/*
     ├── scripts/01-test.py
     └── src
         ├── tests/*
         └── submodule.py
 
-
-## Testing
-To test the code, run `make tests` in the root directory.
-This will execute both the unit tests and docstring examples using `pytest`.
-
-<!-- Run `make coverage` to generate a test coverage report and `make lint` to check code style consistency. -->
-
-
-## Features
-* [ ] TODO
 
 
 ## Maintainer

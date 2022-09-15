@@ -150,12 +150,19 @@ Thumbs.db
 .prof
 
 
+# Build and docs folder/files
+build/*
+dist/*
+sdist/*
+docsrc/api/*
+docsrc/_rst/*
+docsrc/_build/*
+cover/*
+MANIFEST
+
 # End of https://www.toptal.com/developers/gitignore/api/python
 
 
 data/raw/
 data/interim/
 data/processed/
-
-reports/book/_build/
-docsrc/_build/
