@@ -8,25 +8,97 @@ on:
 
 jobs:
   build: 
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: [3.6, 3.7, 3.8, 3.9]
+        python: [3.6, 3.9]
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-    - name: Setup Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python }}
-    
-    - name: Install Dependencies
-      run: |
-        pip install -r requirements.txt
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python }}
+            architecture: x64
 
-    - name: Run PyTest
-      run: |
-        pytest src/ --doctest-modules --doctest-continue-on-failure -ra -v
+      - name: Cache pip
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/pip     # This path is specific to Ubuntu
+          # Look to see if there is a cache hit for the corresponding requirements file
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+            ${{ runner.os }}-
 
+      - name: Setup Conda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: "{{ cookiecutter.project_slug }}"  
+          # TODO: this is not filled correctly by CookieCutter!
+          environment-file: environment.yml
+          auto-activate-base: false
+      - run: |
+          conda info
+          conda list
+
+      - name: Install package
+        run: python setup.py
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Lint with flake8
+        run: |
+          pip install flake8
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics                        # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics       # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+
+      - name: Run PyTest
+        run: |
+          pip install -e .
+          pip install pytest pytest-cov
+          pytest src/ --doctest-modules --doctest-continue-on-failure -ra -v --cov=./ --cov-report=xml --cov-report=html
+      - uses: codecov/codecov-action@v1
+
+
+      - name: Build docs
+        run: |
+          cd docsrc
+          pip install --upgrade -r requirements.txt
+          sudo apt-get install pandoc
+          make html
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: docs
+          path: |
+            docsrc/_build/html
+
+  publish:
+    # https://github.com/marketplace/actions/github-pages-action
+    # https://github.com/marketplace/actions/deploy-to-github-pages
+    needs: build
+    # Only publish documentation when merging into `origin/main`.`
+    if: "github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository_owner == '{{ cookiecutter.github_username }}'"
+    # TODO: this is not filled correctly by CookieCutter!
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download compiled documentation
+        uses: actions/download-artifact@v2
+        with:
+          name: docs
+          path: docs
+
+      - name: Deploy 🚀
+        #if: ${{ github.ref == 'refs/heads/main' && github.event_name != 'pull_request'}}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FOLDER: docs
+          BRANCH: gh-pages
+          CLEAN: true

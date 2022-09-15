@@ -103,16 +103,16 @@ In my opinion it is helpful to differentiate between two kinds of documentation:
 2. The second is optional but, in my opinion, possibly very helpful for others (and also for yourself) to understand **what is going on in your project**, present your results etc..
 
 
-For the first, I would recommend you to use [Sphinx](https://www.sphinx-doc.org/), which is particularly suited for documenting python code and already set up as default doc engine in this project template. It's _autodoc_ extension can also parse the doc strings of your code and process them to nice HTML output.
+For the first, I would recommend you to use [Sphinx](https://www.sphinx-doc.org/), which is particularly suited for documenting python code and already set up as default doc engine in this project template. It's _autodoc_ extension can also parse the doc strings of your code and process them to nice HTML output. For more details, see the [section below](#using-sphinx).
 
 For the second purpose you can, in principle, use whichever tool you like the most (Sphinx, MkDocs, Jekyll, etc.). I personally like [Jupyter Book](https://jupyterbook.org/) very much as it is feature-rich and you can use a bunch of languages: Jupyter Markdown, MyST Markdown for more publishing features, reStructuredText, even your Jupyter Notebooks, or any Jupytext format.
 
 #### Using Sphinx
-For a detailed description of how to use Sphinx and how to write your documentation check out their [website](https://www.sphinx-doc.org/).
 In short: describe as much of your code as possible in the doc-strings of your functions, classes and modules.
 Sphinx can then parse these doc-strings and format them nicely in your documentation output. 
-To compile an HTML report of your Sphinx documentation, enter the `docsrc` directory and execute `make html` (type `make` for more formats).
+To compile an HTML report of your Sphinx documentation locally, enter the `docsrc` directory and execute `make html` (type `make` for more formats).
 Alternatively you can run `make docs` from the root of your project.
+**Hint:** If you use Github for your project, I have integrated a workflow for automatic deployment. The only thing, you need to prepare is, go into your repository's settings (on Github), go to _Pages_ and then select "Deploy from a branch" for _Source_ and under _Branch_ select "gh-pages" and "root". Save your changes. Now, whenever you push something to the main branch, your documentation in `docsrc` will be automatically compiled and deployed. The result will be available on https://<your-github-username>.github.io/<your-project-name>
 For a detailed description of how to use Sphinx and how to write your documentation check out their [website](https://www.sphinx-doc.org/).
 
 ##### <u>Best practise:</u> Write documentation on a separate branch
