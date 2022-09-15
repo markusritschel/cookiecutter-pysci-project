@@ -12,7 +12,7 @@ sphinxcontrib-mermaid
 # jupyterbook-latex
 nbsphinx
 sphinx-issues
-sphinxcontrib-napoleon
+sphinxcontrib-napoleon2
 rinohtype
 sphinx-book-theme
 pydata-sphinx-theme
