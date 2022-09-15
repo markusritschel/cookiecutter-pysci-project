@@ -3,9 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-==================================================================
+=================================={{ '='*cookiecutter.project_name|length }}
 Welcome to the documentation of *{{ cookiecutter.project_name }}*
-==================================================================
+=================================={{ '='*cookiecutter.project_name|length }}
 
 .. note::
 
