@@ -10,6 +10,6 @@
     "sphinx_theme": ["sphinx_rtd_theme", "pydata_sphinx_theme", "sphinx_book_theme"],
     "create_conda_environment": ["no", "yes"],
     "_copy_without_render": [
-        ".github/workflows"
+        ".github/workflows/*.yaml"
     ]
 }
