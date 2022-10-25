@@ -1,0 +1,9 @@
+name: {{ cookiecutter.project_slug }}
+dependencies:
+  - python
+  - numpy
+  - scipy
+  - pandas
+  - pip
+  # - pip:
+  #   - -r requirements.txt
