@@ -7,6 +7,9 @@
 # Document any rules by adding a single line starting with ## right before the rule (see examples below)
 # ======================================================================================================
 
+include .env
+
+
 clean: clean-pyc clean-logs clean-jupyter-book
 
 clean-jupyter-book:
@@ -43,6 +46,15 @@ save_requirements:
 requirements:
 	python -m pip install -U pip setuptools wheel
 	python -m pip install -r requirements.txt
+
+
+## Create a conda environment named after the project slug and activate it
+conda-env:
+	echo "Create conda environment `{{ cookiecutter.project_slug }}`"
+	mamba env create --file environment.yml
+	echo "Activate conda environment `{{ cookiecutter.project_slug }}`"
+	mamba activate {{ cookiecutter.project_slug }}
+	pip install -r requirements.txt
 
 
 ## Check if all packages listed in requirements.txt are installed in the current environment
