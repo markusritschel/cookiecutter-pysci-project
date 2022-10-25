@@ -50,10 +50,13 @@ If you want to connect it with a remote repository on GitHub (or any other hoste
 You need to have python installed as well as the python package `cookiecutter`.
 You can do this either via pip or conda.
 ```bash
-$ pip install -U cookiecutter
-$ conda install -c conda-forge cookiecutter
+$ pip install -U cookiecutter cruft
+$ conda install -c conda-forge cookiecutter cruft
 ```
 Besides that, there is no need to clone or download anything from this repository. Just follow the next step :-)
+
+> 👉 **Important hint**: I recommend you to install [Mamba](https://mamba.readthedocs.io/) as a package manager. It is build on `conda` but has a much greater performance.
+
 
 ## Usage
 ### Setting up a new project
