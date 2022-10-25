@@ -9,6 +9,6 @@
     "project_license": ["MIT license", "BSD license", "ISC license", "Apache Software License 2.0", "GNU General Public License v3", "Not open source"],
     "sphinx_theme": ["sphinx_rtd_theme", "pydata_sphinx_theme", "sphinx_book_theme"],
     "_copy_without_render": [
-        ".github/workflows/*.yaml"
+        ".github/workflows/*"
     ]
 }
