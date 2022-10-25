@@ -95,7 +95,6 @@ jobs:
           path: docs
 
       - name: Deploy 🚀
-        #if: ${{ github.ref == 'refs/heads/main' && github.event_name != 'pull_request'}}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
