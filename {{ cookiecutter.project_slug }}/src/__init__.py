@@ -1,3 +1,11 @@
+# !/usr/bin/env python3
+#
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Author: {{ cookiecutter.project_author }}
+# eMail:  {{ cookiecutter.email }}
+# Date:   {% now 'local', '%Y-%m-%d' %}
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#
 import inspect
 import logging
 import os
@@ -18,6 +26,7 @@ dotenv_path = find_dotenv()
 # load up the entries as environment variables
 load_dotenv(dotenv_path)
 
+sys.path.append(str(BASE_DIR/"scripts"))
 
 
 def setup_logger(level=None, logfile=True, name="root"):
