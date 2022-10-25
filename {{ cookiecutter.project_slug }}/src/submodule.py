@@ -1,5 +1,12 @@
-"""This submodule exists only for demonstration purposes.
-To show the concept of the logger setup and running a pytest.
+# !/usr/bin/env python3
+#
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Author: {{ cookiecutter.project_author }}
+# eMail:  {{ cookiecutter.email }}
+# Date:   {% now 'local', '%Y-%m-%d' %}
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#
+"""This submodule exists only for demonstration purposes, to show the concept of the logger setup and running a pytest.
 """
 import logging
 
