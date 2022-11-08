@@ -33,12 +33,17 @@ Then, in the new, cloned directory (`cd {{ cookiecutter.project_slug }}/`) run e
 ```
 python setup.py install
 ```
-to make the source code in `src` as a package available. If you intend to make changes to the code and want them reflected in the installed instance, replace the `install` in the previous command with `develop`. \
+to make the source code in `src` as a package available. 
+*If* you intend to make changes to the code and want them reflected in the installed instance, replace the `install` in the previous command with `develop`:
+```
+python setup.py develop
+```
 [See [here](https://setuptools.pypa.io/en/latest/userguide/development_mode.html) for an explanation]
 
 Now, install all the packages that the project's code depends on:
 ```
 mamba install --file requirements.txt
+pip install -r requirements.txt
 ```
 
 ### Make raw data available
