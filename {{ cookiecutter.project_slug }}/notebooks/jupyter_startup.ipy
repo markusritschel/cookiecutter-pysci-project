@@ -58,8 +58,8 @@ pd.set_option("display.max_rows", 25)
 # ---------------------------------------------
 # Set matplotlib default parameters
 mpl.rcParams['figure.figsize'] = (8, 5)
-mpl.rcParams['figure.dpi'] = 120
-plt.style.use('bmh')
+mpl.rcParams['figure.dpi'] = 175
+#plt.style.use('bmh')
 
 
 # ---------------------------------------------
@@ -87,7 +87,7 @@ logger.handlers = [handler]
 
 # ---------------------------------------------
 # make some standard paths available
-from src import base_dir, log_dir, plot_dir, data_dir
+from src import BASE_DIR, LOG_DIR, PLOT_DIR, DATA_DIR
 
 
 # ---------------------------------------------
