@@ -26,7 +26,7 @@ Welcome to the documentation of *{{ cookiecutter.project_name }}*
     `Google style`_ (recommended!), `NumPy style`_ and `classical style`_.
 
 
-A full description of the functions and the underlying algorithms can be found in the :ref:`py-modindex`.
+A full description of the functions and the underlying algorithms can be found in the Module reference.
 
 .. TODO: Add a more extensive description here. Maybe include photos/images of the OceanPack etc. Mention any pecularities.
 
