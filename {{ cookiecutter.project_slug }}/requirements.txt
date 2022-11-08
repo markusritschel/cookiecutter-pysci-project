@@ -30,6 +30,7 @@ sphinx-book-theme
 pydata-sphinx-theme
 sphinx-rtd-theme
 myst-parser
+sphinx-issues
 sphinxcontrib-bibtex
 sphinxcontrib-apidoc
 sphinx-autodoc-typehints
