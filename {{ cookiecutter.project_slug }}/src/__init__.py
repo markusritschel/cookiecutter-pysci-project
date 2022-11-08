@@ -9,17 +9,18 @@
 import inspect
 import logging
 import os
+import sys
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
 
 __version__ = '{{ cookiecutter.project_version }}'
 
 # Make some of the basic directories globally available in your environment
-base_dir = Path(__file__).resolve().parents[1]
-data_dir = base_dir / 'data'
-log_dir  = base_dir / 'logs'
-plot_dir = base_dir / 'reports/figures'
-jupyter_startup_script = base_dir / 'notebooks/jupyter_startup.ipy'
+BASE_DIR = Path(__file__).resolve().parents[1]
+DATA_DIR = BASE_DIR / 'data'
+LOG_DIR  = BASE_DIR / 'logs'
+PLOT_DIR = BASE_DIR / 'reports/figures'
+jupyter_startup_script = BASE_DIR / 'notebooks/jupyter_startup.ipy'
 
 # find .env automagically by walking up directories until it's found
 dotenv_path = find_dotenv()
@@ -31,7 +32,7 @@ sys.path.append(str(BASE_DIR/"scripts"))
 
 def setup_logger(level=None, logfile=True, name="root"):
     """Define a logger setup with
-    - 1x fileHandler: writing log files to log_dir (logfile can be boolean or a file path)
+    - 1x fileHandler: writing log files to LOG_DIR (logfile can be boolean or a file path)
     - 1x streamHandler: streaming logs to terminal
 
     Parameters
@@ -40,7 +41,7 @@ def setup_logger(level=None, logfile=True, name="root"):
         The log level (according to the logging convention). Can be either a string or a 
         loggin.loglevel instance
     logfile : bool / str
-        If True, the log file will be placed in log_dir and named after the calling script (default)
+        If True, the log file will be placed in LOG_DIR and named after the calling script (default)
         If logfile is a string, it will be interpreted as a file path (the parent directory must exist)
     
     Return
@@ -68,7 +69,7 @@ def setup_logger(level=None, logfile=True, name="root"):
     
     if logfile:
         if isinstance(logfile, bool):
-            logfile = log_dir / f'{caller_filename}_{os.getpid()}.log'
+            logfile = LOG_DIR / f'{caller_filename}_{os.getpid()}.log'
         elif isinstance(logfile, str):
             logdir = Path(logfile).parents[0]
             if not logdir.exists():
