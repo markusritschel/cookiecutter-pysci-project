@@ -69,6 +69,11 @@ $ cookiecutter git+ssh://git@github.com/markusritschel/cookiecutter-pysci-projec
 ```
 The script will ask you some questions based on the entries in the `cookiecutter.json` and will then create a new project based on this template with the information you just provided by answering the questions.
 
+Then, for development, I **strongly** recommend you create a dedicated virtual environment. Using conda, you can simply execute `conda create -n <your-environment-name>` or create an environment based on the environment.yml file by executing `conda create -f environment.yml`. 
+The latter would create a virtual conda environment with the same name as your project directory.
+
+After creating and activating the environment (`conda activate <your-environment-name>`), you should install all the required packages to make your new project work, including generating the documentation.
+
 ### Using the Makefile
 The Makefile in the project directory provides some default routines like cleanup, testing, installing requirements etc.
 <br>
