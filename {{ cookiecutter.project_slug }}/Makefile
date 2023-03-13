@@ -65,11 +65,11 @@ src-available:
 
 ## Create a conda environment named after the project slug, install packages, and activate it
 setup-conda-env:
-	echo "Install mamba"
+	@echo "Install mamba"
 	conda install -c conda-forge mamba
-	echo "Create conda environment `{{ cookiecutter.project_slug }}`"
+	@echo "Create conda environment '{{ cookiecutter.project_slug }}'"
 	mamba env create --file environment.yml
-	echo "Activate conda environment `{{ cookiecutter.project_slug }}`"
+	@echo "Activate conda environment '{{ cookiecutter.project_slug }}'"
 	mamba activate {{ cookiecutter.project_slug }}
 
 
@@ -81,7 +81,7 @@ test-requirements:
 
 
 ## Run pytest for the source code
-tests: test_requirements
+tests: test-requirements
 	pytest src/tests/ --doctest-modules -v
 
 
