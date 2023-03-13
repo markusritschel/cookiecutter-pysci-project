@@ -3,7 +3,6 @@ ipython
 jupyterlab
 ipywidgets
 nodejs
-nb_conda_kernels
 ipykernel
 seaborn
 tqdm
