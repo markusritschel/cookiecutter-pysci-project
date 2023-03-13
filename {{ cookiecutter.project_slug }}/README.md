@@ -52,6 +52,9 @@ If you don't wanna use conda for any reason, you can also install the required p
 pip install -r requirements.txt
 ```
 
+> **Note**:
+> If you experience that something is not working (e.g. creating the documentation via `make docs`) try to perform an update via `mamba update --all`. This might solve the problem.
+
 ### Make raw data available
 Next, make the raw data available or accessible under `data/` (see project structure below).
 If the project is dealing with large amounts of data that reside somewhere outside your home directory,
