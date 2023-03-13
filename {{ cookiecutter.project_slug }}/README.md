@@ -10,6 +10,7 @@
 
 ## <u>Table of Contents <!-- omit in toc --></u>
 - [Preparation](#preparation)
+  - [Cloning the project to your local machine](#cloning-the-project-to-your-local-machine)
   - [Installing requirements](#installing-requirements)
   - [Make raw data available](#make-raw-data-available)
 - [High-level & Low-level Code](#high-level--low-level-code)
@@ -20,6 +21,7 @@
 - [Contact & Issues](#contact--issues)
 
 ## Preparation
+### Cloning the project to your local machine
 To reproduce the project, clone this repository on your machine
 ```bash
 git clone https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
@@ -34,11 +36,12 @@ Then, in the new, cloned directory (`cd {{ cookiecutter.project_slug }}/`) run e
 python setup.py install
 ```
 to make the source code in `src` as a package available. 
-*If* you intend to make changes to the code and want them reflected in the installed instance, replace the `install` in the previous command with `develop`:
-```
-python setup.py develop
-```
-[See [here](https://setuptools.pypa.io/en/latest/userguide/development_mode.html) for an explanation]
+
+> 👉 **Note:** *If* you intend to make changes to the code and want them reflected in the installed instance, replace the `install` in the previous command with `develop`:
+> ```
+> python setup.py develop
+> ```
+> [See [here](https://setuptools.pypa.io/en/latest/userguide/development_mode.html) for an explanation]
 
 Now, install all the packages that the project's code depends on:
 ```
