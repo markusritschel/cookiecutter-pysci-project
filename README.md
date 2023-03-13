@@ -56,7 +56,7 @@ For an overview of the directory & file structure have a look at the [section fu
 The redundant parts (mainly for demonstration purposes) are only few and are listed in the section after the one describing the project structure.
 
 > 👉 Once set up, a Git repository is automatically initialized. 
-If you want to connect it with a remote repository on GitHub (or any other hosted git service) you need to add the respective remote repository to your local repository.
+If you want to connect it with a remote repository on GitHub (or any other hosted git service) you need to [add the respective remote repository to your local repository](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories).
 
 ## Requirements
 You need to have python installed as well as the python package `cookiecutter`.
@@ -65,6 +65,7 @@ You can do this either via pip or conda.
 $ pip install -U cookiecutter cruft
 $ conda install -c conda-forge cookiecutter cruft
 ```
+As mentioned above, instead of `cookiecutter` you can also use `cookieninja`.
 Besides that, there is no need to clone or download anything from this repository. Just follow the next step :-)
 
 > 👉 **Important hint**: I recommend you to install [Mamba](https://mamba.readthedocs.io/) as a package manager. It is build on `conda` but has a much greater performance.
@@ -85,13 +86,20 @@ $ cookiecutter git+https://github.com/markusritschel/cookiecutter-pysci-project
 $ cookiecutter git+ssh://git@github.com/markusritschel/cookiecutter-pysci-project.git
 ```
 The script will ask you some questions based on the entries in the `cookiecutter.json` and will then create a new project based on this template with the information that you just provided by answering the questions.
+Finalize the step by changing to the new directory.
 
-Then, for development, I **strongly** recommend you create a dedicated virtual environment. Using conda, you can simply execute `conda create -n <your-environment-name>` or create an environment based on the environment.yml file by executing `conda create -f environment.yml`. 
+> 👉 For the following steps, there are also Make commands available that ease the work for you.
+
+Then, for development, I **strongly** recommend you create a dedicated virtual environment. 
+Using conda, you can simply execute `conda create -n <your-environment-name>` or create an environment based on the environment.yml file by executing `conda create -f environment.yml`. 
 The latter would create a virtual conda environment with the same name as your project directory. 
 You can override the default name of the environment with the option `-n <your-custom-name>`.
 This should also install all the required packages that you need to make your new project work, including generating the documentation.
 
 You finalize the set up by activating the environment via `conda activate <your-environment-name>`.
+
+> 👉 You can use the pre-defined commands `make setup-conda-env` and `make src-available` instead of performing the above steps manually.
+> See also the README.md of your new project.
 
 For further information you may wanna have a look at the README.md file in the root directory of your new project.
 This will give you more information about setting up the project, making your code installable, etc.
