@@ -1,4 +1,3 @@
-python
 python-dotenv
 ipython
 jupyterlab
