@@ -268,4 +268,4 @@ Issues & pull-requests accepted.
 
 
 ---
-&copy; [Markus Ritschel](https://github.com/markusritschel), 2022
+&copy; [Markus Ritschel](https://github.com/markusritschel), 2023
