@@ -101,7 +101,7 @@ clear-images:
 	@rm -f ${jpg2png}
 
 
-## Convert JPG and PDF files to PNG files
+## Convert JPG and PDF files to PNG files (applies to all files in ./reports/figures)
 convert-images: $(jpg2png) $(pdf2png)
 	@echo ---
 	@echo finished conversion
@@ -122,13 +122,13 @@ convert-images: $(jpg2png) $(pdf2png)
 # [ $$((2*o)) -gt $$i ] && echo "\tbad compression: remove $@" && rm -f $@ || true
 
 
-## Clear all PNGs that have a JPG or PDF parent, crop PDF and PNG files, and convert PDFs to PNG
+## Clear all PNGs that have a JPG or PDF parent, crop PDF and PNG files, and convert PDFs to PNG (applies to all files in ./reports/figures)
 figures: clear-images crop-pdf convert-images crop-png
 	@echo ---
 	@echo finished creating figures
 
 
-## Crop PDF files
+## Crop PDF files (applies to all files in ./reports/figures)
 crop-pdf:
 	@echo
 	@echo crop all pdf files in ${imagedir}
@@ -138,7 +138,7 @@ crop-pdf:
 		done;
 
 
-## Crop PNG files
+## Crop PNG files (applies to all files in ./reports/figures)
 crop-png:
 	@echo
 	@echo crop all png files in ${imagedir}
