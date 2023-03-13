@@ -51,7 +51,7 @@ save-requirements:
 
 
 ## Install Python Dependencies via pip
-requirements:
+install-requirements:
 	python -m pip install -U pip setuptools wheel
 	mamba install --file requirements.txt
 	pip install sphinxcontrib-napoleon2 rinohtype sphinx-rtd-theme sphinx-autodoc-defaultargs nbsphinx myst-parser sphinx-issues sphinxcontrib-bibtex
@@ -63,8 +63,10 @@ src-available:
 	python setup.py develop
 
 
-## Create a conda environment named after the project slug and activate it
-conda-env:
+## Create a conda environment named after the project slug, install packages, and activate it
+setup-conda-env:
+	echo "Install mamba"
+	conda install -c conda-forge mamba
 	echo "Create conda environment `{{ cookiecutter.project_slug }}`"
 	mamba env create --file environment.yml
 	echo "Activate conda environment `{{ cookiecutter.project_slug }}`"
