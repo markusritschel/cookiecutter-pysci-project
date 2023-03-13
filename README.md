@@ -44,6 +44,9 @@ This includes
 - creating a nice HTML representation of your Jupyter notebooks and of your doc strings
 - and so on... 🚀
 
+> **Note**: 
+> CookieCutter seems to be on hiutus at the moment, meaning that the maintainers are not working on it anymore. While it should still work, you can also switch to the fork [CookieNinja](https://github.com/cookieninja-generator/cookieninja), which works with cookiecutters (project templates) the same way as the original CookieCutter does. 
+
 ## About this template
 There exist tons of different CookieCutter templates for all different kinds of projects.
 However, according to my experience, many of them are very complex in their structure and therefore often a bit overkill, especially for new-comers or projects of a rather modest size.
@@ -261,6 +264,7 @@ Some great sources of inspiration and orientation when I created this template:
 - https://github.com/audreyfeldroy/cookiecutter-pypackage
 - https://github.com/hackalog/easydata
 - https://github.com/aubricus/cookiecutter-python-package
+- https://github.com/cookieninja-generator/cookieninja
 
 
 ## Contributing
