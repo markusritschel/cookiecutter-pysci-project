@@ -1,3 +1,4 @@
+python=3.10
 python-dotenv
 ipython
 jupyterlab
@@ -9,8 +10,11 @@ seaborn
 tqdm
 matplotlib
 numpy
+scipy
 pandas
 xarray
+scikit-learn
+netcdf4
 pytest
 docopt
 click
@@ -21,7 +25,7 @@ markdown
 sphinx
 sphinxcontrib-apidoc
 sphinxcontrib-mermaid
-# jupyterbook-latex
+jupyterbook-latex
 nbsphinx
 sphinx-issues
 sphinxcontrib-napoleon2
