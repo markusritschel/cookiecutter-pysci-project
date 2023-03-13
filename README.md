@@ -86,12 +86,12 @@ The script will ask you some questions based on the entries in the `cookiecutter
 Then, for development, I **strongly** recommend you create a dedicated virtual environment. Using conda, you can simply execute `conda create -n <your-environment-name>` or create an environment based on the environment.yml file by executing `conda create -f environment.yml`. 
 The latter would create a virtual conda environment with the same name as your project directory. 
 You can override the default name of the environment with the option `-n <your-custom-name>`.
-This should install all the required packages that you need to make your new project work, including generating the documentation.
+This should also install all the required packages that you need to make your new project work, including generating the documentation.
 
 You finalize the set up by activating the environment via `conda activate <your-environment-name>`.
 
-For further information you may wanna have a look at the README.md file in the root directory.
-This will give you more information about making your code installable etc.
+For further information you may wanna have a look at the README.md file in the root directory of your new project.
+This will give you more information about setting up the project, making your code installable, etc.
 You may also want to check out the Makefile commands (simply type `make` to get an overview of the available commands).
 
 ### Using the Makefile
