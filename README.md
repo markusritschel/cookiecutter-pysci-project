@@ -11,39 +11,48 @@ Also, feel free to fork the repository and adjust it to your own needs.
 
 ***
 ## Table of contents <!-- omit in toc -->
-- [What is it good for?](#what-is-it-good-for)
-- [About this template](#about-this-template)
-- [Requirements](#requirements)
-- [Usage](#usage)
-  - [Setting up a new project](#setting-up-a-new-project)
-  - [Using the Makefile](#using-the-makefile)
-    - [Setting dependencies](#setting-dependencies)
-  - [Snakemake](#snakemake)
-  - [Write your documentation](#write-your-documentation)
-    - [Using Sphinx](#using-sphinx)
-    - [Using Jupyter-Book](#using-jupyter-book)
-    - [Using both a (Jupyter book) report alongside your code documentation as Github page](#using-both-a-jupyter-book-report-alongside-your-code-documentation-as-github-page)
-  - [Some tips and thoughts regarding the code layout](#some-tips-and-thoughts-regarding-the-code-layout)
-- [Project Structure](#project-structure)
-- [Dummy files](#dummy-files)
-- [Sources of inspiration](#sources-of-inspiration)
-- [Contributing](#contributing)
+- [Cookiecutter PySci-project Template](#cookiecutter-pysci-project-template)
+  - [What is it good for? _or_ How this can boost your productivity](#what-is-it-good-for-or-how-this-can-boost-your-productivity)
+  - [About this template](#about-this-template)
+  - [Requirements](#requirements)
+  - [Usage](#usage)
+    - [Setting up a new project](#setting-up-a-new-project)
+    - [Using the Makefile](#using-the-makefile)
+      - [Setting dependencies](#setting-dependencies)
+    - [Snakemake](#snakemake)
+    - [Write your documentation](#write-your-documentation)
+      - [Using Sphinx](#using-sphinx)
+        - [Best practise: Write documentation on a separate branch](#best-practise-write-documentation-on-a-separate-branch)
+        - [Publish your documentation with Github pages 🚀](#publish-your-documentation-with-github-pages-)
+      - [Using Jupyter-Book](#using-jupyter-book)
+      - [Using both a (Jupyter book) report alongside your code documentation as Github page](#using-both-a-jupyter-book-report-alongside-your-code-documentation-as-github-page)
+    - [Some tips and thoughts regarding the code layout](#some-tips-and-thoughts-regarding-the-code-layout)
+  - [Project Structure](#project-structure)
+  - [Dummy files](#dummy-files)
+  - [Sources of inspiration](#sources-of-inspiration)
+  - [Contributing](#contributing)
 
 ***
 
-## What is it good for?
+## What is it good for? _or_ How this can boost your productivity
 [CookieCutter](https://cookiecutter.readthedocs.io/) is a templating engine for creating directory structures including pre-defined files based on a question catalogue that is being asked during the setup.<br>
-By running `cookiecutter` with this repository, a new directory will be created with a pre-defined structure and some basic files, making you all ready for starting a new scientific python project.
+By running `cookiecutter` with this repository, a new directory will be created with a pre-defined structure and some basic files, making you all ready for starting a new scientific python project without having to manually create the same files & structure over and over again.
+This includes
+- code that is importable from every place in your environment
+- automatically resolved paths to the project's root and the directories for data, plots, logs, etc.
+- `make` commands to run automated unit tests, create documentation of your code, etc.
+- creating a nice HTML representation of your Jupyter notebooks and of your doc strings
+- and so on... 🚀
 
 ## About this template
 There exist tons of different CookieCutter templates for all different kinds of projects.
 However, according to my experience, many of them are very complex in their structure and therefore often a bit overkill, especially for new-comers or projects of a rather modest size.
 <br>
 This template provides a boilerplate for small to medium-size (scientific) data projects, e.g. a thesis, a group project, or similar.
-For an overview of the structure have a look at the [section further below](#project-structure).
+For an overview of the directory & file structure have a look at the [section further below](#project-structure).
 The redundant parts (mainly for demonstration purposes) are only few and are listed in the section after the one describing the project structure.
 
-Once set up, a git repository is automatically initialized. 
+> 👉 Once set up, a Git repository is automatically initialized. 
 If you want to connect it with a remote repository on GitHub (or any other hosted git service) you need to add the respective remote repository to your local repository.
 
 ## Requirements
@@ -59,25 +68,37 @@ Besides that, there is no need to clone or download anything from this repositor
 
 
 ## Usage
+If you plan to use git as a version control system, ensure that you have installed it on your machine and that you have specified the Git configuration settings:
+```bash
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+```
 ### Setting up a new project
-After having `cookiecutter` installed, create a new project from this template by executing one of the following commands:
+Then, after having `cookiecutter` installed, create a new project from this template by executing one of the following commands:
 ```bash
 $ cookiecutter gh:markusritschel/cookiecutter-pysci-project
 $ cookiecutter https://github.com/markusritschel/cookiecutter-pysci-project.git
 $ cookiecutter git+https://github.com/markusritschel/cookiecutter-pysci-project
 $ cookiecutter git+ssh://git@github.com/markusritschel/cookiecutter-pysci-project.git
 ```
-The script will ask you some questions based on the entries in the `cookiecutter.json` and will then create a new project based on this template with the information you just provided by answering the questions.
+The script will ask you some questions based on the entries in the `cookiecutter.json` and will then create a new project based on this template with the information that you just provided by answering the questions.
 
 Then, for development, I **strongly** recommend you create a dedicated virtual environment. Using conda, you can simply execute `conda create -n <your-environment-name>` or create an environment based on the environment.yml file by executing `conda create -f environment.yml`. 
 The latter would create a virtual conda environment with the same name as your project directory.
 
-After creating and activating the environment (`conda activate <your-environment-name>`), you should install all the required packages to make your new project work, including generating the documentation.
+After creating and activating the environment (`conda activate <your-environment-name>`), you should install all the required packages to make your new project work, including generating the documentation:
+
+```bash
+$ conda env create -n <optional-name> -f environment.yml
+```
+
+For further information you may wanna have a look at the README.md file in the root directory.
+This will give you more information about making your code installable etc.
 
 ### Using the Makefile
 The Makefile in the project directory provides some default routines like cleanup, testing, installing requirements etc.
 <br>
-Even though for many people using `make` seems to be a bit old-fashioned, I would recommend you to use Make's great capability of dealing with dependencies.
+Even though for many people using `make` seems to be a bit old-fashioned, I would recommend you have a look at Make's great capability of dealing with dependencies.
 This is in particular useful if, for example, the first step in your data-processing pipeline takes a long time to process your raw data and generate the interim product.
 <br>
 I usually structure my data-processing workflow such that I can run a single process via command line (for example `python scripts/process-raw-data.py -o ./output_dir`). 
@@ -88,7 +109,7 @@ These commands I can set as targets in the Makefile, for example:
 process_raw_data:
     python scripts/process-raw-data.py
 ```
-I can now simply run `make process_raw_data`.
+I can now simply run `make process_raw_data` in the project's root directory.
 
 #### Setting dependencies
 Let's assume that the previous step (processing the raw data) generates new data inside `./data/interim/`. If I now have a second processing step that depends on the data generated by the previous step, I can set these data as dependencies for the new rule:
@@ -103,13 +124,18 @@ For further information, have a look at Make's documentation: https://www.gnu.or
 
 
 ### Snakemake
-Additionally to `make` or as an alternative, [Snakemake](https://snakemake.readthedocs.io) provides <!-- todo -->
+Additionally to `make` or as an alternative, [Snakemake](https://snakemake.readthedocs.io) provides even more extended functionalities. 
+The syntax used in Snakemake is pure python, making it very convenient to work with and providing all the functionality of Python in your Snakemake workflow.
+In Snakemake you define dependencies not as an "artificial" target but you indicate the target file you want to create, and Snakemake takes care of producing the required dependencies.
+Another strength of Snakemake is that it is easily scalable.
+Porting your Snakemake workflow from your local machine to a High Performance Computing system is as straightforward as adding a few extra parameters to the executed command.
+This way, Snakemake automatically generates bash scripts and submits them as jobs on the HPC, automatically distributing the tasks of the workflow.  <!-- todo -->
 
-### Write your documentation
+### Write your documentation 
 In my opinion it is helpful to differentiate between two kinds of documentation: 
 1. The first kind should only **document your code** (similar to what you would expect when opening the online documentation of a python package or similar) and should be considered as best practice to be shipped with your code.
 2. The second is optional but, in my opinion, possibly very helpful for others (and also for yourself) to understand **what is going on in your project**, present your results etc..
-
+<!-- todo: Verweis auf die "BES: Guides to Better Science" Serie -->
 
 For the first, I would recommend you to use [Sphinx](https://www.sphinx-doc.org/), which is particularly suited for documenting python code and already set up as default doc engine in this project template. It's _autodoc_ extension can also parse the doc strings of your code and process them to nice HTML output. For more details, see the [section below](#using-sphinx).
 
