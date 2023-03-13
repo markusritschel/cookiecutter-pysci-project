@@ -26,28 +26,34 @@ To reproduce the project, clone this repository on your machine
 ```bash
 git clone https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
 ```
-As a next step, although optional, I'd highly recommended that you create a new virtual environment (e.g. `conda create -n <whatever-name>`). <br>
+
+### Setting up a dedicated virtual environment
+As a next step, although optional, I'd highly recommended that you create a new virtual environment (e.g. `conda create -n <your-env-name>`). <br>
 > **Note**:
-> I recommend that you use [Conda](https://docs.conda.io/en/latest/miniconda.html) as a package manager. For performance boost, I would even recommend using [Mamba](https://mamba.readthedocs.io/).
+> I recommend that you use [Conda](https://docs.conda.io/en/latest/miniconda.html) as a package manager. For performance boost, it is recommended to use [Mamba](https://mamba.readthedocs.io/).
+
+You can simply use the Makefile command `make setup-conda-env` from inside the cloned directory (`cd {{ cookiecutter.project_slug }}/`). 
+This is probably the easiest way to get set up.
+This will install Mamba, create a new conda environment with the same name as your project directory, install the packages as they are listed in the environment.yml, and activate the environment.
 
 ### Installing requirements
-Then, in the new, cloned directory (`cd {{ cookiecutter.project_slug }}/`) run either
-```
-python setup.py install
-```
-to make the source code in `src` as a package available. 
+Then, in the new, cloned directory run either `python setup.py install` or simply `make src-available` to make the source code in `src` available as a package. 
+From now on you can use `import src` in any python context within your conda environment.
 
 > 👉 **Note:** *If* you intend to make changes to the code and want them reflected in the installed instance, replace the `install` in the previous command with `develop`:
-> ```
+> ```bash
 > python setup.py develop
 > ```
+> The command `make src-available` will actually use the `develop` option.
 > [See [here](https://setuptools.pypa.io/en/latest/userguide/development_mode.html) for an explanation]
 
-Now, install all the packages that the project's code depends on:
-```
-mamba install --file requirements.txt
+If you don't wanna use conda for any reason, you can also install the required packages via pip only:
+```bash
 pip install -r requirements.txt
 ```
+
+> **Note**:
+> If you experience that something is not working (e.g. creating the documentation via `make docs`) try to perform an update via `mamba update --all`. This might solve the problem.
 
 ### Make raw data available
 Next, make the raw data available or accessible under `data/` (see project structure below).

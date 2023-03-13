@@ -70,7 +70,7 @@ setup-conda-env:
 	@echo "Create conda environment '{{ cookiecutter.project_slug }}'"
 	mamba env create --file environment.yml
 	@echo "Activate conda environment '{{ cookiecutter.project_slug }}'"
-	mamba activate {{ cookiecutter.project_slug }}
+	conda activate {{ cookiecutter.project_slug }}
 
 
 ## Check if all packages listed in requirements.txt are installed in the current environment
