@@ -1,10 +1,8 @@
-python~=3.10
 python-dotenv
 ipython
 jupyterlab
 ipywidgets
 nodejs
-nb_conda_kernels
 ipykernel
 seaborn
 tqdm
