@@ -26,9 +26,9 @@ github:
 clean:
 	rm -rf $(BUILDDIR)/* $(AUTODOCDIR)
 
-$(AUTODOCDIR): $(MODULEDIR)
+$(AUTODOCDIR): #$(MODULEDIR)
 	mkdir -p $@
-	$(AUTODOCBUILD) -f -o $@ $^
+	$(AUTODOCBUILD) -f -o $@ $(MODULEDIR)
 
 doc-requirements: $(AUTODOCDIR)
 
