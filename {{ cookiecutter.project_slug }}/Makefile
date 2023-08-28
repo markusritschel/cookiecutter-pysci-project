@@ -121,7 +121,7 @@ convert-images: $(jpg2png) $(pdf2png)
 
 
 ## Clear all PNGs with a JPG or PDF parent, crops PDF files, converts to PNG, and crops PNGs
-figures: clear_images crop_pdf convert crop_png
+figures: clear-images crop-pdf convert-images crop-png
 	@echo ---
 	@echo finished creating figures
 
@@ -143,7 +143,7 @@ crop-png:
 	@for file in `find ${imagedir}/ -iname "*.png" -type f`; \
 		do \
 			echo crop $${file}; \
-			convert $${file} -trim $${file}; \
+			convert $${file} -trim -bordercolor White -border 25x25 $${file}; \
 		done;
 	
 
