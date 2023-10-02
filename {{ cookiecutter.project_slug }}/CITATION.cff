@@ -1,11 +1,11 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
-- family-names: "{{ cookiecutter.project_author }}"
-  given-names: "{{ cookiecutter.project_author }}"
+- family-names: "{{ cookiecutter.project_author.split()[1] }}"
+  given-names: "{{ cookiecutter.project_author.split()[0] }}"
   orcid: "https://orcid.org/0000-0000-0000-0000"
 title: "{{ cookiecutter.project_name }}"
-version: {{ cookiecutter_project_version }}
+version: {{ cookiecutter.project_version }}
 doi: 10.5281/zenodo.1234
-date-released: {% now 'local', '%Y-%m-%d' %}
+date-released: {% now 'utc', '%Y-%m-%d' %}
 url: "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}"
