@@ -51,7 +51,7 @@ save-requirements:
 
 
 ## Install Python Dependencies via pip
-requirements:
+install-requirements:
 	python -m pip install -U pip setuptools wheel
 	mamba install --file requirements.txt
 	pip install sphinxcontrib-napoleon2 rinohtype sphinx-rtd-theme sphinx-autodoc-defaultargs nbsphinx myst-parser sphinx-issues sphinxcontrib-bibtex
@@ -63,12 +63,14 @@ src-available:
 	python setup.py develop
 
 
-## Create a conda environment named after the project slug and activate it
-conda-env:
-	echo "Create conda environment `{{ cookiecutter.project_slug }}`"
+## Create a conda environment named after the project slug, install packages, and activate it
+setup-conda-env:
+	@echo "Install mamba"
+	conda install -c conda-forge mamba
+	@echo "Create conda environment '{{ cookiecutter.project_slug }}'"
 	mamba env create --file environment.yml
-	echo "Activate conda environment `{{ cookiecutter.project_slug }}`"
-	mamba activate {{ cookiecutter.project_slug }}
+	@echo "Activate conda environment '{{ cookiecutter.project_slug }}'"
+	conda activate {{ cookiecutter.project_slug }}
 
 
 ## Check if all packages listed in requirements.txt are installed in the current environment
@@ -79,7 +81,7 @@ test-requirements:
 
 
 ## Run pytest for the source code
-tests: test_requirements
+tests: test-requirements
 	pytest src/tests/ --doctest-modules -v
 
 
@@ -99,7 +101,7 @@ clear-images:
 	@rm -f ${jpg2png}
 
 
-## Convert JPG and PDF files to PNG files
+## Convert JPG and PDF files to PNG files (applies to all files in ./reports/figures)
 convert-images: $(jpg2png) $(pdf2png)
 	@echo ---
 	@echo finished conversion
@@ -120,13 +122,13 @@ convert-images: $(jpg2png) $(pdf2png)
 # [ $$((2*o)) -gt $$i ] && echo "\tbad compression: remove $@" && rm -f $@ || true
 
 
-## Clear all PNGs with a JPG or PDF parent, crops PDF files, converts to PNG, and crops PNGs
+## Clear all PNGs that have a JPG or PDF parent, crop PDF and PNG files, and convert PDFs to PNG (applies to all files in ./reports/figures)
 figures: clear-images crop-pdf convert-images crop-png
 	@echo ---
 	@echo finished creating figures
 
 
-## Crop PDF files
+## Crop PDF files (applies to all files in ./reports/figures)
 crop-pdf:
 	@echo
 	@echo crop all pdf files in ${imagedir}
@@ -136,7 +138,7 @@ crop-pdf:
 		done;
 
 
-## Crop PNG files
+## Crop PNG files (applies to all files in ./reports/figures)
 crop-png:
 	@echo
 	@echo crop all png files in ${imagedir}
@@ -152,4 +154,4 @@ crop-png:
 # https://www.digitalocean.com/community/tutorials/how-to-use-makefiles-to-automate-repetitive-tasks-on-an-ubuntu-vps
 .DEFAULT_GOAL := show-help
 show-help:
-	@echo "$$(tput bold)Available rules:$$(tput sgr0)";echo;sed -ne"/^## /{h;s/.*//;:d" -e"H;n;s/^## //;td" -e"s/:.*//;G;s/\\n## /---/;s/\\n/ /g;p;}" ${MAKEFILE_LIST}|LC_ALL='C' sort -f|awk -F --- -v n=$$(tput cols) -v i=19 -v a="$$(tput setaf 6)" -v z="$$(tput sgr0)" '{printf"%s%*s%s ",a,-i,$$1,z;m=split($$2,w," ");l=n-i;for(j=1;j<=m;j++){l-=length(w[j])+1;if(l<= 0){l=n-i-length(w[j])-1;printf"\n%*s ",-i," ";}printf"%s ",w[j];}printf"\n";}'|more
+	@echo "$$(tput bold)Available rules:$$(tput sgr0)";echo;sed -ne"/^## /{h;s/.*//;:d" -e"H;n;s/^## //;td" -e"s/:.*//;G;s/\\n## /---/;s/\\n/ /g;p;}" ${MAKEFILE_LIST}|LC_ALL='C' sort -f|awk -F --- -v n=$$(tput cols) -v i=21 -v a="$$(tput setaf 6)" -v z="$$(tput sgr0)" '{printf"%s%*s%s ",a,-i,$$1,z;m=split($$2,w," ");l=n-i;for(j=1;j<=m;j++){l-=length(w[j])+1;if(l<= 0){l=n-i-length(w[j])-1;printf"\n%*s ",-i," ";}printf"%s ",w[j];}printf"\n";}'|more

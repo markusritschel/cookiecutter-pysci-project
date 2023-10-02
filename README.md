@@ -44,6 +44,9 @@ This includes
 - creating a nice HTML representation of your Jupyter notebooks and of your doc strings
 - and so on... 🚀
 
+> **Note**: 
+> CookieCutter seems to be on hiutus at the moment, meaning that the maintainers are not working on it anymore. While it should still work, you can also switch to the fork [CookieNinja](https://github.com/cookieninja-generator/cookieninja), which works with cookiecutters (project templates) the same way as the original CookieCutter does. 
+
 ## About this template
 There exist tons of different CookieCutter templates for all different kinds of projects.
 However, according to my experience, many of them are very complex in their structure and therefore often a bit overkill, especially for new-comers or projects of a rather modest size.
@@ -53,7 +56,7 @@ For an overview of the directory & file structure have a look at the [section fu
 The redundant parts (mainly for demonstration purposes) are only few and are listed in the section after the one describing the project structure.
 
 > 👉 Once set up, a Git repository is automatically initialized. 
-If you want to connect it with a remote repository on GitHub (or any other hosted git service) you need to add the respective remote repository to your local repository.
+If you want to connect it with a remote repository on GitHub (or any other hosted git service) you need to [add the respective remote repository to your local repository](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories).
 
 ## Requirements
 You need to have python installed as well as the python package `cookiecutter`.
@@ -62,6 +65,7 @@ You can do this either via pip or conda.
 $ pip install -U cookiecutter cruft
 $ conda install -c conda-forge cookiecutter cruft
 ```
+As mentioned above, instead of `cookiecutter` you can also use `cookieninja`.
 Besides that, there is no need to clone or download anything from this repository. Just follow the next step :-)
 
 > 👉 **Important hint**: I recommend you to install [Mamba](https://mamba.readthedocs.io/) as a package manager. It is build on `conda` but has a much greater performance.
@@ -82,18 +86,24 @@ $ cookiecutter git+https://github.com/markusritschel/cookiecutter-pysci-project
 $ cookiecutter git+ssh://git@github.com/markusritschel/cookiecutter-pysci-project.git
 ```
 The script will ask you some questions based on the entries in the `cookiecutter.json` and will then create a new project based on this template with the information that you just provided by answering the questions.
+Finalize the step by changing to the new directory.
 
-Then, for development, I **strongly** recommend you create a dedicated virtual environment. Using conda, you can simply execute `conda create -n <your-environment-name>` or create an environment based on the environment.yml file by executing `conda create -f environment.yml`. 
-The latter would create a virtual conda environment with the same name as your project directory.
+> 👉 For the following steps, there are also Make commands available that ease the work for you.
 
-After creating and activating the environment (`conda activate <your-environment-name>`), you should install all the required packages to make your new project work, including generating the documentation:
+Then, for development, I **strongly** recommend you create a dedicated virtual environment. 
+Using conda, you can simply execute `conda create -n <your-environment-name>` or create an environment based on the environment.yml file by executing `conda create -f environment.yml`. 
+The latter would create a virtual conda environment with the same name as your project directory. 
+You can override the default name of the environment with the option `-n <your-custom-name>`.
+This should also install all the required packages that you need to make your new project work, including generating the documentation.
 
-```bash
-$ conda env create -n <optional-name> -f environment.yml
-```
+You finalize the set up by activating the environment via `conda activate <your-environment-name>`.
 
-For further information you may wanna have a look at the README.md file in the root directory.
-This will give you more information about making your code installable etc.
+> 👉 You can use the pre-defined commands `make setup-conda-env` and `make src-available` instead of performing the above steps manually.
+> See also the README.md of your new project.
+
+For further information you may wanna have a look at the README.md file in the root directory of your new project.
+This will give you more information about setting up the project, making your code installable, etc.
+You may also want to check out the Makefile commands (simply type `make` to get an overview of the available commands).
 
 ### Using the Makefile
 The Makefile in the project directory provides some default routines like cleanup, testing, installing requirements etc.
@@ -262,6 +272,7 @@ Some great sources of inspiration and orientation when I created this template:
 - https://github.com/audreyfeldroy/cookiecutter-pypackage
 - https://github.com/hackalog/easydata
 - https://github.com/aubricus/cookiecutter-python-package
+- https://github.com/cookieninja-generator/cookieninja
 
 
 ## Contributing
@@ -269,4 +280,4 @@ Issues & pull-requests accepted.
 
 
 ---
-&copy; [Markus Ritschel](https://github.com/markusritschel), 2022
+&copy; [Markus Ritschel](https://github.com/markusritschel), 2023
