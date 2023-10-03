@@ -93,3 +93,22 @@ def setup_logger(level=None, logfile=True, name="root"):
     logger.info("-"*(17+len(caller_file))+"\n")
 
     return logger
+
+
+
+welcome = """
+████████╗██╗████████╗██╗     ███████╗
+╚══██╔══╝██║╚══██╔══╝██║     ██╔════╝
+   ██║   ██║   ██║   ██║     █████╗  
+   ██║   ██║   ██║   ██║     ██╔══╝  
+   ██║   ██║   ██║   ███████╗███████╗
+   ╚═╝   ╚═╝   ╚═╝   ╚══════╝╚══════╝
+          Some subtitle ☃
+"""
+# https://patorjk.com/software/taag/ with "ANSI Shadow" font
+
+# print(pyfiglet.figlet_format("My title", font="slant") + "\n Some subtitle")
+
+
+if __name__ == '__main__':
+    print(welcome)
