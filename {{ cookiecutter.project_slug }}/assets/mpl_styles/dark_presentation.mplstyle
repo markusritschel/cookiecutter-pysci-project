@@ -1,0 +1,24 @@
+# https://matplotlib.org/stable/users/explain/customizing.html
+
+font.family: sans-serif
+font.sans-serif: Josefin Sans
+font.weight : normal
+font.size : 14
+
+figure.figsize : 10, 6
+figure.dpi : 100
+
+hatch.color : black
+hatch.linewidth : .5
+
+savefig.facecolor : "#111111"
+figure.facecolor : "#111111"
+axes.facecolor : "#111111"
+axes.edgecolor : "#dddddd"
+axes.labelcolor : "#dddddd"
+xtick.color : "#dddddd"
+ytick.color : "#dddddd"
+text.color : "#dddddd"
+
+lines.solid_capstyle : round
+lines.solid_joinstyle : round

@@ -57,9 +57,8 @@ pd.set_option("display.max_rows", 25)
 
 # ---------------------------------------------
 # Set matplotlib default parameters
-mpl.rcParams['figure.figsize'] = (8, 5)
-mpl.rcParams['figure.dpi'] = 175
-#plt.style.use('bmh')
+plt.rcdefaults()
+plt.style.use(BASE_DIR/"assets/mpl_styles/white_paper.mplstyle")
 
 
 # ---------------------------------------------
