@@ -18,7 +18,7 @@ def generate_int_list(x: int = 3) -> list[int]:
 
     Example
     -------
-    >>> sub_fun(3)
+    >>> generate_int_list(3)
     [1, 2, 3]
     """
     logger.info("From sub-module")
