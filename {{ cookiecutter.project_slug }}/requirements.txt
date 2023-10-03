@@ -37,4 +37,4 @@ sphinxcontrib-bibtex
 sphinxcontrib-apidoc
 sphinx-autodoc-typehints
 sphinx-autodoc-defaultargs
-sphinx-toolbox
+#sphinx-toolbox
