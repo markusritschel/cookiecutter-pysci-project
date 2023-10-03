@@ -10,7 +10,7 @@ print("Load standard packages and some magic commands, set up logger and matplot
 %load_ext jupyternotify
 
 # Load numpy and matplotlib to work interactively.
-%pylab --no-import-all 
+# %pylab --no-import-all 
 %matplotlib inline
 # %matplotlib notebook
 # %matplotlib tk
@@ -19,6 +19,8 @@ print("Load standard packages and some magic commands, set up logger and matplot
 # ---------------------------------------------
 # import some standard libraries
 import sys
+import glob
+import re
 import logging
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -26,6 +28,7 @@ import pandas as pd
 from IPython.core.getipython import get_ipython
 from IPython.core.magic import (Magics, magics_class,  cell_magic)
 from IPython.display import Javascript
+from tqdm.auto import tqdm
 
 
 # ---------------------------------------------
@@ -50,10 +53,12 @@ get_ipython().register_magics(MarkdownMagics)
 
 
 # ---------------------------------------------
-# Set pandas default parameters
+# Set pandas and xarray default options
 pd.set_option("display.precision", 3)
 pd.set_option("display.expand_frame_repr", False)  # Don't wrap repr(DataFrame) across additional lines
 pd.set_option("display.max_rows", 25)
+xr.set_options(keep_attrs=True)
+
 
 # ---------------------------------------------
 # Set matplotlib default parameters
