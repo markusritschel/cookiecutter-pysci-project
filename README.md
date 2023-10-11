@@ -44,8 +44,13 @@ This includes
 - creating a nice HTML representation of your Jupyter notebooks and of your doc strings
 - and so on... 🚀
 
+It is indeed so easy:<br>
+![cookiecutter](https://github.com/markusritschel/cookiecutter-pysci-project/assets/3332539/792d58d4-b0c9-487f-9575-4d5776d65535)
+
+
+
 > **Note**: 
-> CookieCutter seems to be on hiutus at the moment, meaning that the maintainers are not working on it anymore. While it should still work, you can also switch to the fork [CookieNinja](https://github.com/cookieninja-generator/cookieninja), which works with cookiecutters (project templates) the same way as the original CookieCutter does. 
+> CookieCutter seems to be on hiatus at the moment, meaning that the maintainers are not working on it anymore. While it should still work, you can also switch to the fork [CookieNinja](https://github.com/cookieninja-generator/cookieninja), which works with cookiecutters (project templates) the same way as the original CookieCutter does. 
 
 ## About this template
 There exist tons of different CookieCutter templates for all different kinds of projects.
