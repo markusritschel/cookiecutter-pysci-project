@@ -10,10 +10,10 @@
 include .env
 
 
-.PHONY: clean clean-jupyter-book clean-pyc, clean-logs, docs, book, save-requirements, requirements, src-available, conda-env, test-requirements, tests, clear-images, convert-images, figures, crop-pdf, crop-png, show-help
+.PHONY: cleanup clean-jupyter-book clean-pyc, clean-logs, docs, book, save-requirements, requirements, src-available, conda-env, test-requirements, tests, clear-images, convert-images, figures, crop-pdf, crop-png, show-help
 
-## Clean python artifacts, logs and jupyter-book built
-clean: clean-pyc clean-logs clean-jupyter-book clean-docs
+## Clean-up python artifacts, logs and jupyter-book built
+cleanup: clean-pyc clean-logs clean-jupyter-book clean-docs
 
 clean-jupyter-book:
 	jb clean --all docsrc/
@@ -48,6 +48,16 @@ book:
 ## Update the requirements.txt
 save-requirements:
 	pip freeze > requirements.txt
+
+
+## Create a conda environment.yml file
+save-conda-env:
+	pip_packages=$$(conda env export | grep -A9999 ".*- pip:" | grep -v "^prefix: ") ;\
+	conda env export --from-history | grep -v "^prefix: " > environment.yml ;\
+	echo "$$pip_packages" >> environment.yml ;\
+	sed -ie 's/name: base/name: $(CONDA_DEFAULT_ENV)/g' environment.yml; \
+	echo "$$CONDA_DEFAULT_ENV"
+
 
 
 ## Install Python Dependencies via pip
