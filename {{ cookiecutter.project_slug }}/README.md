@@ -9,7 +9,7 @@
 {{ cookiecutter.project_description}}
 
 ## <u>Table of Contents <!-- omit in toc --></u>
-- [{{cookiecutter.project\_name}}](#cookiecutterproject_name)
+- [{{ cookiecutter.project_name }}](#{{ cookiecutter.project_name.lower().replace(' ', '-').strip() }})
   - [Table of Contents ](#table-of-contents-)
   - [Preparation](#preparation)
     - [Cloning the project to your local machine](#cloning-the-project-to-your-local-machine)
