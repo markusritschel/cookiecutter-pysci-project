@@ -157,4 +157,6 @@ For any questions or issues, please contact me via {{ cookiecutter.email }} or o
 
 
 ---
-&copy; [{{ cookiecutter.project_author }}](https://github.com/{{ cookiecutter.github_username }}), {% now 'local', '%Y' %}
+&copy; [{{ cookiecutter.project_author }}](https://github.com/{{ cookiecutter.github_username }}), {% now 'utc', '%Y' %}
+
+
