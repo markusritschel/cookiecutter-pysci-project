@@ -271,7 +271,7 @@ For more information, visit https://jupytext.readthedocs.io/.
     │   ├── processed      <- The final, processed data used for the actual analyses
     │   └── raw            <- The original, immutable(!) data
     │
-    ├── docsrc             <- The technical documentation (default engine: Sphinx; but feel free to 
+    ├── docs               <- The technical documentation (default engine: Sphinx; but feel free to 
     │                         use MkDocs, Jupyter-Book or anything similar).
     │                         This should contain only documentation of the code and the assets.
     │                         A report of the actual project should be placed in `reports/book`.

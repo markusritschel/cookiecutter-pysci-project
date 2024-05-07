@@ -1,0 +1,20 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: index
+parts:
+  - caption: Content
+    chapters:
+      - file: demo-stuff
+  - caption: Project Info
+    chapters:
+      - file: _autoapi/index   # will be generated automatically
+      - file: bibliography
+      - file: readme
+        title: README
+        sections:
+          - file: license
+            title: LICENSE
+          - title: CHANGELOG
+            file: changelog

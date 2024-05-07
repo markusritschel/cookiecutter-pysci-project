@@ -10,13 +10,13 @@
 include .env
 
 
-.PHONY: cleanup clean-jupyter-book clean-pyc, clean-logs, docs, book, save-requirements, requirements, src-available, conda-env, test-requirements, tests, clear-images, convert-images, figures, crop-pdf, crop-png, show-help
+.PHONY: cleanup clean-jupyter-book clean-pyc, clean-logs, documentation, book, save-requirements, requirements, src-available, conda-env, test-requirements, tests, clear-images, convert-images, figures, crop-pdf, crop-png, show-help
 
 ## Clean-up python artifacts, logs and jupyter-book built
 cleanup: clean-pyc clean-logs clean-jupyter-book clean-docs
 
 clean-jupyter-book:
-	jb clean --all docsrc/
+	jb clean --all docs/
 
 clean-docs:
 	jb clean --all reports/book/
@@ -35,9 +35,9 @@ clean-logs:
 	find ./logs -iname '*.log' -type f -exec rm {} +
 
 
-## Build the code documentation with Sphinx
-docs:
-	$(MAKE) -C docsrc html
+## Build the code documentation with Jupyter-Book
+documentation:
+	jb build docs/ -v
 
 
 ## Build the project's Jupyter-Book
@@ -64,7 +64,8 @@ save-conda-env:
 install-requirements:
 	python -m pip install -U pip setuptools wheel
 	mamba install --file requirements.txt
-	pip install sphinxcontrib-napoleon2 rinohtype sphinx-rtd-theme sphinx-autodoc-defaultargs nbsphinx myst-parser sphinx-issues sphinxcontrib-bibtex
+	pip install -r docs/docs_requirements.txt
+	# pip install sphinxcontrib-napoleon2 rinohtype sphinx-rtd-theme sphinx-autodoc-defaultargs nbsphinx myst-parser sphinx-issues sphinxcontrib-bibtex
 	# python -m pip install -r requirements.txt
 
 
@@ -74,9 +75,7 @@ src-available:
 
 
 ## Create a conda environment named after the project slug, install packages, and activate it
-setup-conda-env:
-	@echo "Install mamba"
-	conda install -c conda-forge mamba
+conda-env:
 	@echo "Create conda environment '{{ cookiecutter.project_slug }}'"
 	mamba env create --file environment.yml
 	@echo "Activate conda environment '{{ cookiecutter.project_slug }}'"
