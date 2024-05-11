@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools @ git+https://github.com/pypa/setuptools.git@main"]
+
+[project]
+name = "src"
+description = "{{ cookiecutter.project_description }}"
+authors = [
+  {name = "{{ cookiecutter.project_author }}", email = "{{ cookiecutter.email }}"},
+]
+readme = "README.md"
+license = {file = "LICENSE"}
+dynamic = ["version"]
+requires-python = ">= 3.10"
+
+
+[tool.setuptools.dynamic]
+version = {attr = "src.__version__"}
+
+
+[tool.jupytext]
+formats = "ipynb,py:percent,md:myst"
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = [
+    "src/tests",
+    "src",
+]
+addopts = [
+    "--import-mode=importlib",
+    "--doctest-modules",
+    "-ra -q",
+]
+

@@ -70,7 +70,7 @@ install-requirements:
 
 ## Make the source code as package available
 src-available:
-	python setup.py develop
+	pip install -e .
 
 
 ## Create a conda environment named after the project slug, install packages, and activate it
@@ -92,7 +92,7 @@ test-requirements:
 
 ## Run pytest for the source code
 tests: test-requirements
-	pytest src/tests/ --doctest-modules -v
+	python -m pytest -v
 
 
 .SUFFIXES: .jpg .jpeg .png .pdf
