@@ -16,16 +16,15 @@ __all__ = ["setup_logger", "save"]
 
 def setup_logger(level=None, logfile=True, name="root"):
     """Define a logger setup with
-    - 1x fileHandler: writing log files to LOG_DIR (logfile can be boolean or a file path)
+    - 1x fileHandler: writing log files to :obj:`~src.LOG_DIR` (logfile can be boolean or a file path)
     - 1x streamHandler: streaming logs to terminal
 
     Parameters
     ----------
-    level : logLevel / str
-        The log level (according to the logging convention). Can be either a string or a 
-        loggin.loglevel instance
-    logfile : bool / str
-        If True, the log file will be placed in LOG_DIR and named after the calling script (default)
+    level : int | str
+        The log level (according to the logging convention).
+    logfile : bool | str
+        If True, the log file will be placed in :obj:`~src.LOG_DIR` and named after the calling script (default)
         If logfile is a string, it will be interpreted as a file path (the parent directory must exist)
     
     Return
