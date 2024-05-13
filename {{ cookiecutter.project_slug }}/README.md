@@ -58,8 +58,12 @@ to make the project's routines (located in `src`) available for import.
 Finally, you can run
 
 ```bash
-pip install -r requirements.txt
+make tests
+make documentation
 ```
+
+to run the tests via `pytest` and build the documentation located in `docs`.
+The latter will create an HTML-rendered version of the documentation in `docs/_build/html/`.
 
 > [!NOTE]
 > If you experience that something is not working (e.g. creating the documentation via `make documentation`) try to perform an update via `mamba update --all`. This might solve the problem.
@@ -74,7 +78,7 @@ The Python scripts should be able to follow symlinks.
 <!-- If all is set up, you can run `make test-structure` to perform some tests before starting running the scripts or Jupyter notebooks in the respective directories. -->
 
 <u>A recommendation for long-running tasks:</u><br>
-Some tasks like data processing will need a long time. 
+Some tasks like data processing will need a long time.
 It is highly recommended that you use a detachable terminal environment like `screen` or [`tmux`](https://github.com/tmux/tmux/wiki).
 This way you can detach from the session (even close your terminal) without losing or ending the process.
 Alternatively, if you work on a high-performance computer, make use of the queuing system to submit jobs.
@@ -90,8 +94,8 @@ Alternatively, if you work on a high-performance computer, make use of the queui
     │   ├── processed      <- The final, processed data used for the actual analyses
     │   └── raw            <- The original, immutable(!) data
     │
-    ├── docsrc             <- The technical documentation (default engine: Sphinx; but feel free to use 
-    │                         MkDocs, Jupyter-Book or anything similar).
+    ├── docs               <- The technical documentation (default engine: Jupyter-Book; but feel free to use 
+    │                         MkDocs, Sphinx, or anything similar).
     │                         This should contain only documentation of the code and the assets.
     │                         A report of the actual project should be placed in `reports/book`.
     │
@@ -99,7 +103,7 @@ Alternatively, if you work on a high-performance computer, make use of the queui
     │
     ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
     │   │                     and a short `-` or `_` delimited description, e.g. `01-initial-analyses`
-    │   ├── _paired        <- Optional location for your paired jupyter notebook files
+    │   ├── _paired        <- Optional location for your paired Jupyter notebook files
     │   ├── exploratory    <- Notebooks for exploratory tasks
     │   └── reports        <- Notebooks generating reports and figures
     │
@@ -118,22 +122,20 @@ Alternatively, if you work on a high-performance computer, make use of the queui
     ├── .env               <- In this file, specify all your custom environment variables
     │                         Keep this out of version control!
     ├── CHANGELOG.md       <- All major changes should go in there
-    ├── jupytext.toml      <- Configuration file for jupytext
     ├── LICENSE            <- The license used for this project
     ├── Makefile           <- A self-documenting Makefile for standard CLI tasks
+    ├── pyproject.toml      <- Configuration file for the Python project
     ├── README.md          <- The top-level README of this project
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    └── setup.py           <- Setup python file to install your source code in your (virtual) python environment
+    └── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
+                              generated with `pip freeze > requirements.txt`
 
 
 ## Dummy files
 
-The following files are for demonstration purposes only and can be safely deleted if not needed:
+The following files are for demonstration purposes only and can be safely deleted *if not needed*:
 
     ├── notebooks/01-minimal-example.ipynb
-    ├── docsrc/source/*
+    ├── docs/*
     ├── reports/book/*
     ├── scripts/01-test.py
     └── src
