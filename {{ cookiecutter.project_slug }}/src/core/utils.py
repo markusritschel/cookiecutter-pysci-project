@@ -9,8 +9,6 @@ import logging
 import os
 from pathlib import Path
 
-from src import LOG_DIR
-
 log = logging.getLogger(__name__)
 
 __all__ = ["setup_logger", "save"]
@@ -35,6 +33,8 @@ def setup_logger(level=None, logfile=True, name="root"):
     logger
         The logger instance
     """
+    from src import LOG_DIR
+
     caller_file = inspect.stack()[-1].filename
     caller_filename = Path(caller_file).stem
 
