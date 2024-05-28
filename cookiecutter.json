@@ -1,7 +1,7 @@
 {
-    "project_author": "Markus Ritschel",
-    "email": "git@markusritschel.de",
-    "github_username": "markusritschel",
+    "project_author": "Your Full Name",
+    "email": "your@email.ad",
+    "github_username": "yourgithubuser",
     "project_name": "Scientific Project Python Boilerplate",
     "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-').strip() }}",
     "project_description": "A boilerplate for scientific projects using Python",
