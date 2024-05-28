@@ -1,7 +1,9 @@
+# !/usr/bin/env python3
+#
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-# Author: Markus Ritschel
-# eMail:  git@markusritschel.de
-# Date:   2024-05-07
+# Author: {{ cookiecutter.project_author }}
+# eMail:  {{ cookiecutter.email }}
+# Date:   {% now 'local', '%Y-%m-%d' %}
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #
 import inspect
