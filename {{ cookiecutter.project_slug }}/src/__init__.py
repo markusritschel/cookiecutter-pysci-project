@@ -9,7 +9,7 @@
 import sys
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
-from .core.utils import setup_logger
+from .core.utils import save, setup_logger
 
 __version__ = '{{ cookiecutter.project_version }}'
 
