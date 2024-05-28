@@ -18,6 +18,7 @@ __all__ = ["setup_logger", "save"]
 
 def setup_logger(level=None, logfile=True, name="root"):
     """Define a logger setup with
+    
     - 1x fileHandler: writing log files to :obj:`~src.LOG_DIR` (logfile can be boolean or a file path)
     - 1x streamHandler: streaming logs to terminal
 
