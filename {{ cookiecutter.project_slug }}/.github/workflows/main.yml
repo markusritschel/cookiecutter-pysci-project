@@ -34,8 +34,8 @@ jobs:
       - name: Setup Conda
         uses: conda-incubator/setup-miniconda@v2
         with:
-          activate-environment: "{{ cookiecutter.project_slug }}"  
-          # TODO: this is not filled correctly by CookieCutter!
+          # activate-environment: "{{ cookiecutter.project_slug }}"  
+          # # TODO: this is not filled correctly by CookieCutter!
           environment-file: environment.yml
           auto-activate-base: false
       - run: |
@@ -81,9 +81,6 @@ jobs:
     # https://github.com/marketplace/actions/github-pages-action
     # https://github.com/marketplace/actions/deploy-to-github-pages
     needs: build
-    # Only publish documentation when merging into `origin/main`.`
-    if: "github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository_owner == '{{ cookiecutter.github_username }}'"
-    # TODO: this is not filled correctly by CookieCutter!
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -94,6 +91,8 @@ jobs:
           path: docs
 
       - name: Deploy 🚀
+        # Only publish documentation when merging into `origin/main`.`
+        if: ${{ github.ref == 'refs/heads/main' && github.event_name != 'pull_request'}}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
