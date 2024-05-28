@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import pytest
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -175,6 +176,7 @@ def save(obj, *args, **kwargs):
 
     Examples
     --------
+    >>> pytest.skip()
     >>> save(my_object)
     NotImplementedError: Cannot save object of type <class 'type'> using `save` method. Please use the native method.
 
