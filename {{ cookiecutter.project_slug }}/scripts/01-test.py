@@ -17,6 +17,7 @@ from src import submodule
 
 # This is only necessary if this file gets imported by another one so that logs get piped
 logger = logging.getLogger(__name__)
+# Alternatively, set `logger = setup_logger()` as shown below.
 
 
 def main():
