@@ -95,7 +95,5 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' && github.event_name != 'pull_request'}}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FOLDER: docs
-          BRANCH: gh-pages
-          CLEAN: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          folder: docs
