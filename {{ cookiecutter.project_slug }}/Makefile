@@ -40,9 +40,9 @@ documentation:
 	jb build docs/ -v
 
 
-## Build the project's Jupyter-Book
-book:
-	jb build ./reports/book
+## Synchronize Jupyter notebooks according to the rules in pyproject.toml
+sync-notebooks:
+	jupytext --sync notebooks/*ipynb
 
 
 ## Update the requirements.txt
@@ -52,11 +52,11 @@ save-requirements:
 
 ## Create a conda environment.yml file
 save-conda-env:
-	pip_packages=$$(conda env export | grep -A9999 ".*- pip:" | grep -v "^prefix: ") ;\
-	conda env export --from-history | grep -v "^prefix: " > environment.yml ;\
-	echo "$$pip_packages" >> environment.yml ;\
-	sed -ie 's/name: base/name: $(CONDA_DEFAULT_ENV)/g' environment.yml; \
-	echo "$$CONDA_DEFAULT_ENV"
+	@pip_packages=$$(conda env export | grep -A9999 ".*- pip:" | grep -v "^prefix: ") ;\
+	 conda env export --from-history | grep -v "^prefix: " > environment.yml;\
+	 echo "$$pip_packages" >> environment.yml ;\
+	 sed -i 's/name: base/name: $(CONDA_DEFAULT_ENV)/g' environment.yml
+	@echo exported \"$$CONDA_DEFAULT_ENV\" environment to environment.yml
 
 
 
@@ -74,7 +74,7 @@ src-available:
 	pip install -e .
 
 
-## Create a conda environment named after the project slug, install packages, and activate it
+## Create a conda environment named '{{ cookiecutter.project_slug }}', install packages, and activate it
 conda-env:
 	@echo "Create conda environment '{{ cookiecutter.project_slug }}'"
 	mamba env create --file environment.yml
