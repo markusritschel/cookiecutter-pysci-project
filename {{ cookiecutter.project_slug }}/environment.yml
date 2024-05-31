@@ -1,5 +1,10 @@
 name: {{ cookiecutter.project_slug }}
+channels:
+  - conda-forge
+  - anaconda
+  - defaults
 dependencies:
+<<<<<<< HEAD
   - python=3.9
   - python-dotenv
   - ipython
@@ -19,28 +24,28 @@ dependencies:
   - netcdf4
   - pytest
   - docopt
+=======
+>>>>>>> 3eb01c5 (Update requirements)
   - click
+  - colorama
+  - Deprecated
+  - docopt
+  - ipykernel
+  - ipython
+  - ipywidgets
   - jupyter-book
-  - jupytext
+  - jupyterbook-latex
+  - jupyterlab
   - jupyternotify
+  - jupytext
   - markdown
-  - sphinx
-  - sphinxcontrib-apidoc
-  - sphinxcontrib-mermaid
-  - nbsphinx
-  - sphinx-issues
-  - sphinx-book-theme
-  - pydata-sphinx-theme
-  - sphinx-rtd-theme
-  - myst-parser
-  - sphinx-issues
-  - sphinxcontrib-bibtex
-  - sphinxcontrib-apidoc
-  - sphinx-autodoc-typehints
-  - sphinx-toolbox
+  - matplotlib
+  - mystmd
+  - nodejs
+  - numpy
+  - pandas
+  - pytest
+  - python-dotenv
+  - tqdm
+  - xarray
   - pip
-  - pip:
-    - jupyterbook-latex
-    - sphinxcontrib-napoleon2
-    - rinohtype
-    - sphinx-autodoc-defaultargs
