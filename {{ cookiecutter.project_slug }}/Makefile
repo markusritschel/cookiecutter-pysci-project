@@ -7,20 +7,19 @@
 # Document any rules by adding a single line starting with ## right before the rule (see examples below)
 # ======================================================================================================
 
-include .env
+# If you have an .env file
+# include .env
 
 
 .PHONY: cleanup clean-jupyter-book clean-pyc, clean-logs, documentation, book, save-requirements, requirements, src-available, conda-env, test-requirements, tests, clear-images, convert-images, figures, crop-pdf, crop-png, show-help
 
 ## Clean-up python artifacts, logs and jupyter-book built
-cleanup: clean-pyc clean-logs clean-jupyter-book clean-docs
+cleanup: clean-pyc clean-logs clean-docs
 
-clean-jupyter-book:
-	jb clean --all docs/
-
+## Cleanup documentation built
 clean-docs:
-	jb clean --all reports/book/
-	rm -rf docsrc/build/*
+	jb clean --all docs/
+	rm -rf doc/_build/*
 
 # Remove Python file artifacts
 clean-pyc:
@@ -64,7 +63,7 @@ save-conda-env:
 install-requirements:
 	python -m pip install -U pip setuptools wheel
 	mamba install --file requirements.txt
-	pip install -r docs/docs_requirements.txt
+	pip install -r docs/requirements.txt
 	# pip install sphinxcontrib-napoleon2 rinohtype sphinx-rtd-theme sphinx-autodoc-defaultargs nbsphinx myst-parser sphinx-issues sphinxcontrib-bibtex
 	# python -m pip install -r requirements.txt
 
