@@ -10,6 +10,17 @@
 # If you have an .env file
 # include .env
 
+# Check if Mamba is installed
+CONDA := $(shell command -v conda 2> /dev/null)
+MAMBA := $(shell command -v mamba 2> /dev/null)
+
+# Set the package manager to use
+ifeq ($(MAMBA),)
+    PACKAGE_MANAGER := conda
+else
+    PACKAGE_MANAGER := mamba
+endif
+
 
 .PHONY: cleanup clean-jupyter-book clean-pyc, clean-logs, documentation, book, save-requirements, requirements, src-available, conda-env, test-requirements, tests, clear-images, convert-images, figures, crop-pdf, crop-png, show-help
 
