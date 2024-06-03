@@ -7,9 +7,9 @@
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #
 import pytest
-from src import submodule
+from src.submodule import generate_int_list
 
 def test_subfunc(global_fixture):
-    l = submodule.generate_int_list()
+    l = generate_int_list()
     assert isinstance(l, list)
     assert isinstance(global_fixture, str)
