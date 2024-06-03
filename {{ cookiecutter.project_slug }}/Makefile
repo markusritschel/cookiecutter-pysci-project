@@ -82,6 +82,10 @@ else
 endif
 
 
+## Install requirements for building the docs
+install-doc-requirements:
+	python -m pip install -r docs/requirements.txt
+
 
 ## Make the source code as package available
 src-available:
