@@ -29,8 +29,8 @@ cleanup: clean-pyc clean-logs clean-docs
 
 ## Cleanup documentation built
 clean-docs:
-	jb clean --all docs/
 	rm -rf doc/_build/*
+	jb clean --all docs/
 
 # Remove Python file artifacts
 clean-pyc:
@@ -69,6 +69,14 @@ save-conda-env:
 	@echo exported \"$$CONDA_DEFAULT_ENV\" environment to environment.yml
 
 
+## Create a conda environment named '{{ cookiecutter.project_slug }}', install packages, and activate it
+conda-env:
+	@echo "Create conda environment '{{ cookiecutter.project_slug }}"
+	conda create --name {{ cookiecutter.project_slug }} --no-default-packages 
+	@echo "Activate conda environment '{{ cookiecutter.project_slug }}'"
+	conda activate {{ cookiecutter.project_slug }}
+
+
 
 ## Install Python Dependencies
 install-requirements:
@@ -90,16 +98,6 @@ install-doc-requirements:
 ## Make the source code as package available
 src-available:
 	pip install -e .
-
-
-## Create a conda environment named '{{ cookiecutter.project_slug }}', install packages, and activate it
-conda-env:
-	@echo "Create conda environment '{{ cookiecutter.project_slug }}"
-	conda create --name {{ cookiecutter.project_slug }} --no-default-packages 
-	@echo "Activate conda environment '{{ cookiecutter.project_slug }}'"
-	conda activate {{ cookiecutter.project_slug }}
-
-
 
 
 ## Check if all packages listed in requirements.txt are installed in the current environment
