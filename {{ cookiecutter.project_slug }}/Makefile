@@ -70,13 +70,17 @@ save-conda-env:
 
 
 
-## Install Python Dependencies via pip
+## Install Python Dependencies
 install-requirements:
+	@echo "Install required packages into current environment"
+ifeq ($(CONDA),)
+	@echo "Conda not found, using pip."
 	python -m pip install -U pip setuptools wheel
-	mamba install --file requirements.txt
-	pip install -r docs/requirements.txt
-	# pip install sphinxcontrib-napoleon2 rinohtype sphinx-rtd-theme sphinx-autodoc-defaultargs nbsphinx myst-parser sphinx-issues sphinxcontrib-bibtex
-	# python -m pip install -r requirements.txt
+	python -m pip install -r requirements.txt
+else
+	$(PACKAGE_MANAGER) env update --file environment.yml --prune
+endif
+
 
 
 ## Make the source code as package available
@@ -86,10 +90,12 @@ src-available:
 
 ## Create a conda environment named '{{ cookiecutter.project_slug }}', install packages, and activate it
 conda-env:
-	@echo "Create conda environment '{{ cookiecutter.project_slug }}'"
-	mamba env create --file environment.yml
+	@echo "Create conda environment '{{ cookiecutter.project_slug }}"
+	conda create --name {{ cookiecutter.project_slug }} --no-default-packages 
 	@echo "Activate conda environment '{{ cookiecutter.project_slug }}'"
 	conda activate {{ cookiecutter.project_slug }}
+
+
 
 
 ## Check if all packages listed in requirements.txt are installed in the current environment
