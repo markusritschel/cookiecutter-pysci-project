@@ -1,5 +1,6 @@
 [build-system]
-requires = ["setuptools @ git+https://github.com/pypa/setuptools.git@main"]
+requires = ["setuptools @ git+https://github.com/pypa/setuptools.git@main", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "src"
@@ -11,10 +12,15 @@ readme = "README.md"
 license = {file = "LICENSE"}
 dynamic = ["version"]
 requires-python = ">= 3.10"
-
+dependencies = []
 
 [tool.setuptools.dynamic]
 version = {attr = "src.__version__"}
+
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src"]
 
 
 [tool.jupytext]
