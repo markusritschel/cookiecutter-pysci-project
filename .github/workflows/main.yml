@@ -38,5 +38,3 @@ jobs:
       working-directory: ./scientific-project-python-boilerplate
       run: |
         pytest src/ --doctest-modules --doctest-continue-on-failure -ra -v
-        
-      
