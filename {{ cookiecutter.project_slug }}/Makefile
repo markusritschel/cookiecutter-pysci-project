@@ -86,7 +86,7 @@ ifeq ($(CONDA),)
 	python -m pip install -U pip setuptools wheel
 	python -m pip install -r requirements.txt
 else
-	$(PACKAGE_MANAGER) env update --file environment.yml --prune
+	$(PACKAGE_MANAGER) env update --file environment.yml
 endif
 
 
