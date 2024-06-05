@@ -52,12 +52,12 @@ documentation:
 
 ## Synchronize Jupyter notebooks according to the rules in pyproject.toml
 sync-notebooks:
-	jupytext --sync notebooks/*ipynb
+	jupytext --sync notebooks/**/*.ipynb
 
 
 ## Update the requirements.txt
 save-requirements:
-	pip freeze > requirements.txt
+	pip list --format=freeze > requirements.txt
 
 
 ## Create a conda environment.yml file
@@ -110,6 +110,12 @@ test-requirements:
 ## Run pytest for the source code
 tests: test-requirements
 	python -m pytest -v
+
+
+## Test github actions locally
+test-gh-actions:
+	mkdir -p /tmp/artifacts
+	act push --artifact-server-path /tmp/artifacts --container-options "--userns host" --action-offline-mode
 
 
 .SUFFIXES: .jpg .jpeg .png .pdf
