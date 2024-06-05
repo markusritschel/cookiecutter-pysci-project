@@ -72,7 +72,7 @@ save-conda-env:
 ## Create a conda environment named '{{ cookiecutter.project_slug }}', install packages, and activate it
 conda-env:
 	@echo "Create conda environment '{{ cookiecutter.project_slug }}"
-	conda create --name {{ cookiecutter.project_slug }} --no-default-packages 
+	conda create --name {{ cookiecutter.project_slug }} python=3.10 --no-default-packages 
 	@echo "Activate conda environment '{{ cookiecutter.project_slug }}'"
 	conda activate {{ cookiecutter.project_slug }}
 
