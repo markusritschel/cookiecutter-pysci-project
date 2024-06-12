@@ -155,7 +155,7 @@ sphinx:
          - fmt: myst
     images_config: 
       backend: 'LightBox2'
-    html_theme: furo   # furo, sphinx_rtd_theme, pydata_sphinx_theme, sphinx_book_theme, furo, sphinx_material, sphinx_immaterial
+    html_theme: {{ cookiecutter.sphinx_theme }}   # furo, sphinx_rtd_theme, pydata_sphinx_theme, sphinx_book_theme, sphinx_material, sphinx_immaterial
     pygments_style: sphinx
     bibtex_reference_style: author_year
 
