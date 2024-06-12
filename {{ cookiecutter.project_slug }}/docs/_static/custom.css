@@ -10,3 +10,50 @@
     display: inline-block;
   }
   
+
+/* Add an accordion-like details section */
+bd-content details > * {
+  padding: 8pt;
+  margin: 0;
+//    border: thin solid #ccc;
+}
+bd-content details[open] > * {
+//background-color: #eee;
+}
+
+
+bd-content details summary {
+font-weight: bold;
+}
+
+bd-content details > p {
+padding: 0 0 12pt 25pt;
+}
+
+bd-content details:first-of-type summary {
+  border-radius: 10pt 10pt 0 0;
+}
+
+bd-content details:last-of-type:not([open]) summary {
+  border-radius: 0 0 10pt 10pt;
+}
+
+bd-content details:last-of-type p {
+  border-radius: 0 0 10pt 10pt;    
+}
+
+
+bd-content details[open] summary::before{
+content: "\00D7";
+margin-right: 1ex;
+}
+
+bd-content details:not([open]) summary::before{
+content: "\002B ";
+margin-right: 1ex;
+}
+
+
+bd-content summary::marker{
+content: "";
+}
