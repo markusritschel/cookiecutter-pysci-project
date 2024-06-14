@@ -1,8 +1,8 @@
-name: CI
+name: CI/CD Workflow
 
 on: 
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
   pull_request:
     branches: [ main ]
 
@@ -12,15 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ['3.10', '3.12']
+        python-version: ['3.10', '3.12']
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-    - name: Setup Python
+    - name: Setup Python${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
-        python-version: ${{ matrix.python }}
+        python-version: ${{ matrix.python-version }}
         cache: 'pip'
     
     - name: Install CookieCutter & run setup
@@ -37,4 +38,10 @@ jobs:
     - name: Run tests
       working-directory: ./scientific-project-python-boilerplate
       run: |
-        pytest src/ --doctest-modules --doctest-continue-on-failure -ra -v
+        python -m pytest
+
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
