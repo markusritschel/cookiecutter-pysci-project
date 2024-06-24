@@ -3,6 +3,7 @@ jupyter-book
 jupytext
 myst-parser
 mystmd
+lxml_html_clean
 nbsphinx
 pydata-sphinx-theme
 rinohtype
@@ -11,6 +12,7 @@ sphinx-autoapi
 sphinx-autodoc-defaultargs
 sphinx-autodoc-typehints
 sphinx-book-theme
+sphinx-comments
 sphinx-immaterial
 sphinx-issues
 sphinx-material
