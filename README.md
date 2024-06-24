@@ -139,6 +139,8 @@ make src-available
 > [!TIP]
 > For further information, see also the README of your new project.
 > You may also want to check out the Makefile commands (simply type `make` to get an overview of the available commands).
+> If you don't have Make available on your computer (especially on Windows this seems to be problematic), then please check the content of the Makefile and find the respective commands, which you can all execute in the "raw" form.
+> For example, instead of `make src-available` you can also execute `pip install -e .`.
 
 ### Make & Snakemake
 
