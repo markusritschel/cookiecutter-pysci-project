@@ -15,6 +15,7 @@ nodejs
 numpy
 pandas
 pytest
+pytest-cov
 python-dotenv
 tqdm
 xarray
