@@ -19,16 +19,26 @@ print("Load standard packages and some magic commands, set up logger and matplot
 # ---------------------------------------------
 # import some standard libraries
 import sys
-import glob
-import re
 import logging
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-import pandas as pd
 from IPython.core.getipython import get_ipython
 from IPython.core.magic import (Magics, magics_class,  cell_magic)
 from IPython.display import Javascript
-from tqdm.auto import tqdm
+try:
+    import glob
+    import re
+    from tqdm.auto import tqdm
+except:
+    pass
+
+
+# ---------------------------------------------
+# Set up logger
+log = logging.getLogger(__name__)
+log.setLevel(logging.WARNING)
+# Create STDERR handler
+handler = logging.StreamHandler(sys.stderr)
+# Set STDERR handler as the only handler
+log.handlers = [handler]
 
 
 # ---------------------------------------------
@@ -44,26 +54,52 @@ class MarkdownMagics(Magics):
         """Provides a new cell magic that depicts a red-framed panel."""
         if not line:
             line = 'Important'
-        return HTML("<div style='border:thick solid red; padding:10px'> \
-                     <div style='color:red; font-size:x-large; text-decoration:underline'>{}</div> \
-                     <div style='font-weight:bold; font-size:large'>{}</div></div>".format(markdown(line, extensions=['markdown.extensions.extra']),
-                                                                                           markdown(cell, extensions=['markdown.extensions.extra'])))
+        return HTML(
+            "<div style='border:thick solid red; padding:10px'>"
+            "<div style='color:red; font-size:x-large; text-decoration:underline'>{}</div>"
+            "<div style='font-weight:bold; font-size:large'>{}</div>"
+            "</div>".format(
+                markdown(line, extensions=['markdown.extensions.extra']),
+                markdown(cell, extensions=['markdown.extensions.extra'])
+            )
+        )
 
 get_ipython().register_magics(MarkdownMagics)
 
-
 # ---------------------------------------------
 # Set pandas and xarray default options
-pd.set_option("display.precision", 3)
-pd.set_option("display.expand_frame_repr", False)  # Don't wrap repr(DataFrame) across additional lines
-pd.set_option("display.max_rows", 25)
-xr.set_options(keep_attrs=True)
+try:
+    import pandas as pd
+    pd.set_option("display.precision", 3)
+    pd.set_option("display.expand_frame_repr", False)  # Don't wrap repr(DataFrame) across additional lines
+    pd.set_option("display.max_rows", 25)
+except:
+    log.warning("Couldn't import pandas")
+
+try:
+    import xarray as xr
+    xr.set_options(keep_attrs=True)
+except:
+    log.warning("Couldn't import xarray")
+
+
+# ---------------------------------------------
+# make some standard paths available
+try:
+    from src import BASE_DIR, LOG_DIR, PLOT_DIR, DATA_DIR
+except:
+    raise Exception("Could not find `src`. Did you `make src-available`?")
 
 
 # ---------------------------------------------
 # Set matplotlib default parameters
-plt.rcdefaults()
-plt.style.use(BASE_DIR/"assets/mpl_styles/white_paper.mplstyle")
+try:
+    import matplotlib as mpl
+    import matplotlib.pyplot as plt
+    plt.rcdefaults()
+    plt.style.use(BASE_DIR/"assets/mpl_styles/white_paper.mplstyle")
+except:
+    log.warning("Coudn't import matplotlib.")
 
 
 # ---------------------------------------------
@@ -75,23 +111,8 @@ def alert(msg="All done!"):
 
 
 # ---------------------------------------------
-# Set up logger
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.WARNING)
-# Create STDERR handler
-handler = logging.StreamHandler(sys.stderr)
-# Set STDERR handler as the only handler
-logger.handlers = [handler]
-
-
-# ---------------------------------------------
 %autoreload 2
-%autonotify -a 30 -o
-
-
-# ---------------------------------------------
-# make some standard paths available
-from src import BASE_DIR, LOG_DIR, PLOT_DIR, DATA_DIR
+# %autonotify -a 30 -o
 
 
 # ---------------------------------------------
