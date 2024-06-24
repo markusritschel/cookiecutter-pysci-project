@@ -15,10 +15,6 @@ requires-python = ">= 3.10"
 dependencies = []
 
 
-[project.scripts]
-{{ cookiecutter.project_slug }} = "{{ cookiecutter.project_name }}.cli:main"
-
-
 [tool.setuptools.dynamic]
 version = {attr = "src.__version__"}
 
