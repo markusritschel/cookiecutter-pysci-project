@@ -48,3 +48,6 @@ addopts = [
     "--cov-report=term-missing"
 ]
 
+
+[tool.cruft]
+skip = [".git/"]
