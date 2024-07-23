@@ -1,6 +1,7 @@
+click
 colorama
+dask
 Deprecated
-python-dotenv
 ipython
 ipywidgets
 jupyter-book

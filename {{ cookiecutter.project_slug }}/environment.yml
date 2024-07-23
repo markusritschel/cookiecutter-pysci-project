@@ -6,6 +6,7 @@ channels:
 dependencies:
   - click
   - colorama
+  - dask
   - Deprecated
   - docopt
   - ipykernel
