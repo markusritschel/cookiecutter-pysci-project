@@ -1,0 +1,29 @@
+# See https://docs.astral.sh/ruff/ for settings
+line-length = 88
+indent-width = 4
+
+
+[format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = false
+
+
+[lint]
+extend-select = [
+  # pydocstyle
+  "D",
+  # pycodestyle
+  "E",
+  # Pyflakes
+  "F",
+]
+
+ignore = ["F403", "F405"]
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+
+[lint.pydocstyle]
+convention = "numpy"

@@ -18,5 +18,6 @@ pandas
 pytest
 pytest-cov
 python-dotenv
+ruff
 tqdm
 xarray

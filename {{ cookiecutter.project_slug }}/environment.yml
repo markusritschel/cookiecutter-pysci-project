@@ -25,6 +25,7 @@ dependencies:
   - pandas
   - pytest
   - python-dotenv
+  - ruff
   - tqdm
   - xarray
   - pip
