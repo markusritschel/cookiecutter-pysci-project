@@ -44,7 +44,7 @@ make install-requirements
 
 to install the required packages either via `conda` or `pip`.
 
-> ![!NOTE]
+> [!NOTE]
 > I recommend that you use [Conda](https://docs.conda.io/en/latest/miniconda.html) (or, for higher performance, [Mamba](https://mamba.readthedocs.io/)) as a package manager.
 
 Then, — make sure you have activated the virtual environment — run
