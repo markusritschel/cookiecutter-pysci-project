@@ -3,7 +3,7 @@ message: "If you use this software, please cite it as below."
 authors:
 - family-names: "{{ cookiecutter.project_author.split()[1] }}"
   given-names: "{{ cookiecutter.project_author.split()[0] }}"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
+  orcid: "https://orcid.org/{{ cookiecutter.orcid }}"
 title: "{{ cookiecutter.project_name }}"
 version: {{ cookiecutter.project_version }}
 doi: 10.5281/zenodo.1234
