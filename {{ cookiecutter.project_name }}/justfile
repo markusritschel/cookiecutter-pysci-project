@@ -7,27 +7,27 @@ list:
 
 # Run all the formatting, linting, and testing commands
 qa:
-    uv run --extra test ruff format .
-    uv run --extra test ruff check . --fix
-    uv run --extra test ruff check --select I --fix .
-    uv run --extra test ty check .
-    uv run --extra test pytest .
+    uv run --group test ruff format .
+    uv run --group test ruff check . --fix
+    uv run --group test ruff check --select I --fix .
+    uv run --group test ty check .
+    uv run --group test pytest .
 
 # Run all the tests, but allow for arguments to be passed
 test *ARGS:
     @echo "Running with arg: {{ARGS}}"
-    uv run --extra test pytest {{ARGS}}
+    uv run --group test pytest {{ARGS}}
 
 # Run all the tests, but on failure, drop into the debugger
 pdb *ARGS:
     @echo "Running with arg: {{ARGS}}"
-    uv run  --extra test pytest --pdb --maxfail=10 --pdbcls=IPython.terminal.debugger:TerminalPdb {{ARGS}}
+    uv run  --group test pytest --pdb --maxfail=10 --pdbcls=IPython.terminal.debugger:TerminalPdb {{ARGS}}
 
 # Run coverage, and build to HTML
 coverage:
-    uv run --extra test coverage run -m pytest .
-    uv run --extra test coverage report -m
-    uv run --extra test coverage html
+    uv run --group test coverage run -m pytest .
+    uv run --group test coverage report -m
+    uv run --group test coverage html
 
 # Build the project, useful for checking that packaging is correct
 build:
