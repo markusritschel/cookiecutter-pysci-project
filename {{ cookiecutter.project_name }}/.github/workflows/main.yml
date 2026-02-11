@@ -23,20 +23,21 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install the project
-        run: uv sync --locked --all-extras --dev
+        run: uv sync --locked --dev
 
       - name: Run linting
         run: | 
           # stop the build if there are Python syntax errors or undefined names
-          uv run flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-          uv run flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics       
+          uv run ruff check --select=E9,F63,F7,F82
+          # run full linting with all configured rules
+          # --exit-zero throws errors as warnings (the GitHub editor is 127 chars wide)
+          uv run ruff check --exit-zero
 
       - name: Run tests
         run: uv run pytest -v
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v6
+        uses: codecov/codecov-action@v5
         env:
             CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
@@ -50,8 +51,6 @@ jobs:
 
       - name: Install uv and set the Python version
         uses: astral-sh/setup-uv@v7
-        with:
-          python-version-file: "pyproject.toml"
 
       - name: Install documentation dependencies
         run: uv sync --groups docs
