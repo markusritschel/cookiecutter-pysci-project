@@ -47,13 +47,13 @@ tag:
     git tag -a v{{VERSION}} -m "Creating version v{{VERSION}}"
     git push origin v{{VERSION}}
 
-# remove all build, test, coverage and Python artifacts
+# Remove all build, test, coverage and Python artifacts
 clean: 
 	clean-build
 	clean-pyc
 	clean-test
 
-# remove build artifacts
+# Remove build artifacts
 clean-build:
 	rm -fr build/
 	rm -fr dist/
@@ -61,14 +61,14 @@ clean-build:
 	find . -name '*.egg-info' -exec rm -fr {} +
 	find . -name '*.egg' -exec rm -f {} +
 
-# remove Python file artifacts
+# Remove Python file artifacts
 clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 	find . -name '__pycache__' -exec rm -fr {} +
 
-# remove test and coverage artifacts
+# Remove test and coverage artifacts
 clean-test:
 	rm -f .coverage
 	rm -fr htmlcov/
