@@ -1,7 +1,7 @@
 # https://matplotlib.org/stable/users/explain/customizing.html
 
 font.family: sans-serif
-font.sans-serif: Josefin Sans
+font.sans-serif: Josefin Sans #Ysabeau Office #Proza Libre #monofur for Powerline #Hubballi #Josefin Sans
 font.weight : normal
 font.size : 14
 
