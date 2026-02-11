@@ -36,6 +36,11 @@ dependencies = [
 ]
 
 
+[project.scripts]
+generate-list = "{{ cookiecutter.project_slug }}.submodule:generate_int_list"
+{{ cookiecutter.project_slug }} = "{{ cookiecutter.project_slug }}.cli:app"
+
+
 [dependency-groups]
 dev = [
   {include-group = "lint"},
