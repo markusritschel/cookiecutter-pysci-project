@@ -12,16 +12,78 @@ readme = "README.md"
 license = {file = "LICENSE"}
 dynamic = ["version"]
 requires-python = ">= 3.10"
-dependencies = []
+dependencies = [
+  "click",
+  "colorama",
+  "dask",
+  "Deprecated",
+  "docopt",
+  "ipykernel",
+  "ipython",
+  "ipywidgets",
+  "jupyter-book",
+  "jupyterbook-latex",
+  "jupyterlab",
+  "jupyternotify",
+  "jupytext",
+  "markdown",
+  "matplotlib",
+  "mystmd",
+  "nodejs",
+  "numpy",
+  "pandas",
+  "python-dotenv",
+  "rich",
+  "tqdm",
+  "typer",
+  "xarray"
+]
 
 
-[tool.setuptools.dynamic]
-version = {attr = "src.__version__"}
+[dependency-groups]
+dev = [
+  {include-group = "lint"},
+  {include-group = "test"}
+]
+lint = [
+  "flake8",
+  "ruff"
+]
+test = [
+  "pytest",
+  "pytest-cov"
+]
+docs = [
+  "furo",
+  "jupyter-book",
+  "jupytext",
+  "lxml_html_clean",
+  "myst-parser",
+  "nbsphinx",
+  "pydata-sphinx-theme",
+  "rinohtype",
+  "Sphinx",
+  "sphinx-autoapi",
+  "sphinx-autodoc-defaultargs",
+  "sphinx-autodoc-typehints",
+  "sphinx-book-theme",
+  "sphinx-comments",
+  "sphinx-immaterial",
+  "sphinx-issues",
+  "sphinx-material",
+  "sphinx-rtd-theme",
+  "sphinx-tabs",
+  "sphinx-toolbox",
+  "sphinxcontrib-apidoc",
+  "sphinxcontrib-bibtex",
+  "sphinxcontrib-htmlhelp",
+  "sphinxcontrib-images",
+  "sphinxcontrib-mermaid",
+  "sphinxcontrib-napoleon",
+  "sphinxcontrib-napoleon2"
+]
 
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["src"]
 
 
 [tool.jupytext]
