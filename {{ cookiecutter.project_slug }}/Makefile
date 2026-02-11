@@ -25,7 +25,7 @@ endif
 .PHONY: cleanup clean-jupyter-book clean-pyc, clean-logs, documentation, book, save-requirements, requirements, src-available, conda-env, test-requirements, tests, clear-images, convert-images, figures, crop-pdf, crop-png, show-help
 
 ## Clean-up python artifacts, logs and jupyter-book built
-cleanup: clean-pyc clean-logs clean-docs
+cleanup: clean-pyc clean-logs clean-docs clean-test-cov
 
 ## Cleanup documentation built
 clean-docs:
@@ -44,6 +44,10 @@ clean-pyc:
 clean-logs:
 	find ./logs -iname '*.log' -type f -exec rm {} +
 
+
+## Remove coverage files
+clean-test-cov:
+	rm -rf htmlcov/
 
 ## Build the code documentation with Jupyter-Book
 documentation:
