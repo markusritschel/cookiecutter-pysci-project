@@ -324,6 +324,9 @@ The following files are for demonstration purposes only and, if not needed, can 
         ├── tests/*
         └── submodule.py
 
+> [!NOTE]
+> Note that the Github workflow will fail if there is not a single test present. Therefore, if you haven't developed any tests yet, keep the dummy test.
+
 ## Sources of inspiration
 
 Some great sources of inspiration and orientation when I created this template:
