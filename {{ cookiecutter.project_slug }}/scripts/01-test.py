@@ -12,8 +12,8 @@ as well as this docstring once the concept is understood :-)"""
 from __future__ import absolute_import, division, print_function, with_statement
 import logging
 
-from src import *
-from src.submodule import generate_int_list
+from {{ cookiecutter.project_slug }} import *
+from {{ cookiecutter.project_slug }}.submodule import generate_int_list
 
 # This is only necessary if this file gets imported by another one so that logs get piped
 logger = logging.getLogger(__name__)

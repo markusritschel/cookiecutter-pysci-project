@@ -12,7 +12,7 @@ from .core.utils import save, setup_logger
 __version__ = '{{ cookiecutter.project_version }}'
 
 # Make some of the basic directories globally available in your environment
-BASE_DIR = Path(__file__).resolve().parents[1]
+BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = BASE_DIR / 'data'
 LOG_DIR  = BASE_DIR / 'logs'
 PLOT_DIR = BASE_DIR / 'reports/figures'

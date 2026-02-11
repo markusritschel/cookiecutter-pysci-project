@@ -7,7 +7,7 @@
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #
 import pytest
-from src.submodule import generate_int_list
+from {{ cookiecutter.project_slug }}.submodule import generate_int_list
 
 def test_subfunc(global_fixture):
     l = generate_int_list()
