@@ -1,5 +1,3 @@
-# !/usr/bin/env python3
-#
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Author: {{ cookiecutter.project_author }}
 # eMail:  {{ cookiecutter.email }}
@@ -43,7 +41,7 @@ def setup_logger(level=None, logfile=True, name="root"):
     logger
         The logger instance
     """
-    from src import LOG_DIR
+    from .. import LOG_DIR
 
     caller_file = inspect.stack()[-1].filename
     caller_filename = Path(caller_file).stem

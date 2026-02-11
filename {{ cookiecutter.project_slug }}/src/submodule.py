@@ -1,5 +1,3 @@
-# !/usr/bin/env python3
-#
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Author: {{ cookiecutter.project_author }}
 # eMail:  {{ cookiecutter.email }}
