@@ -83,9 +83,28 @@ It is highly recommended that you use a detachable terminal environment like `sc
 This way you can detach from the session (even close your terminal) without losing or ending the process.
 Alternatively, if you work on a high-performance computer, make use of the queuing system to submit jobs.
 
+
+## Tips
+
+### Plotting
+
+To make your plots look more uniform, use a style sheet and apply it to all your plotting scripts.
+In the `./assets/mpl_styles/` directory, you find two basic style sheets that you can use as a starting point.
+More information on how to use style sheets can be found in the [Matplotlib documentation](https://matplotlib.org/stable/tutorials/introductory/customizing.html).
+Matplotlib also provides [a set of default stylesheets](https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html), which you can also use.
+At the beginning of your plotting script, add the following lines:
+
+```python
+from src import BASE_DIR
+import matplotlib.pyplot as plt
+plt.style.use(BASE_DIR/'assets/mpl_styles/white_paper.mplstyle')
+```
+
+
 ## Project Structure
 
     ├── assets             <- A place for assets like shapefiles or config files
+    │   └── mpl_styles     <- Matplotlib style sheets
     │
     ├── data               <- Contains all data used for the analyses in this project.
     │   │                     The sub-directories can be links to the actual location of your data.
