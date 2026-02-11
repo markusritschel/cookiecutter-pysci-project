@@ -1,5 +1,5 @@
 [project]
-name = "src"
+name = "{{ cookiecutter.project_slug }}"
 description = "{{ cookiecutter.project_description }}"
 authors = [
   {name = "{{ cookiecutter.project_author }}", email = "{{ cookiecutter.email }}"},
@@ -93,7 +93,7 @@ formats = "ipynb,py:percent,md:myst"
 [tool.pytest.ini_options]
 minversion = "6.0"
 testpaths = [
-    "src/tests",
+    "tests",
     "src",
 ]
 addopts = [
