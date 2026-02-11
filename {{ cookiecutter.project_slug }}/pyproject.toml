@@ -1,12 +1,12 @@
 [project]
 name = "{{ cookiecutter.project_slug }}"
+version = "0.1.0"
 description = "{{ cookiecutter.project_description }}"
 authors = [
   {name = "{{ cookiecutter.project_author }}", email = "{{ cookiecutter.email }}"},
 ]
 readme = "README.md"
 license = {file = "LICENSE"}
-dynamic = ["version"]
 requires-python = ">= 3.10"
 dependencies = [
   "click",
