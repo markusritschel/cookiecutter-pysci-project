@@ -143,10 +143,9 @@ plt.style.use(BASE_DIR/'assets/mpl_styles/white_paper.mplstyle')
     ├── CHANGELOG.md       <- All major changes should go in there
     ├── LICENSE            <- The license used for this project
     ├── Makefile           <- A self-documenting Makefile for standard CLI tasks
-    ├── pyproject.toml      <- Configuration file for the Python project
+    ├── pyproject.toml      <- Configuration file for the Python project (manages all dependencies)
     ├── README.md          <- The top-level README of this project
-    └── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-                              generated with `pip freeze > requirements.txt`
+    └── uv.lock            <- Lock file for reproducible dependency resolution (managed by UV)
 
 
 ## Dummy files
