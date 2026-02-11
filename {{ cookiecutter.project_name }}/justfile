@@ -4,6 +4,9 @@
 list:
     @just --list
 
+# Run ruff check for linting without modifying files
+lint:
+    uv run --group test ruff check {{ARGS}}
 
 # Run all the formatting, linting, and testing commands
 qa:
