@@ -2,6 +2,9 @@
 line-length = 88
 indent-width = 4
 
+# Specify which files/directories to check
+include = ["src/**/*.py", "tests/**/*.py", "scripts/**/*.py"]
+exclude = ["docs/", "notebooks/", "build/", ".venv/", "venv/", "htmlcov/"]
 
 [format]
 quote-style = "double"
@@ -10,13 +13,15 @@ docstring-code-format = false
 
 
 [lint]
-extend-select = [
-  # pydocstyle
-  "D",
-  # pycodestyle
-  "E",
-  # Pyflakes
-  "F",
+select = [
+    "D",    # pydocstyle
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # Pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "UP",   # pyupgrade
+    "C901", # mccabe complexity (replaces flake8 --max-complexity=10)
 ]
 
 ignore = ["F403", "F405"]
