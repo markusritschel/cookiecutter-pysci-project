@@ -1,7 +1,3 @@
-[build-system]
-requires = ["setuptools @ git+https://github.com/pypa/setuptools.git@main", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "src"
 description = "{{ cookiecutter.project_description }}"
@@ -83,6 +79,10 @@ docs = [
   "sphinxcontrib-napoleon2"
 ]
 
+
+[build-system]
+requires = ["uv_build>=0.8.13,<0.9.0"]
+build-backend = "uv_build"
 
 
 
