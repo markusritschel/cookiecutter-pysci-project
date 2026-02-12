@@ -44,6 +44,14 @@ VERSION := `grep -m1 '^version' pyproject.toml | sed -E 's/version = "(.*)"/\1/'
 version:
     @echo "Current version is {{VERSION}}"
 
+# Compile the documentation
+docs:
+    uv run --group docs sphinx-build -b html docs/ docs/_build/html
+
+# Serve the documentation with live reload
+docs-serve:
+    uv run --group docs sphinx-autobuild --open-browser docs/ docs/_build/html
+
 # Tag the current version in git and put to github
 tag:
     @echo "Tagging version v{{VERSION}}"
@@ -51,10 +59,7 @@ tag:
     git push origin v{{VERSION}}
 
 # Remove all build, test, coverage and Python artifacts
-clean: 
-	clean-build
-	clean-pyc
-	clean-test
+clean: clean-build clean-docs clean-pyc clean-test
 
 # Remove build artifacts
 clean-build:
@@ -62,6 +67,11 @@ clean-build:
     @rm -fr build/ dist/ .eggs/
     @find . -name '*.egg-info' -exec rm -fr {} +
     @find . -name '*.egg' -exec rm -f {} +
+
+# Remove documentation build artifacts
+clean-docs:
+    @echo "Cleaning documentation build artifacts..."
+    @rm -fr docs/_build/ docs/api/
 
 # Remove Python file artifacts
 clean-pyc:
