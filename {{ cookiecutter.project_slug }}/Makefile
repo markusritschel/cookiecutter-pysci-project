@@ -41,7 +41,7 @@ clean-test-cov:
 
 ## Build the code documentation with Jupyter-Book
 documentation:
-	jb build docs/ -v
+	uv run --group docs sphinx-build -b html docs/ docs/_build/html
 
 
 ## Synchronize Jupyter notebooks according to the rules in pyproject.toml
