@@ -13,9 +13,11 @@ __version__ = '{{ cookiecutter.project_version }}'
 
 # Make some of the basic directories globally available in your environment
 BASE_DIR = Path(__file__).resolve().parents[2]
-DATA_DIR = BASE_DIR / 'data'
 LOG_DIR  = BASE_DIR / 'logs'
+{% if cookiecutter.is_research_project -%}
+DATA_DIR = BASE_DIR / 'data'
 PLOT_DIR = BASE_DIR / 'reports/figures'
+{% endif -%}
 jupyter_startup_script = BASE_DIR / 'notebooks/jupyter_startup.ipy'
 
 # find .env automagically by walking up directories until it's found

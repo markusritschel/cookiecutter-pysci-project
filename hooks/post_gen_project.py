@@ -6,7 +6,6 @@ import subprocess
 if not {{ cookiecutter.is_research_project }}:
     REMOVE_PATHS = [
         "data/",
-        "logs/",
         "notebooks/",
         "references/",
         "reports/",
