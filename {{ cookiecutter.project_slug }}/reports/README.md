@@ -10,26 +10,33 @@ You may delete this README ;-)
 
 ### Jupyter-Book
 
-From the root of the project, execute
+From inside the `reports` directory, execute
 
 ```bash
-jupyter-book create reports/jbook
-jupyter-book build reports/jbook
+mkdir jbook
+cd jbook
+jupyter book init
 ```
+
+> [!note]
+> You may need to install `jupyter-book` first.
 
 More info [here](https://jupyterbook.org/en/stable/start/create.html).
 
 ### MyST-MD
 
-From the root of the project, execute
+From inside the `reports` directory, execute
 
 ```bash
-git clone https://github.com/executablebooks/mystmd-quickstart.git reports/myst-article
-cd reports/myst-article
+git clone https://github.com/jupyter-book/mystmd-quickstart.git myst-article
+cd myst-article
 myst init
 ```
 
-👉 More info [here](https://mystmd.org/guide/quickstart-myst-websites).
+> [!note]
+> You may need to install `mystmd` first.
+
+More info [here](https://mystmd.org/guide/quickstart).
 
 ***
 
