@@ -53,8 +53,8 @@ which you can even reference in your text (see Equation {eq}`my-math-ref`).
 ## Link to API
 
 You can even link to objects in your code, either by referencing them by their actual member
-{py:obj}`{{ cookiecutter.project_slug }}.core.utils`
+{py:obj}`{{ cookiecutter.package_name }}.core.utils`
 or, by using an 
-{py:obj}`alias <{{ cookiecutter.project_slug }}.core.utils.save>`
+{py:obj}`alias <{{ cookiecutter.package_name }}.core.utils.save>`
 .
 You can also reference code of external libraries, such as {py:obj}`numpy.ndarray` or {class}`xarray.Dataset`. They are automatically linked to their respective documentation, so you can easily check the details of the API.

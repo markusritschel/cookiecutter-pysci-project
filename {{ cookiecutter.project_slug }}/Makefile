@@ -63,12 +63,12 @@ save-conda-env:
 	@echo exported \"$$CONDA_DEFAULT_ENV\" environment to environment.yml
 
 
-## Create a conda environment named '{{ cookiecutter.project_slug }}', install packages, and activate it
+## Create a conda environment named '{{ cookiecutter.package_name }}', install packages, and activate it
 conda-env:
-	@echo "Create conda environment '{{ cookiecutter.project_slug }}"
-	conda create --name {{ cookiecutter.project_slug }} python=3.10 --no-default-packages 
-	@echo "Activate conda environment '{{ cookiecutter.project_slug }}'"
-	conda activate {{ cookiecutter.project_slug }}
+	@echo "Create conda environment '{{ cookiecutter.package_name }}"
+	conda create --name {{ cookiecutter.package_name }} python=3.10 --no-default-packages 
+	@echo "Activate conda environment '{{ cookiecutter.package_name }}'"
+	conda activate {{ cookiecutter.package_name }}
 
 
 ## Set up a virtual environment with uv

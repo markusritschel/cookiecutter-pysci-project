@@ -1,5 +1,5 @@
 [project]
-name = "{{ cookiecutter.project_slug }}"
+name = "{{ cookiecutter.package_name }}"
 version = "0.1.0"
 description = "{{ cookiecutter.project_description }}"
 authors = [
@@ -37,8 +37,8 @@ dependencies = [
 
 
 [project.scripts]
-generate-list = "{{ cookiecutter.project_slug }}.submodule:generate_int_list"
-{{ cookiecutter.project_slug }} = "{{ cookiecutter.project_slug }}.cli:app"
+generate-list = "{{ cookiecutter.package_name }}.submodule:generate_int_list"
+{{ cookiecutter.package_name }} = "{{ cookiecutter.package_name }}.cli:app"
 
 
 [dependency-groups]
