@@ -1,6 +1,24 @@
 """This script executes some commands after the project has been successfully set up from the cookiecutter template"""
-import subprocess
 import os
+import shutil
+import subprocess
+
+if not {{ cookiecutter.is_research_project }}:
+    REMOVE_PATHS = [
+        "data/",
+        "logs/",
+        "notebooks/",
+        "references/",
+        "reports/",
+        "scripts/",
+    ]
+    for path in REMOVE_PATHS:
+        if path and os.path.exists(path):
+            if os.path.isdir(path):
+                shutil.rmtree(path)
+            else:
+                os.unlink(path)
+
 
 print("Initialize Git repository and make a first commit")
 subprocess.call(['git', 'init'])

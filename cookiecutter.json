@@ -5,6 +5,7 @@
   "project_name": "Scientific Project Python Boilerplate",
   "project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
   "package_name": "{{ cookiecutter.project_slug|lower|replace('-', '_') }}",
+  "is_research_project": true,
   "project_description": "A boilerplate for scientific projects using Python",
   "project_version": "0.1.0",
   "command_line_interface": ["Click", "Docopt", "No command-line interface"],
