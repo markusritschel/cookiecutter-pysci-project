@@ -56,7 +56,7 @@ jobs:
         run: uv sync --groups docs
 
       - name: Build documentation
-        run: make documentation
+        run: uv run --group docs sphinx-build -b html docs/ docs/_build/html
 
       - name: Upload documentation artifacts
         uses: actions/upload-pages-artifact@v4
