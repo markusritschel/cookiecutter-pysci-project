@@ -14,7 +14,6 @@ dependencies = [
   "dask",
   "Deprecated",
   "docopt",
-  "dotenv",
   "ipykernel",
   "ipython",
   "ipywidgets",
@@ -39,7 +38,6 @@ dependencies = [
 
 
 [project.scripts]
-generate-list = "{{ cookiecutter.package_name }}.submodule:generate_int_list"
 {{ cookiecutter.package_name }} = "{{ cookiecutter.package_name }}.cli:app"
 
 
@@ -126,6 +124,7 @@ addopts = [
 
 [tool.uv]
 package = true
+
 
 [tool.cruft]
 skip = [
