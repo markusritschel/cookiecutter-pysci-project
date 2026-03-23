@@ -50,13 +50,15 @@ dev = [
 ]
 lint = [
   "flake8",
-  "ruff"
+  "ruff",
+  "ty",
 ]
 test = [
   "pytest",
   "pytest-cov"
 ]
 docs = [
+{% if cookiecutter.docs_engine|lower == 'sphinx' -%}
   "furo",
   "jupyter-book",
   "jupyterbook-latex",
@@ -86,6 +88,12 @@ docs = [
   "sphinxcontrib-images",
   "sphinxcontrib-mermaid",
   "sphinxcontrib-napoleon",
+{% elif cookiecutter.docs_engine|lower == 'zensical' -%}
+  "zensical",
+  "mkdocstrings-python",
+{% elif cookiecutter.docs_engine|lower == 'myst' -%}
+  "mystmd",
+{%- endif %}
 ]
 
 
@@ -102,17 +110,17 @@ formats = "ipynb,py:percent,md:myst"
 [tool.pytest.ini_options]
 minversion = "6.0"
 testpaths = [
-    "tests",
-    "src",
+  "tests",
+  "src",
 ]
 addopts = [
-    "--doctest-modules",
-    "--doctest-continue-on-failure",
-    "-ra -v",
-    "--cov=./src",
-    "--cov-report=xml",
-    "--cov-report=html",
-    "--cov-report=term-missing"
+  "--doctest-modules",
+  "--doctest-continue-on-failure",
+  "-ra -v",
+  "--cov=./src",
+  "--cov-report=xml",
+  "--cov-report=html",
+  "--cov-report=term-missing"
 ]
 
 
@@ -120,4 +128,9 @@ addopts = [
 package = true
 
 [tool.cruft]
-skip = [".git/"]
+skip = [
+  ".git/", 
+  "docs/**/*.md",
+  "tests", 
+  "README.md"
+]
