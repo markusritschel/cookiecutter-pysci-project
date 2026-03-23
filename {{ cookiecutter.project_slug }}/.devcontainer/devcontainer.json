@@ -1,0 +1,27 @@
+// see also:
+// - https://code.visualstudio.com/docs/devcontainers/containers 
+// - https://containers.dev/guide/dockerfile
+// - https://github.com/devcontainers/templates/tree/main/src/python
+{
+    "name": "{{cookiecutter.project_slug}}",
+    "image": "mcr.microsoft.com/devcontainers/python:1-3.14-bullseye",
+    "runArgs": [
+        "--userns=keep-id"
+      ],
+    "features": {},
+
+    "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
+
+    "customizations": {
+        "vscode": {
+            "extensions": ["ms-python.python", "editorconfig.editorconfig"],
+            "settings": {
+                "python.testing.pytestArgs": ["tests"],
+                "python.testing.pytestEnabled": true,
+                "python.testing.unittestEnabled": false,
+                "python.defaultInterpreterPath": "/workspaces/{{cookiecutter.project_slug}}/.venv/bin/python",
+                "python.testing.pytestPath": "/workspaces/{{cookiecutter.project_slug}}/.venv/bin/pytest"
+            }
+        }
+    }
+}

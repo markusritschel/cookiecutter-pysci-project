@@ -1,0 +1,7 @@
+# See https://docs.astral.sh/uv/guides/integration/pre-commit/
+repos:
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.10.2
+    hooks:
+      - id: uv-lock
+      - id: uv-export
