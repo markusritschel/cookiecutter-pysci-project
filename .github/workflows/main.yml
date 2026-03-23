@@ -23,12 +23,18 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     
+    - name: Configure Git identity
+      run: |
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
+        git config --global init.defaultBranch main
+
     - name: Install CookieCutter & run setup
       run: |
         uvx cookiecutter . --no-input
     
     - name: Upload generated project
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: generated-project-${{ matrix.python-version }}
         path: python-boilerplate/
@@ -45,7 +51,7 @@ jobs:
     
     steps:
     - name: Download generated project
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: generated-project-${{ matrix.python-version }}
         path: python-boilerplate/
