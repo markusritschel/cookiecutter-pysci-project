@@ -28,6 +28,7 @@ dependencies = [
   "nodejs",
   "numpy",
   "pandas",
+  "pandoc",
   "python-dotenv",
   "rich",
   "tqdm",
@@ -113,6 +114,9 @@ addopts = [
     "--cov-report=term-missing"
 ]
 
+
+[tool.uv]
+package = true
 
 [tool.cruft]
 skip = [".git/"]
