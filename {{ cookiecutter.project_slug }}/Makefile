@@ -44,6 +44,12 @@ documentation:
 	uv run --group docs sphinx-build -b html docs/ docs/_build/html
 
 
+
+## Run linter
+lint:
+	uv run ruff check
+
+
 ## Synchronize Jupyter notebooks according to the rules in pyproject.toml
 sync-notebooks:
 	jupytext --sync notebooks/**/*.ipynb
