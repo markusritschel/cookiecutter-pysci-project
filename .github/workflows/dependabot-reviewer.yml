@@ -18,7 +18,7 @@ jobs:
         uses: dependabot/fetch-metadata@v2
       
       - name: Use auto labels
-        uses: actions/labeler@v5
+        uses: actions/labeler@v6
 
       - name: Enable auto-merge
         if: |
