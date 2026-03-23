@@ -14,8 +14,8 @@ html_theme_options = {
     "source_branch": "main",
     "source_directory": "docs/",
     "light_css_variables": {
-        "color-brand-primary": "red",
-        "color-brand-content": "#CC3333",
+        # "color-brand-primary": "red",
+        # "color-brand-content": "#CC3333",
         # "color-admonition-background": "orange",
     },
     "sidebar_hide_name": False,
@@ -29,7 +29,7 @@ html_theme_options = {
             "class": "fa-brands fa-solid fa-github fa-2x",
         },
     ],
-    "announcement": "<em>:🚀 Important</em> announcement!",
+    # "announcement": "<em>:🚀 Important</em> announcement!",
 }
 
 html_copy_source = False
