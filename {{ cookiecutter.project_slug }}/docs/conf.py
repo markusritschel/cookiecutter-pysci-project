@@ -6,7 +6,7 @@ html_title = "Sidebar title"
 html_logo = "_static/python-logo.svg"
 
 
-html_theme = "{{ cookiecutter.sphinx_theme }}"   # furo, sphinx_rtd_theme, pydata_sphinx_theme, sphinx_book_theme, sphinx_immaterial
+html_theme = "furo"   # furo, sphinx_rtd_theme, pydata_sphinx_theme, sphinx_book_theme, sphinx_immaterial
 master_doc = 'index'
 html_static_path = ["_static"]
 templates_path = ['_templates']

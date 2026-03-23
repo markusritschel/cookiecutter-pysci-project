@@ -8,9 +8,9 @@
   "is_research_project": true,
   "project_description": "A boilerplate for scientific projects using Python",
   "project_version": "0.1.0",
-  "command_line_interface": ["Click", "Docopt", "No command-line interface"],
+  "command_line_interface": ["Typer", "Click", "Docopt", "No command-line interface"],
   "project_license": ["MIT license", "BSD license", "ISC license", "Apache Software License 2.0", "GNU General Public License v3", "Not open source"],
-  "sphinx_theme": ["furo", "sphinx_rtd_theme", "pydata_sphinx_theme", "sphinx_book_theme", "sphinx_immaterial"],
+  "docs_engine": ["Sphinx", "Zensical", "MyST"],
   "_copy_without_render": [
     ".github/workflows/*",
     "docs/references.bib",
