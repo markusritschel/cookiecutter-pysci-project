@@ -63,7 +63,6 @@ For any questions or issues, please contact me via {{ cookiecutter.email }} or o
 :caption: Main navigation
 
 example
-demo-stuff
 ```
 
 
