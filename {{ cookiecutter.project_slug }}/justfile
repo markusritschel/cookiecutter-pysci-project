@@ -1,7 +1,7 @@
 # See https://just.systems/ for more information
 
-# Show available commands
-list:
+[private]
+default:
     @just --list
 
 # Run ruff check for linting without modifying files
