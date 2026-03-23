@@ -28,8 +28,17 @@ Then, getting set up is as simple as
 ```bash
 uv sync
 ```
-to make the project's routines (located in `src`) available for import.
-<!-- TODO -->
+to install dependencies and make the project's source code (located in `src`) available for import.
+
+👉 Activate your virtual environment:
+```bash
+source .venv/bin/activate
+```
+You can verify that you're using the environment's Python executable by checking if
+```bash
+which python
+```
+points to `.venv/bin/activate`.
 
 
 {% if cookiecutter.is_research_project -%}
