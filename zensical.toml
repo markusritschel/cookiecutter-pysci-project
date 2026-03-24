@@ -318,7 +318,7 @@ repo = "lucide/smile"
 # ----------------------------------------------------------------------------
 [[project.extra.social]]
 icon = "fontawesome/brands/github"
-link = "https://github.com/markusritschel/cookiecutter-pysci-project"
+link = "https://github.com/markusritschel/cookiecutter-pyproject"
 
 
 [project.markdown_extensions.admonition]

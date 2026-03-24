@@ -19,13 +19,13 @@ icon: material/school
 ## Create a new project using the template
 Make sure to have `uv` installed, and then run the following command to create a new project from this template:
 ```bash
-uvx cookiecutter gh:markusritschel/cookiecutter-pysci-project
+uvx cookiecutter gh:markusritschel/cookiecutter-pyproject
 ```
 <!-- Alternative URIs:
-cookiecutter gh:markusritschel/cookiecutter-pysci-project
-cookiecutter https://github.com/markusritschel/cookiecutter-pysci-project.git
-cookiecutter git+https://github.com/markusritschel/cookiecutter-pysci-project
-cookiecutter git+ssh://git@github.com/markusritschel/cookiecutter-pysci-project.git
+cookiecutter gh:markusritschel/cookiecutter-pyproject
+cookiecutter https://github.com/markusritschel/cookiecutter-pyproject.git
+cookiecutter git+https://github.com/markusritschel/cookiecutter-pyproject
+cookiecutter git+ssh://git@github.com/markusritschel/cookiecutter-pyproject.git
 -->
 
 Fill in the prompts to customize your project. For example:

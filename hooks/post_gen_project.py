@@ -56,7 +56,7 @@ if not os.path.exists(".git"):
      subprocess.run(["git", "init"], check=True)
      subprocess.run(['git', 'branch', '-m', 'main'], check=True)
      subprocess.run(["git", "add", "."], check=True)
-     subprocess.run(["git", "commit", "-m", "Set up new project from cookiecutter template https://github.com/markusritschel/cookiecutter-pysci-project"], check=True)
+     subprocess.run(["git", "commit", "-m", "Set up new project from cookiecutter template https://github.com/markusritschel/cookiecutter-pyproject"], check=True)
 
 
 # /// 3. Print message ///

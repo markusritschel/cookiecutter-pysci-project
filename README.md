@@ -1,7 +1,7 @@
-# Cookiecutter Py(thon)Sci(ence)-Project Template <!-- omit in toc -->
+# Cookiecutter Py(thon)-Project Template <!-- omit in toc -->
 
-![build](https://github.com/markusritschel/cookiecutter-pysci-project/actions/workflows/main.yml/badge.svg)
-[![License MIT](https://img.shields.io/github/license/markusritschel/cookiecutter-pysci-project)](./LICENSE)
+![build](https://github.com/markusritschel/cookiecutter-pyproject/actions/workflows/main.yml/badge.svg)
+[![License MIT](https://img.shields.io/github/license/markusritschel/cookiecutter-pyproject)](./LICENSE)
 
 > 👉 If you're tired of setting up the same directory and file structure for your new scientific projects again and again, then this might be for you ;-)
 
@@ -65,7 +65,7 @@ This includes
 The easiest way to get started is using [uv](https://docs.astral.sh/uv/0).
 Make sure you have `uv` installed, and then run the following command to create a new project from this template:
 ```bash
-$ uvx cookiecutter gh:markusritschel/cookiecutter-pypackage
+$ uvx cookiecutter gh:markusritschel/cookiecutter-pyproject
 
 ```
 
@@ -74,16 +74,16 @@ $ uvx cookiecutter gh:markusritschel/cookiecutter-pypackage
 
 install [CookieCutter](https://github.com/cookiecutter/cookiecutter) via pip or conda, and then run the following command to create a new project from this template:
 ```bash
-$ cookiecutter gh:markusritschel/cookiecutter-pypackage
+$ cookiecutter gh:markusritschel/cookiecutter-pyproject
 ```
 
 </details><br />
 
 <!-- Alternative URIs:
-$ cookiecutter gh:markusritschel/cookiecutter-pypackage
-$ cookiecutter https://github.com/markusritschel/cookiecutter-pypackage.git
-$ cookiecutter git+https://github.com/markusritschel/cookiecutter-pypackage
-$ cookiecutter git+ssh://git@github.com/markusritschel/cookiecutter-pypackage.git
+$ cookiecutter gh:markusritschel/cookiecutter-pyproject
+$ cookiecutter https://github.com/markusritschel/cookiecutter-pyproject.git
+$ cookiecutter git+https://github.com/markusritschel/cookiecutter-pyproject
+$ cookiecutter git+ssh://git@github.com/markusritschel/cookiecutter-pyproject.git
 -->
 
 Once you have answered the questions, your directory structure will be created and you're set, ready to start working on your new project 🚀.

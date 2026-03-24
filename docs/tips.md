@@ -38,7 +38,7 @@ cruft tracks which version of the template your project was generated from and a
 !!! tip
     If you created your project with `cookiecutter` instead of `cruft`, you can still link it retroactively:
     ```bash
-    uvx cruft link https://github.com/markusritschel/cookiecutter-pysci-project
+    uvx cruft link https://github.com/markusritschel/cookiecutter-pyproject
     ```
 
 
