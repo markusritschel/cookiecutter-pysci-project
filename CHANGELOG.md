@@ -6,3 +6,7 @@
 - Renamed the repository to `cookiecutter-pyproject`
 - The new project now has its own documentation hosted on GitHub pages
 - The documentation now includes more detailed information in favour of a shortened README.md
+- Now uses `uv` as dependency manager
+- Now uses justfile as taskrunner
+- Now has extensive documentation on https://markusritschel.github.io/cookiecutter-pyproject/
+- Uses Zensical for main documentation
