@@ -6,12 +6,16 @@ icon: fontawesome/brands/github
 
 The template includes automated Continuous Integration (CI) and Continuous Deployment (CD) via [GitHub Actions](https://github.com/features/actions).
 
+!!! NOTE
+    Keep in mind that the deployment may take a while. You can check the status of the workflow by clicking on "Action" in the menu bar of your repository.
+
 ## Workflow File
 
 The main workflow is defined in `.github/workflows/main.yml`. It automatically runs on:
 
 - **Push to `main` or `develop`** branches
 - **Pull requests** targeting the `main` branch
+
 
 ## What the Workflow Does
 
@@ -29,6 +33,7 @@ Installs Pandoc and builds Sphinx docs
 
 **`deploy-documentation` job** (runs after `build-documentation`, main branch only): <br />
 Deploys built docs to GitHub Pages
+
 
 ## Workflow Status
 
@@ -54,10 +59,12 @@ Pull requests show status checks:
 
 **Codecov upload skipped** – Add `CODECOV_TOKEN` to your repository secrets (**Settings → Secrets and variables → Actions**).
 
+
 ## See Also
 
 - [Publishing](./publish-package.md) - PyPI deployment
 - [Documentation](./documentation.md) - What gets built
+
 
 ## Further Reading
 

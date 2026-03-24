@@ -40,3 +40,15 @@ cruft tracks which version of the template your project was generated from and a
     ```bash
     uvx cruft link https://github.com/markusritschel/cookiecutter-pysci-project
     ```
+
+
+## A note on version controlling Jupyter notebooks
+
+It is very ugly to keep Jupyter Notebooks under version control as they are in principle a very large JSON file, containing lots of metadata, output of your cells, etc.
+This circumstance makes it also quite hard to collaborate on them. 
+
+However, there's help: *[Jupytext](https://jupytext.readthedocs.io/)* syncs your Jupyter notebooks with another file for which you can choose a variety of formats (e.g. Markdown, R Markdown, normal Python, etc.).
+These "paired" files, which can either reside alongside your Jupyter notebooks or in a separate directory, can then be easily version-controlled.
+*Jupytext* can either be used from the command line (`jupytext --sync notebooks/*ipynb`) or as a Jupyter plugin.
+
+For more information, visit https://jupytext.readthedocs.io/.

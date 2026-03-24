@@ -13,7 +13,7 @@ Enable `is_research_project` during setup to get a data science project structur
 
 ## Directory Structure
 
-```
+```yaml
 project/
 ├── data/
 │   ├── raw/           # Original, immutable data
@@ -31,6 +31,21 @@ project/
 ├── tests/             # Test suite
 └── docs/              # Documentation
 ```
+
+### High-level & low-level Code
+
+All **high-level** code (that is, code the user directly interacts with) should reside in the `scripts/` and the `notebooks/` directory.
+High-level code is, for example, code that produces a figure, a report, or similar.
+
+
+!!! TIP "Best practice"
+    Name scripts and notebooks in a way that indicates their order of execution (examples can be found in the respective directories).
+    In addition, document the proceedure of execution and what each script does.
+    Have *one* script for each task, i.e. the creation of *one* figure or *one* table. <br />
+
+Code residing in `src/` is *exclusively* source code or **low-level** code and **is not meant to be actively run** but rather used in your scripts and notebooks.
+
+
 
 ## Path variables
 

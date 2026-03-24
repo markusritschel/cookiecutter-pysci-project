@@ -22,10 +22,10 @@ This template provides a full, modern development environment with integrated to
 ## Getting Started
 
 I recommend you to use `uv` as a dependency and environment manager.
-Read the corresponding section of the documentation [here](./uv).
+Read the [corresponding section of the documentation](./uv).
 In your project's directory, run the following commands 
 
-=== "macOS/Linux"
+=== ":fontawesome-brands-apple: macOS / :fontawesome-brands-linux: Linux"
     ```bash
     uv venv
 
@@ -35,7 +35,7 @@ In your project's directory, run the following commands
     just qa                    # Verify setup
     ```
 
-=== "Windows"
+=== ":fontawesome-brands-windows: Windows"
     ```powershell
     uv venv
 
