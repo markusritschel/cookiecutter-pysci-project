@@ -3,9 +3,9 @@
 ![build](https://github.com/markusritschel/cookiecutter-pyproject/actions/workflows/main.yml/badge.svg)
 [![License MIT](https://img.shields.io/github/license/markusritschel/cookiecutter-pyproject)](./LICENSE)
 
-> 👉 If you're tired of setting up the same directory and file structure for your new scientific projects again and again, then this might be for you ;-)
+> 👉 If you're tired of setting up the same directory and file structure for your new Python projects again and again, then this might be for you ;-)
 
-This repository provides a "template" of a directory structure for small to medium-sized scientific projects, making use of [CookieCutter](https://github.com/cookiecutter/cookiecutter), a templating engine for project structures.
+This repository provides a "template" of a directory structure for small to medium-sized (scientific) projects, making use of [CookieCutter](https://github.com/cookiecutter/cookiecutter), a templating engine for project structures.
 Check out the links at the [bottom of the page](#sources-of-inspiration) to create your own CookieCutter or use this one to start your project.
 Also, feel free to fork the repository and adjust it to your own needs.
 
