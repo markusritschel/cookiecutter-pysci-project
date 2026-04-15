@@ -48,12 +48,14 @@ dev = [
 ]
 lint = [
   "flake8",
+  "isort",
   "ruff",
   "ty",
 ]
 test = [
   "pytest",
-  "pytest-cov"
+  "pytest-cov",
+  "safety",
 ]
 docs = [
 {% if cookiecutter.docs_engine|lower == 'sphinx' -%}
