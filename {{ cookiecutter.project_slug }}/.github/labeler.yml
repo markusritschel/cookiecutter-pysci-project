@@ -1,0 +1,19 @@
+# actions/labeler
+documentation:
+  - changed-files:
+    - any-glob-to-any-file: 
+      - docs/**
+      - zensical.toml
+
+tests:
+  - changed-files:
+    - any-glob-to-any-file: tests/**
+
+dependencies:
+  - changed-files:
+    - any-glob-to-any-file: [pyproject.toml, requirements.txt]
+
+
+# Add 'feature' label to any PR where the head branch name starts with `feat` or has a `feature` section in the name
+feature:
+  - head-branch: ['^feat', 'feature']

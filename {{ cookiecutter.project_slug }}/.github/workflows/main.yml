@@ -42,6 +42,11 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
+      - name: Auto-apply labels
+        uses: actions/labeler@v5
+        # NOTE: requires a .github/labeler.yml file with appropriate rules
+
+
 
   build-documentation:
     runs-on: ubuntu-latest
