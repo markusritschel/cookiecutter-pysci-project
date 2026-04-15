@@ -52,11 +52,11 @@ elif "{{ cookiecutter.docs_engine|lower }}" == "myst":
 # /// 2. Initialize Git repository ///
 
 if not os.path.exists(".git"):
-     print("Initialize Git repository and make a first commit")
-     subprocess.run(["git", "init"], check=True)
-     subprocess.run(['git', 'branch', '-m', 'main'], check=True)
-     subprocess.run(["git", "add", "."], check=True)
-     subprocess.run(["git", "commit", "-m", "Set up new project from cookiecutter template https://github.com/markusritschel/cookiecutter-pyproject"], check=True)
+    print("Initialize Git repository and make a first commit")
+    subprocess.run(["git", "init"], check=True)
+    subprocess.run(['git', 'branch', '-m', 'main'], check=True)
+    subprocess.run(["git", "add", "."], check=True)
+    subprocess.run(["git", "commit", "-m", "Set up new project from cookiecutter template https://github.com/markusritschel/cookiecutter-pyproject"], check=True)
 
 
 # /// 3. Print message ///
@@ -73,23 +73,23 @@ msg = f"""
     ----------------------------------------------
 
     1. Change directory into your project (if you aren't already):
-         {CODE}cd {os.getcwd()}/ {DEFAULT}
+        {CODE}cd {os.getcwd()}/ {DEFAULT}
 
     2. Activate your virtual environment (see the README.md for more details):
-         On Linux/macOS: {CODE}source .venv/bin/activate {DEFAULT}
-         On Windows:    {CODE}.\.venv\Scripts\activate {DEFAULT}
+        On Linux/macOS: {CODE}source .venv/bin/activate {DEFAULT}
+        On Windows:    {CODE}.\.venv\Scripts\activate {DEFAULT}
 
     3. Add a remote git repository (optional): {CODE}
-         {CODE}git remote add origin https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }} {DEFAULT}
+        {CODE}git remote add origin https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }} {DEFAULT}
 
     4. To add packages, use:
-         {CODE}uv add <package_name> {DEFAULT}
+        {CODE}uv add <package_name> {DEFAULT}
 
     5. To run scripts, use:
-         {CODE}uv run python <script.py> {DEFAULT}
+        {CODE}uv run python <script.py> {DEFAULT}
 
     6. To build documentation:
-         {CODE}just docs {DEFAULT}
+        {CODE}just docs {DEFAULT}
 
 
     Happy coding! 🚀

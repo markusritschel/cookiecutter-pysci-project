@@ -7,7 +7,7 @@
     "image": "mcr.microsoft.com/devcontainers/python:1-3.14-bullseye",
     "runArgs": [
         "--userns=keep-id"
-      ],
+    ],
     "features": {},
 
     "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
