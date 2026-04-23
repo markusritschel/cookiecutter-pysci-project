@@ -71,7 +71,7 @@ If everything goes well, you should see a message like this at the end of the se
 
 2. Activate your virtual environment (see the README.md for more details):
      On Linux/macOS: source .venv/bin/activate 
-     On Windows:    .\.venv\Scriptsctivate 
+     On Windows:    .\.venv\Scripts\activate 
 
 3. Add a remote git repository (optional):  # (1)!
      git remote add origin https://github.com/<your-github-username>/<package-slug> 

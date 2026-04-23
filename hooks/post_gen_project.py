@@ -77,7 +77,7 @@ msg = f"""
 
     2. Activate your virtual environment (see the README.md for more details):
         On Linux/macOS: {CODE}source .venv/bin/activate {DEFAULT}
-        On Windows:    {CODE}.\.venv\Scripts\activate {DEFAULT}
+        On Windows:    {CODE}.\.venv\Scripts\\activate {DEFAULT}
 
     3. Add a remote git repository (optional): {CODE}
         {CODE}git remote add origin https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }} {DEFAULT}
