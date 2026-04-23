@@ -1,5 +1,8 @@
 # See https://just.systems/ for more information
 
+# in windows comment this in to that it finds the shell
+set windows-shell := ["C:\\Program Files\\Git\\bin\\sh.exe","-c"] 
+
 [private]
 default:
     @just --list
