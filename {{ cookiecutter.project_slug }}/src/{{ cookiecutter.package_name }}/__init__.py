@@ -9,7 +9,12 @@ from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
 from .core.utils import save, setup_logger
 
-__version__ = '{{ cookiecutter.project_version }}'
+__all__ = [
+    "save",
+    "setup_logger",
+] 
+# to avoid false positive linting error as recommended in https://docs.astral.sh/ruff/rules/unused-import/#why-is-this-bad 
+__version__ = "{{ cookiecutter.project_version }}"
 
 # Make some of the basic directories globally available in your environment
 BASE_DIR = Path(__file__).resolve().parents[2]

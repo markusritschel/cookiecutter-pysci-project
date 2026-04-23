@@ -12,7 +12,9 @@
 
 """The functions below only serve for demonstrating the logger setup. Feel free to delete them 
 as well as this docstring once the concept is understood :-)"""
-from __future__ import absolute_import, division, print_function, with_statement
+
+# probably not needed (Ole)
+# from __future__ import absolute_import, division, print_function, with_statement
 import logging
 
 from {{ cookiecutter.package_name }} import *

@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 def generate_int_list(x: int = 3) -> list[int]:
     """This is a doctest in a docstring. You can link to other functions, e.g. :func:`src.setup_logger`.
-    Function names should be self-explanatory. 
+    Function names should be self-explanatory.
 
     Example
     -------

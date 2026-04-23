@@ -33,20 +33,23 @@ To reproduce the project, clone this repository on your machine
 git clone https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
 ```
 
-### Setup
+### Reproducibility Setup
 
 The easiest way to get started is using [uv](https://docs.astral.sh/uv/0).
 Make sure you have `uv` installed, and then run the following command to create a new project from this template:
 ```bash
 $ uvx cookiecutter gh:opinner/cookiecutter-pyproject
+$ cd ./{{ cookiecutter.project_slug }}
 ```
-The virtual enviroment is then created with `$ uv venv` and activated with
-     On Linux/macOS: source .venv/bin/activate 
-     On Windows:    .\.venv\Scripts\activate
+The virtual enviroment is then created with `$ uv venv` and activated on Linux/macOS with: `source .venv/bin/activate`.
 
-On windows, I needed to run the following once, in order to enable the activation of the virtual enviroment
+On windows, I, in order to enable the activation of the virtual enviroment,  needed to first run  
 ```shell
 (Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned) ; (& c:\Users\opinner\Desktop\Python\pinner2026_JPO_code\.venv\Scripts\Activate.ps1)
+```
+and then
+```shell
+.\.venv\Scripts\activate
 ```
 
 <!-- Commented as because just is used instead of make -->
