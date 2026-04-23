@@ -35,7 +35,22 @@ git clone https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.
 
 ### Setup
 
-For getting started in the fastest way possible, there are Make targets provided.
+The easiest way to get started is using [uv](https://docs.astral.sh/uv/0).
+Make sure you have `uv` installed, and then run the following command to create a new project from this template:
+```bash
+$ uvx cookiecutter gh:opinner/cookiecutter-pyproject
+```
+The virtual enviroment is then created with `$ uv venv` and activated with
+     On Linux/macOS: source .venv/bin/activate 
+     On Windows:    .\.venv\Scripts\activate
+
+On windows, I needed to run the following once, in order to enable the activation of the virtual enviroment
+```shell
+(Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned) ; (& c:\Users\opinner\Desktop\Python\pinner2026_JPO_code\.venv\Scripts\Activate.ps1)
+```
+
+<!-- Commented as because just is used instead of make -->
+<!-- For getting started in the fastest way possible, there are Make targets provided.
 So, to set up the project, simply run the following commands from the main directory:
 
 First, run
@@ -70,7 +85,7 @@ to run the tests via `pytest` and build the documentation located in `docs`.
 The latter will create an HTML-rendered version of the documentation in `docs/_build/html/`.
 
 > [!NOTE]
-> If you experience that something is not working (e.g. creating the documentation via `make documentation`) try to perform an update via `mamba update --all`. This might solve the problem.
+> If you experience that something is not working (e.g. creating the documentation via `make documentation`) try to perform an update via `mamba update --all`. This might solve the problem. -->
 
 {% if cookiecutter.is_research_project %}
 ### Make data available
@@ -107,6 +122,8 @@ plt.style.use(BASE_DIR/'assets/mpl_styles/white_paper.mplstyle')
 
 
 ## Project Structure
+
+created automatically with `https://markusritschel.github.io/cookiecutter-pyproject`
 
     ├── assets             <- A place for assets like shapefiles or config files
     │   └── mpl_styles     <- Matplotlib style sheets

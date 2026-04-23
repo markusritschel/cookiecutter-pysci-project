@@ -1,5 +1,5 @@
 # See https://docs.astral.sh/ruff/ for settings
-line-length = 88
+line-length = 100 # allow longer lines than the default of 88 
 indent-width = 4
 
 # Specify which files/directories to check
@@ -14,7 +14,8 @@ docstring-code-format = false
 
 [lint]
 select = [
-    "D",    # pydocstyle
+    # ignore documentation best practices for now
+    #"D",   # pydocstyle 
     "E",    # pycodestyle errors
     "W",    # pycodestyle warnings
     "F",    # Pyflakes
@@ -24,7 +25,12 @@ select = [
     "C901", # mccabe complexity (replaces flake8 --max-complexity=10)
 ]
 
-ignore = ["F403", "F405"]
+ignore = [
+    # wild card imports with *
+    # "F403",
+    # "F405", 
+    "E501", # line too long 
+]
 
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"

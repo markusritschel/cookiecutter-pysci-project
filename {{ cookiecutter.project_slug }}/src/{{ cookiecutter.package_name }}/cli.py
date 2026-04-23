@@ -1,4 +1,6 @@
 """CLI script for {{ cookiecutter.package_name }}."""
+# disable white space errors due to the WELCOME ascii art
+# ruff: noqa: W291, W293 
 
 import typer
 from rich.console import Console

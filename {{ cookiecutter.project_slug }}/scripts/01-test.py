@@ -7,6 +7,9 @@
 # Date:   {% now 'local', '%Y-%m-%d' %}
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #
+
+# ruff: noqa: F403, F405 #disable erros due to the wild card imports
+
 """The functions below only serve for demonstrating the logger setup. Feel free to delete them 
 as well as this docstring once the concept is understood :-)"""
 from __future__ import absolute_import, division, print_function, with_statement
