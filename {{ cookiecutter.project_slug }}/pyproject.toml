@@ -44,7 +44,8 @@ dependencies = [
 [dependency-groups]
 dev = [
   {include-group = "lint"},
-  {include-group = "test"}
+  {include-group = "test"},
+  "pre-commit"
 ]
 lint = [
   "flake8",
