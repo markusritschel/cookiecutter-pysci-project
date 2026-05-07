@@ -100,7 +100,7 @@ Matplotlib also provides [a set of default stylesheets](https://matplotlib.org/s
 At the beginning of your plotting script, add the following lines:
 
 ```python
-from src import BASE_DIR
+from {{ cookiecutter.package_name }} import BASE_DIR
 import matplotlib.pyplot as plt
 plt.style.use(BASE_DIR/'assets/mpl_styles/white_paper.mplstyle')
 ```
