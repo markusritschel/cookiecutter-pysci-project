@@ -103,15 +103,16 @@ It also provides an optional structure for research projects (see corresponding 
 
 ### 🔧 Tools
 
-| Purpose               | Tool     | Comment                                                           |
-| --------------------- | -------- | ----------------------------------------------------------------- |
-| Dependency management | *uv*     | A modern and blazingly fast dependency manager for Python         |
-| Version control       | *Git*    | A popular version control system (VCS), automatically initialized |
-| Documentation         | *Sphinx* | A popular and versatile docs generator for Python                 |
-| Code quality          | *Ruff*   | A fast linter and code formatter for Python                       |
-| Testing               | *Pytest* | A powerful testing framework for Python                           |
-| Task automation       | *Just*   | A modern taskrunner, simplifying your workflow                    |
-| Test Github Actions   | *Act*    | A tool to run GitHub Actions locally                              |
+| Purpose               | Tool           | Comment                                                           |
+| --------------------- | -------------- | ----------------------------------------------------------------- |
+| Dependency management | *uv*           | A modern and blazingly fast dependency manager for Python         |
+| Version control       | *Git*          | A popular version control system (VCS), automatically initialized |
+| Documentation         | *Sphinx*       | A popular and versatile docs generator for Python                 |
+| Code quality          | *Ruff*         | A fast linter and code formatter for Python                       |
+| Testing               | *Pytest*       | A powerful testing framework for Python                           |
+| Git hooks             | *pre-commit*   | Automatically enforces checks (e.g. lockfile sync) before commits |
+| Task automation       | *Just*         | A modern taskrunner, simplifying your workflow                    |
+| Test Github Actions   | *Act*          | A tool to run GitHub Actions locally                              |
 
 
 

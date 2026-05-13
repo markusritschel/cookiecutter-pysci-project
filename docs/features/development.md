@@ -9,14 +9,15 @@ This template provides a full, modern development environment with integrated to
 
 ## Core Tools
 
-| Tool       | Purpose                                     |
-| ---------- | ------------------------------------------- |
-| **uv**     | [Dependency & environment manager](./uv.md) |
-| **Ruff**   | [Linting & formatting](./code-quality.md)   |
-| **ty**     | [Type checking](./code-quality.md)          |
-| **pytest** | [Testing & coverage](./code-quality.md)     |
-| **Just**   | [Task automation](./justfile.md)            |
-| **Sphinx** | [Documentation](./documentation.md)         |
+| Tool           | Purpose                                             |
+| -------------- | --------------------------------------------------- |
+| **uv**         | [Dependency & environment manager](./uv.md)         |
+| **Ruff**       | [Linting & formatting](./code-quality.md)           |
+| **ty**         | [Type checking](./code-quality.md)                  |
+| **pytest**     | [Testing & coverage](./code-quality.md)             |
+| **pre-commit** | [Git hooks for automated checks](./code-quality.md) |
+| **Just**       | [Task automation](./justfile.md)                    |
+| **Sphinx**     | [Documentation](./documentation.md)                 |
 
 
 ## Getting Started
@@ -93,6 +94,9 @@ just qa            # Format → Lint → Type check → Test
 git add .
 git commit -m "Add user_data function"
 ```
+
+Pre-commit hooks run automatically at this point — they update `uv.lock` and `requirements.txt` if needed. If a hook modifies a file, the commit is aborted; re-stage the changes and commit again.
+
 !!! tip "Best practice"
     Make atomic commits. That is, commit every logical "bite" that does something meaningful in your code.
     Use "active" language, i.e. describe what the commit does when applied.

@@ -131,6 +131,35 @@ addopts = [
     - critical code paths
 
 
+## Pre-commit Hooks
+
+[pre-commit](https://pre-commit.com/) is a framework for managing and running git hooks. The template ships with a `.pre-commit-config.yaml` that keeps your `uv` lockfile in sync automatically before each commit.
+
+**Included hooks:**
+
+| Hook         | What it does                                      |
+| ------------ | ------------------------------------------------- |
+| `uv-lock`    | Updates `uv.lock` to reflect changes to deps      |
+| `uv-export`  | Re-exports `requirements.txt` from the lockfile   |
+
+**Setup** (one-time, after cloning):
+
+```bash
+uv run pre-commit install
+```
+
+This registers the hooks with git. From then on they run automatically on every `git commit`.
+
+**Run hooks manually** (without committing):
+
+```bash
+uv run pre-commit run --all-files
+```
+
+!!! tip
+    If a hook modifies a file (e.g. updates `uv.lock`), the commit is aborted so you can review and re-stage the change. Just run `git add` and commit again.
+
+
 ## Running All Quality Checks
 
 Execute all checks at once:
@@ -209,3 +238,5 @@ strict = true  # Requires full type annotations
 - [Python Type Hints](https://docs.python.org/3/library/typing.html)
 - [PEP 8 Style Guide](https://www.python.org/dev/peps/pep-0008/)
 - [PEP 257 Docstring Conventions](https://www.python.org/dev/peps/pep-0257/)
+- [pre-commit Documentation](https://pre-commit.com/)
+- [uv pre-commit integration](https://docs.astral.sh/uv/guides/integration/pre-commit/)
