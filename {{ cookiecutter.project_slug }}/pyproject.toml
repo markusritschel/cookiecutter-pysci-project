@@ -20,8 +20,8 @@ dependencies = [
   "jupytext",
   "jupyterbook-latex",
   "jupyterlab",
-  "jupyternotify",
   "jupytext",
+  "marimo",
   "markdown",
   "matplotlib",
   "mystmd",
@@ -48,8 +48,6 @@ dev = [
   "pre-commit"
 ]
 lint = [
-  "flake8",
-  "isort",
   "ruff",
   "ty",
 ]
@@ -133,6 +131,7 @@ package = true
 skip = [
   ".git/", 
   "docs/**/*.md",
+  "**/*.bib",
   "tests", 
   "README.md"
 ]
