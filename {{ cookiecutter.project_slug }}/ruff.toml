@@ -7,27 +7,78 @@ include = ["src/**/*.py", "tests/**/*.py", "scripts/**/*.py"]
 exclude = ["docs/", "notebooks/", "build/", ".venv/", "venv/", "htmlcov/"]
 
 [format]
-quote-style = "double"
+quote-style = "preserve"
 indent-style = "space"
-docstring-code-format = false
+docstring-code-format = true
 
 
 [lint]
 select = [
-    "D",    # pydocstyle
-    "E",    # pycodestyle errors
-    "W",    # pycodestyle warnings
-    "F",    # Pyflakes
-    "I",    # isort
-    "B",    # flake8-bugbear
-    "UP",   # pyupgrade
-    "C901", # mccabe complexity (replaces flake8 --max-complexity=10)
+    "D",    # pydocstyle          — docstring presence and formatting (NumPy convention, see below)
+    "E",    # pycodestyle errors  — PEP 8 style errors
+    "W",    # pycodestyle warns   — PEP 8 style warnings
+    "F",    # Pyflakes            — undefined names, unused imports, redefinitions
+    "I",    # isort               — import ordering and grouping
+    "B",    # flake8-bugbear      — likely bugs and opinionated design issues
+    "C4",   # flake8-comprehensions — prefer comprehensions over map/filter/list()
+    "C901", # McCabe complexity   — flag functions exceeding the complexity threshold (see below)
+    "N",    # pep8-naming         — enforce PEP 8 naming conventions
+    "UP",   # pyupgrade           — modernize to newer Python syntax automatically
+    "NPY",  # NumPy               — NumPy-specific anti-patterns (numpy is a core dependency)
+    "PD",   # pandas-vet          — pandas-specific anti-patterns (pandas is a core dependency)
+    "PERF", # Perflint            — performance anti-patterns (relevant for array-heavy code)
+    "PT",   # flake8-pytest-style — consistent pytest patterns across the test suite
+    "RUF",  # Ruff-specific       — additional best-practice rules unique to Ruff
 ]
 
-ignore = ["F403", "F405"]
+ignore = [
+    # Formatting — deferred to `ruff format`, which handles these automatically
+    "E501",  # line too long — formatter wraps where possible; long strings/URLs are acceptable
+    "E701",  # multiple statements on one line — formatter handles this
+
+    # Q (flake8-quotes) is intentionally not selected: quote style is owned by `ruff format`
+    # (quote-style = "preserve"). Enabling Q alongside the formatter causes conflicts.
+
+    # Style choices
+    "E402",  # module-level import not at top of file — path manipulation before imports is common in data science code
+    "E711",  # comparison to None — `x == None` can be intentional in ORM/pandas query contexts
+    "E731",  # lambda expression assignment — occasionally clearer than a named one-liner
+    "W293",  # whitespace on blank lines — harmless and common in editors that auto-indent
+
+    # flake8-bugbear
+    "B011",  # `assert False` — acceptable; we do not use Python's -O optimization flag
+    "B903",  # suggest using @dataclass — too opinionated and lacks an autofix
+
+    # flake8-comprehensions (C4 selected; these are intentional exceptions)
+    "C408",  # rewrite dict(a=1) as {"a": 1} — dict() with kwargs aids readability
+    "C409",  # unnecessary tuple literal in list — see https://github.com/astral-sh/ruff/issues/12912
+    "C419",  # unnecessary list comprehension in any()/all() — see https://github.com/astral-sh/ruff/issues/10838
+    "C420",  # dict.fromkeys() over comprehension — fromkeys is explicit and widely understood
+
+    # pydocstyle
+    "D205",  # missing blank line after summary — not required by the NumPy convention
+
+    # pyupgrade
+    "UP035", # deprecated typing imports — project targets Python ≥ 3.10 but enforcing this is disruptive
+
+    # NumPy (NPY selected; NPY002 kept as intentional exception)
+    "NPY002", # replace legacy np.random.* calls — common in existing code; migrate gradually
+]
 
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+
+[lint.mccabe]
+max-complexity = 10
+
+
+[lint.isort]
+known-first-party = ["{{ cookiecutter.package_name }}"]
+
+
+[lint.per-file-ignores]
+"tests/**/*.py" = ["D"]  # test functions are self-documenting via their names
 
 
 [lint.pydocstyle]
