@@ -1,5 +1,11 @@
 # See https://docs.astral.sh/uv/guides/integration/pre-commit/
 repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.13
+    hooks:
+      - id: ruff-format  # format code (equivalent to running `ruff format`)
+      - id: ruff         # lint and autofix (equivalent to running `ruff check --fix`)
+        args: [--fix]
   - repo: https://github.com/astral-sh/uv-pre-commit
     rev: 0.11.6
     hooks:
