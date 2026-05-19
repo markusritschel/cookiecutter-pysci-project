@@ -1,7 +1,7 @@
 # {{cookiecutter.project_name}} <!-- omit in toc -->
 
 [![build](https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/workflows/main.yml/badge.svg)](https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/)
-{% if cookiecutter.project_license != "No License" %}
+{%- if cookiecutter.project_license != "No License" -%}
 [![License {{ cookiecutter.project_license }}](https://img.shields.io/github/license/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }})](./LICENSE)
 {% endif %}
 
@@ -118,7 +118,7 @@ Matplotlib also provides [a set of default stylesheets](https://matplotlib.org/s
 At the beginning of your plotting script, add the following lines:
 
 ```python
-from src import BASE_DIR
+from {{ cookiecutter.package_name }} import BASE_DIR
 import matplotlib.pyplot as plt
 plt.style.use(BASE_DIR/'assets/mpl_styles/white_paper.mplstyle')
 ```

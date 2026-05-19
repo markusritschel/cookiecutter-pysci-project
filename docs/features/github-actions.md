@@ -9,30 +9,28 @@ The template includes automated Continuous Integration (CI) and Continuous Deplo
 !!! NOTE
     Keep in mind that the deployment may take a while. You can check the status of the workflow by clicking on "Action" in the menu bar of your repository.
 
-## Workflow File
+## Workflow Files
 
-The main workflow is defined in `.github/workflows/main.yml`. It automatically runs on:
+The template uses two separate workflow files:
 
-- **Push to `main` or `develop`** branches
-- **Pull requests** targeting the `main` branch
+### `main.yml` — CI
 
-
-## What the Workflow Does
-
-The CI/CD pipeline is split into three jobs:
+Runs on every push to `main` or `develop`, and on pull requests targeting `main`.
 
 **`build` job** (matrix: Python 3.10, 3.12):
 
-1. **Setup**: Installs uv and syncs all dev dependencies
-2. **Linting**: Runs `ruff check` twice: once for critical errors (syntax/undefined names), once for the full rule set with `--exit-zero` (warnings only)
+1. **Setup**: Installs uv and syncs all dev dependencies (`uv sync --locked --dev`)
+2. **Format check & lint**: Runs `ruff format --check` followed by `ruff check` — both must pass; no auto-fixing
 3. **Testing**: Runs `pytest -v`
 4. **Coverage**: Uploads coverage data to [Codecov](https://codecov.io/) (requires `CODECOV_TOKEN` secret)
 
-**`build-documentation` job** (runs after `build`): <br />
-Installs Pandoc and builds Sphinx docs
+### `docs.yml` — Documentation
 
-**`deploy-documentation` job** (runs after `build-documentation`, main branch only): <br />
-Deploys built docs to GitHub Pages
+Runs only on pushes to `main` when documentation-related files change (`docs/**`, `src/**`, `*.md`). Can also be triggered manually via the GitHub Actions UI (`workflow_dispatch`).
+
+**`build-documentation` job**: Installs Pandoc and builds Sphinx docs
+
+**`deploy-documentation` job** (runs after `build-documentation`): Deploys built docs to GitHub Pages
 
 
 ## Workflow Status

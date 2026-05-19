@@ -3,7 +3,13 @@
 # eMail:  {{ cookiecutter.email }}
 # Date:   {% now 'local', '%Y-%m-%d' %}
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-#
+"""Utility functions for logging and saving various data object types.
+
+This module provides utilities for:
+- setup_logger: configure logging with file and stream handlers
+- save: generic save function supporting multiple data types (Figure, DataFrame, Dataset)
+"""
+
 import functools
 import inspect
 import logging
@@ -11,7 +17,6 @@ import os
 from pathlib import Path
 import subprocess
 import sys
-import pytest
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -19,7 +24,7 @@ import xarray as xr
 
 log = logging.getLogger(__name__)
 
-__all__ = ["setup_logger", "save"]
+__all__ = ["save", "setup_logger"]
 
 
 def setup_logger(level=None, logfile=True, name="root"):
@@ -47,33 +52,35 @@ def setup_logger(level=None, logfile=True, name="root"):
     caller_filename = Path(caller_file).stem
 
     if not level:
-        level = os.getenv('LOGLEVEL', 'INFO').upper()
+        level = os.getenv("LOGLEVEL", "INFO").upper()
     print("LOGLEVEL:", level)
 
     # set up new logger and set level to DEBUG to ensure that all messages are written to the log file
     logger = logging.getLogger()
-    logger.setLevel('DEBUG')
+    logger.setLevel("DEBUG")
 
-    formatter = logging.Formatter('%(asctime)s: '
-                                  '[%(levelname)s] '
-                                  # '(%(name)s): '
-                                  '(%(name)s:#%(lineno)d): '
-                                  '%(message)s'
-                                  , datefmt='%Y-%m-%d %H:%M:%S')
-    
+    formatter = logging.Formatter(
+        "%(asctime)s: "
+        "[%(levelname)s] "
+        # "(%(name)s): "
+        "(%(name)s:#%(lineno)d): "
+        "%(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
+
     if logfile:
         if isinstance(logfile, bool):
-            logfile = LOG_DIR / f'{caller_filename}_{os.getpid()}.log'
+            logfile = LOG_DIR / f"{caller_filename}_{os.getpid()}.log"
         elif isinstance(logfile, str):
             logdir = Path(logfile).parents[0]
             if not logdir.exists():
-                raise IOError(f'Log directory {logdir} does not exist.')
+                raise OSError(f"Log directory {logdir} does not exist.")
         logger.logfile = logfile.as_posix()
         print(f"Log file: {logger.logfile}")
-        
+
         filehandler = logging.FileHandler(logfile)
         filehandler.setFormatter(formatter)
-        filehandler.setLevel('DEBUG')
+        filehandler.setLevel("DEBUG")
         logger.addHandler(filehandler)
     else:
         logger.logfile = None
@@ -82,9 +89,9 @@ def setup_logger(level=None, logfile=True, name="root"):
     streamhandler.setFormatter(formatter)
     logger.addHandler(streamhandler)
 
-    logger.info("="*(17+len(caller_file)))
+    logger.info("=" * (17 + len(caller_file)))
     logger.info("Calling routine: %s", caller_file)
-    logger.info("-"*(17+len(caller_file))+"\n")
+    logger.info("-" * (17 + len(caller_file)) + "\n")
 
     return logger
 
@@ -106,48 +113,54 @@ def add_metadata(func):
         The decorated function.
 
     """
+
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         metadata = {}
 
-        frame = sys._getframe(1)#.f_back
+        frame = sys._getframe(1)  # .f_back
         filename = frame.f_code.co_filename
-        line_number = frame.f_lineno #- 1   # TODO: <-- check!
+        line_number = frame.f_lineno  # - 1   # TODO: <-- check!
         relative_path = os.path.relpath(filename)
-        git_commit = subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD']).decode('ascii').strip()
+        git_commit = (
+            subprocess.check_output(["git", "rev-parse", "--short", "HEAD"]).decode("ascii").strip()
+        )
 
-        metadata['relative_path'] = relative_path
-        metadata['line_number'] = line_number
-        metadata['git_commit'] = git_commit
-        
+        metadata["relative_path"] = relative_path
+        metadata["line_number"] = line_number
+        metadata["git_commit"] = git_commit
+
         obj = args[0] if args else None
         print(f"Object to be saved': {obj}")
         # print("Code context:", frame.f_code.co_name)
         print("Code filename:", filename)
         print("Git commit:", git_commit)
         print("Log metadata_dict: ", metadata)
-        
+
         args = list(args)
         path = Path(args[1])
-        suffix = ''
-        if kwargs.pop('add_hash', True):
+        suffix = ""
+        if kwargs.pop("add_hash", True):
             suffix += f"_{git_commit}"
-        args[1] = f'{path.parent}/{path.stem}{suffix}{path.suffix}'
-        
-        obj_type = str(type(obj)).split("'")[1].split('.')[-1]
-        
+        args[1] = f"{path.parent}/{path.stem}{suffix}{path.suffix}"
+
+        obj_type = str(type(obj)).split("'")[1].split(".")[-1]
+
         msg = f"Save {obj_type} to {args[1]}"
         if kwargs:
-            kws = [f"{k}={v}" for (k,v) in kwargs.items()]
+            kws = [f"{k}={v}" for (k, v) in kwargs.items()]
             msg += f" with {', '.join(kws)}"
         print(msg)
-        log.info(f"Log: {msg} to {args[1]}, produced by {relative_path}#{line_number} @{git_commit}")
+        log.info(
+            f"Log: {msg} to {args[1]}, produced by {relative_path}#{line_number} @{git_commit}"
+        )
 
         if isinstance(obj, plt.Figure):
-            metadata = {k:str(v) for k,v in metadata.items()}
-            kwargs['metadata'] = metadata
+            metadata = {k: str(v) for k, v in metadata.items()}
+            kwargs["metadata"] = metadata
 
         return func(*args, **kwargs)
+
     return wrapper
 
 
@@ -183,16 +196,20 @@ def save(obj, *args, **kwargs):
     >>> save(fig, "/tmp/myfigure.png", dpi=175)        #doctest: +SKIP
     Save Figure to /tmp/myfigure.png with dpi=175
     """
-    raise NotImplementedError(f"Cannot save object of type {type(obj)} using `save` method. Please use the native method.")
+    raise NotImplementedError(
+        f"Cannot save object of type {type(obj)} using `save` method. Please use the native method."
+    )
 
 
 @save.register(plt.Figure)
 def _(fig, path, *args, **kwargs):
     fig.savefig(path, *args, **kwargs)
 
+
 @save.register(pd.DataFrame)
 def _(df, path, *args, **kwargs):
     df.to_csv(path, *args, **kwargs)
+
 
 @save.register(xr.Dataset)
 def _(ds, path, *args, **kwargs):

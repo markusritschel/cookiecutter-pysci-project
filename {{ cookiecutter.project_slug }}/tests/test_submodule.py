@@ -6,8 +6,8 @@
 # Date:   {% now 'local', '%Y-%m-%d' %}
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #
-import pytest # noqa: F401 # suppress unused-import error, as it actually needed here to work with pytest
 from {{ cookiecutter.package_name }}.submodule import generate_int_list
+
 
 def test_subfunc(global_fixture):
     list_example = generate_int_list()

@@ -2,8 +2,8 @@
 # disable white space errors due to the WELCOME ascii art
 # ruff: noqa: W291, W293 
 
-import typer
 from rich.console import Console
+import typer
 
 app = typer.Typer()
 console = Console()
@@ -12,7 +12,8 @@ console = Console()
 @app.command()
 def main():
     """CLI script for {{ cookiecutter.package_name }}."""
-    console.print(r"""
+    console.print(
+        r"""
   $$\      $$\           $$\                                             
   $$ | $\  $$ |          $$ |                                            
   $$ |$$$\ $$ | $$$$$$\  $$ | $$$$$$$\  $$$$$$\  $$$$$$\$$$$\   $$$$$$\  
@@ -22,10 +23,11 @@ def main():
   $$  /   \$$ |\$$$$$$$\ $$ |\$$$$$$$\ \$$$$$$  |$$ | $$ | $$ |\$$$$$$$\ 
   \__/     \__| \_______|\__| \_______| \______/ \__| \__| \__| \_______|
                                                                       
-    """, style="green")
+    """,
+        style="green",
+    )
     # https://patorjk.com/software/taag/
-    console.print("Replace this message by putting your code into "
-               "{{ cookiecutter.package_name }}.cli.main")
+    console.print("Replace this message by putting your code into {{ cookiecutter.package_name }}.cli.main")
     console.print("See Typer documentation at https://typer.tiangolo.com/")
 
 

@@ -3,22 +3,22 @@
 # eMail:  {{ cookiecutter.email }}
 # Date:   {% now 'local', '%Y-%m-%d' %}
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-#
-import sys
-from pathlib import Path
-from dotenv import find_dotenv, load_dotenv
-from .core.utils import save, setup_logger
+"""Provide global path variables, version information, and utility functions for the package."""
 
-__all__ = [
-    "save",
-    "setup_logger",
-] 
-# to avoid false positive linting error as recommended in https://docs.astral.sh/ruff/rules/unused-import/#why-is-this-bad 
+from pathlib import Path
+import sys
+
+from dotenv import find_dotenv, load_dotenv
+
+from .core.utils import save as save
+from .core.utils import setup_logger as setup_logger
+
 __version__ = "{{ cookiecutter.project_version }}"
+
 
 # Make some of the basic directories globally available in your environment
 BASE_DIR = Path(__file__).resolve().parents[2]
-LOG_DIR  = BASE_DIR / "logs"
+LOG_DIR = BASE_DIR / "logs"
 {% if cookiecutter.is_research_project -%}
 DATA_DIR = BASE_DIR / "data"
 PLOT_DIR = BASE_DIR / "figures"
@@ -30,4 +30,4 @@ dotenv_path = find_dotenv()
 # load up the entries as environment variables
 load_dotenv(dotenv_path)
 
-sys.path.append(str(BASE_DIR/"scripts"))
+sys.path.append(str(BASE_DIR / "scripts"))

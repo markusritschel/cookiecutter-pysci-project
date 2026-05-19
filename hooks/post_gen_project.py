@@ -51,12 +51,27 @@ elif "{{ cookiecutter.docs_engine|lower }}" == "myst":
 
 # /// 2. Initialize Git repository ///
 
-if not os.path.exists(".git"):
-    print("Initialize Git repository and make a first commit")
-    subprocess.run(["git", "init"], check=True)
-    subprocess.run(['git', 'branch', '-m', 'main'], check=True)
-    subprocess.run(["git", "add", "."], check=True)
-    subprocess.run(["git", "commit", "-m", "Set up new project from cookiecutter template https://github.com/markusritschel/cookiecutter-pyproject"], check=True)
+if shutil.which("git") and not os.path.exists(".cruft.json"):
+    if not os.path.exists(".git"):
+        print("Initialize Git repository and make a first commit")
+        subprocess.run(["git", "init"], check=True)
+        subprocess.run(['git', 'branch', '-m', 'main'], check=True)
+        subprocess.run(["git", "add", "."], check=True)
+        subprocess.run(["git", "rm", "--cached", "notebooks/*.ipynb", "scripts/*.py", "src/{{cookiecutter.package_name}}/cli.py", "src/{{cookiecutter.package_name}}/submodule.py", "tests/*.py"])
+        subprocess.run(["git", "commit", "-m", "Set up new project from cookiecutter template https://github.com/markusritschel/cookiecutter-pyproject"], check=True)
+        if shutil.which("uv"):
+            print("Install development dependencies and set up pre-commit hooks")
+            subprocess.run(["uv", "sync", "--dev"], check=True)
+            subprocess.run(["uv", "run", "pre-commit", "install"], check=True)
+            subprocess.run(["git", "add", "uv.lock", "pyproject.toml"], check=True)
+            subprocess.run(["git", "commit", "-m", "Set up pre-commit hooks and install dev dependencies"], check=True)
+        else:
+            print("WARNING: `uv` not found. Run the following manually after installation:")
+            print("  uv sync --dev")
+            print("  uv run pre-commit install")
+else:
+    print("WARNING: `git` not found. Initialize the repository manually after installation:")
+    print("  git init && git branch -m main && git add . && git commit -m 'Initial commit'")
 
 
 # /// 3. Print message ///
