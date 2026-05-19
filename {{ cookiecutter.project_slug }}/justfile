@@ -16,11 +16,11 @@ lint:
 
 # Run all the formatting, linting, and testing commands
 qa:
-    uv run --group test ruff format .
-    uv run --group test ruff check . --fix
-    uv run --group test ruff check --select I --fix .
-    uv run --group test ty check .
-    uv run --group test pytest .
+    uv run --group dev ruff format .
+    uv run --group dev ruff check --fix .
+    uv run --group dev ruff check --select I --fix .
+    uv run --group dev ty check .
+    uv run --group dev pytest .
 
 # Run all the tests, but allow for arguments to be passed
 test *ARGS:
