@@ -81,6 +81,8 @@ ignore = [
     "D203",  # one-blank-line-before-class     — conflicts with D211
     "D205",  # blank line after summary        — not required by the NumPy convention
     "D213",  # multi-line summary second line  — conflicts with D212
+    "D400",  # First lines should end with a period  — often omitted in one-line docstrings
+    "D401",  # First line should be in imperative mood  — not universally applicable
 
     # pyupgrade
     "UP035", # deprecated typing imports       — target is Python ≥ 3.11 but enforcing this is disruptive
@@ -95,7 +97,7 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 # ── Per-file exemptions ─────────────────────────────────────────────────────────
 [lint.per-file-ignores]
 # Tests: self-documenting via names; allow assertions and magic values
-"tests/**/*.py"        = ["D", "S101", "PLR2004"]
+"tests/**/*.py"        = ["D", "E741", "S101", "PLR2004"]
 
 # CLI entry points: docstrings add little value on __main__ and Typer/Click apps
 "**/__main__.py"       = ["D"]
