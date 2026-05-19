@@ -9,4 +9,4 @@ import pytest
 
 @pytest.fixture
 def global_fixture(request):
-    return 'Test'
+    return "Test"

@@ -6,8 +6,8 @@
 # Date:   {% now 'local', '%Y-%m-%d' %}
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #
-import pytest
 from {{ cookiecutter.package_name }}.submodule import generate_int_list
+
 
 def test_subfunc(global_fixture):
     l = generate_int_list()

@@ -7,12 +7,12 @@
 # Date:   {% now 'local', '%Y-%m-%d' %}
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #
-"""The functions below only serve for demonstrating the logger setup. Feel free to delete them 
+"""The functions below only serve for demonstrating the logger setup. Feel free to delete them
 as well as this docstring once the concept is understood :-)"""
-from __future__ import absolute_import, division, print_function, with_statement
+
 import logging
 
-from {{ cookiecutter.package_name }} import *
+from {{ cookiecutter.package_name }} import setup_logger
 from {{ cookiecutter.package_name }}.submodule import generate_int_list
 
 # This is only necessary if this file gets imported by another one so that logs get piped
@@ -24,7 +24,7 @@ def main():
     logger.info("Calling main function, doing nothing")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     logger = setup_logger()
     main()
     logger.info("Calling function from submodule")
