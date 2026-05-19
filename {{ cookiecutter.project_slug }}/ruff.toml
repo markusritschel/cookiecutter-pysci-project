@@ -27,6 +27,8 @@ select = [
     "C901", # McCabe complexity       — flag functions exceeding the complexity threshold (see below)
     "N",    # pep8-naming             — enforce PEP 8 naming conventions
     "UP",   # pyupgrade               — modernize to newer Python syntax automatically
+    "PIE",  # flake8-pie              — miscellaneous lint rules (unnecessary pass, prefer isinstance, etc.)
+    "DTZ",  # flake8-datetimez        — enforce timezone-aware datetimes (critical for scientific data pipelines)
     "NPY",  # NumPy                   — NumPy-specific anti-patterns (numpy is a core dependency)
     "PERF", # Perflint                — performance anti-patterns (relevant for array-heavy code)
     "PT",   # flake8-pytest-style     — consistent pytest patterns across the test suite
@@ -44,7 +46,6 @@ select = [
 #   "S"     — bandit security (relevant for web apps, rarely for research pipelines)
 #   "SIM"   — simplification suggestions (useful but can be noisy)
 #   "PD"    — pandas-vet (enable if pandas is a core dependency in your project)
-
 
 ignore = [
     # Formatting — deferred to `ruff format`, which handles these automatically
@@ -73,6 +74,9 @@ ignore = [
     "C419",  # list comprehension in any/all   — see https://github.com/astral-sh/ruff/issues/10838
     "C420",  # dict.fromkeys() over comprehension — fromkeys is explicit and widely understood
 
+    # flake8-pie
+    "PIE790", # unnecessary pass              — pass is occasionally useful for explicitness
+
     # pydocstyle
     "D203",  # one-blank-line-before-class     — conflicts with D211
     "D205",  # blank line after summary        — not required by the NumPy convention
@@ -91,16 +95,22 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 # ── Per-file exemptions ─────────────────────────────────────────────────────────
 [lint.per-file-ignores]
 # Tests: self-documenting via names; allow assertions and magic values
-"tests/**/*.py"  = ["D", "S101", "PLR2004"]
+"tests/**/*.py"        = ["D", "S101", "PLR2004"]
 
 # CLI entry points: docstrings add little value on __main__ and Typer/Click apps
-"**/__main__.py" = ["D"]
-"**/cli.py"      = ["D101", "D102", "D103"]
+"**/__main__.py"       = ["D"]
+"**/cli.py"            = ["D101", "D102", "D103"]
 
 # Notebooks (jupytext .py representations) and scripts: no docstring enforcement,
 # allow print statements and top-of-file import ordering violations
-"notebooks/**"   = ["D", "E402", "T201"]
-"scripts/**"     = ["D", "T201"]
+"notebooks/**"         = ["D", "E402", "T201"]
+"scripts/**"           = ["D", "T201"]
+
+# Jupyter/Marimo notebooks: standalone expressions are the execution model (B018),
+# and unused imports are structural rather than accidental (F401)
+"**/*.ipynb"           = ["B018", "F401"]
+"notebooks/**/*.ipynb" = ["B018", "F401"]
+"scripts/**/*.ipynb"   = ["B018", "F401"]
 
 # ── Rule configuration ──────────────────────────────────────────────────────────
 [lint.mccabe]
