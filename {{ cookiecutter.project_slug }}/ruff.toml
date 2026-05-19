@@ -1,5 +1,5 @@
 # See https://docs.astral.sh/ruff/ for settings
-line-length = 88
+line-length = 100
 indent-width = 4
 
 # Specify which files/directories to check
@@ -43,10 +43,11 @@ ignore = [
     "E402",  # module-level import not at top of file — path manipulation before imports is common in data science code
     "E711",  # comparison to None — `x == None` can be intentional in ORM/pandas query contexts
     "E731",  # lambda expression assignment — occasionally clearer than a named one-liner
+    "W291",  # trailing whitespace — stripped automatically by the formatter
     "W293",  # whitespace on blank lines — harmless and common in editors that auto-indent
 
     # flake8-bugbear
-    "B011",  # `assert False` — acceptable; we do not use Python's -O optimization flag
+    "B011",  # `assert False` — acceptable; we do not use Pythons -O optimization flag
     "B903",  # suggest using @dataclass — too opinionated and lacks an autofix
 
     # flake8-comprehensions (C4 selected; these are intentional exceptions)
