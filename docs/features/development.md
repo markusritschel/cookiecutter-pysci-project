@@ -134,6 +134,21 @@ If GitHub pages is configured, your documentation will be served online on `http
 | Clean artifacts    | `just clean`                  |
 
 
+## Demo Files and Git History
+
+The template ships with a set of demo files to help you get started:
+
+| File                         | Purpose                                   |
+| ---------------------------- | ----------------------------------------- |
+| `src/mypackage/cli.py`       | Example CLI entry point using Typer       |
+| `src/mypackage/submodule.py` | Example module with a documented function |
+| `tests/test_*.py`            | Minimal test stubs                        |
+| `scripts/*.py`               | Example helper scripts                    |
+| `notebooks/`                 | Example notebooks                         |
+
+These files are deliberately **excluded from the initial git commit** by the post-generation hook. They exist in your working tree so you have something to reference, but they won't appear in your project's history. Replace or delete them as you build out your own code.
+
+
 ## Project Structure
 
 The `src/` layout ensures tests run against installed package.
