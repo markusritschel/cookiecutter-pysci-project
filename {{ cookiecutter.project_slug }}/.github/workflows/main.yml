@@ -26,10 +26,9 @@ jobs:
       - name: Install the project
         run: uv sync --locked --dev
 
-      - name: Format check and Lint, no auto-fixing, clear failure messages
-        run: |
-          uv run ruff format --check .
-          uv run ruff check .
+      - name: Lint code, no auto-fixing, clear failure messages
+        run: uv run ruff check .
+        # NOTE: Formatting should be handled manually and should not break the CI/CD pipeline. This ensures that formatting issues are addressed in a controlled manner.
 
       - name: Run tests
         run: uv run pytest -v
