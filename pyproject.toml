@@ -1,0 +1,16 @@
+# Development tooling for the template repository itself.
+#
+# This file declares the tools needed to *develop and test* the template
+# (i.e. to run `copier copy` against it). It is NOT part of the generated
+# project — that lives under `template/`.
+[project]
+name = "cookiecutter-pyproject"
+version = "0"
+description = "Copier template for scientific Python projects"
+requires-python = ">=3.10"
+
+[dependency-groups]
+dev = [
+    "copier>=9",
+    "jinja2-time",
+]
