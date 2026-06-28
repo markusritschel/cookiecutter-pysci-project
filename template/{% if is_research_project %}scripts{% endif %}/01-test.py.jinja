@@ -2,8 +2,8 @@
 # -*- coding utf-8 -*-
 #
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-# Author: {{ cookiecutter.project_author }}
-# eMail:  {{ cookiecutter.email }}
+# Author: {{ project_author }}
+# eMail:  {{ email }}
 # Date:   {% now 'local', '%Y-%m-%d' %}
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #
@@ -12,8 +12,8 @@ as well as this docstring once the concept is understood :-)"""
 
 import logging
 
-from {{ cookiecutter.package_name }} import setup_logger
-from {{ cookiecutter.package_name }}.submodule import generate_int_list
+from {{ package_name }} import setup_logger
+from {{ package_name }}.submodule import generate_int_list
 
 # This is only necessary if this file gets imported by another one so that logs get piped
 logger = logging.getLogger(__name__)

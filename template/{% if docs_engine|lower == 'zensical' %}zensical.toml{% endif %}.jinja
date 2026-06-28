@@ -11,18 +11,18 @@
 # The site_name is shown in the page header and the browser window title
 #
 # Read more: https://zensical.org/docs/setup/basics/#site_name
-site_name = "{{ cookiecutter.project_name }}"
+site_name = "{{ project_name }}"
 
 # The site_description is included in the HTML head and should contain a
 # meaningful description of the site content for use by search engines.
 #
 # Read more: https://zensical.org/docs/setup/basics/#site_description
-site_description = "{{ cookiecutter.project_description }}"
+site_description = "{{ project_description }}"
 
 # The site_author attribute. This is used in the HTML head element.
 #
 # Read more: https://zensical.org/docs/setup/basics/#site_author
-site_author = "{{ cookiecutter.project_author }}"
+site_author = "{{ project_author }}"
 
 # The site_url is the canonical URL for your site. When building online
 # documentation you should set this.
@@ -34,7 +34,7 @@ site_author = "{{ cookiecutter.project_author }}"
 #
 # Read more: https://zensical.org/docs/setup/basics/#copyright
 copyright = """
-Copyright &copy; {% now 'local', '%Y' %} {{ cookiecutter.project_author }}
+Copyright &copy; {% now 'local', '%Y' %} {{ project_author }}
 """
 
 # Zensical supports both implicit navigation and explicitly defined navigation.
@@ -302,6 +302,6 @@ toggle.name = "Switch to light mode"
 # ----------------------------------------------------------------------------
 #[[project.extra.social]]
 #icon = "fontawesome/brands/github"
-#link = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}"
+#link = "https://github.com/{{ github_username }}/{{ project_slug }}"
 
 

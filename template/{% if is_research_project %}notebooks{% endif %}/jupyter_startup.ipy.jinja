@@ -86,9 +86,9 @@ except:
 # ---------------------------------------------
 # make some standard paths available
 try:
-    from {{ cookiecutter.package_name }} import BASE_DIR, LOG_DIR, PLOT_DIR, DATA_DIR
+    from {{ package_name }} import BASE_DIR, LOG_DIR, PLOT_DIR, DATA_DIR
 except:
-    raise Exception("Could not find {{ cookiecutter.package_name }}. Did you `make src-available`?")
+    raise Exception("Could not find {{ package_name }}. Did you `make src-available`?")
 
 
 # ---------------------------------------------

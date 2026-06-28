@@ -15,9 +15,9 @@ html_theme_options = {
         "repo": "fontawesome/brands/github",
         "edit": "material/file-edit-outline",
     },
-    "site_url": "https://{{ cookiecutter.github_username}}.github.io/{{ cookiecutter.project_slug }}/",
-    "repo_url": "https://github.com/{{ cookiecutter.github_username}}/{{ cookiecutter.project_slug }}/",
-    "repo_name": "{{ cookiecutter.project_slug }}",
+    "site_url": "https://{{ github_username}}.github.io/{{ project_slug }}/",
+    "repo_url": "https://github.com/{{ github_username}}/{{ project_slug }}/",
+    "repo_name": "{{ project_slug }}",
     "edit_uri": "blob/main/docs",
     "globaltoc_collapse": True,
     "features": [
@@ -76,7 +76,7 @@ html_theme_options = {
     # "version_dropdown": True,
     # "version_info": [
     #     {
-    #         "version": "https://{{ cookiecutter.github_username}}.github.io/{{ cookiecutter.project_slug }}/",
+    #         "version": "https://{{ github_username}}.github.io/{{ project_slug }}/",
     #         "title": "Github Pages",
     #         "aliases": [],
     #     },
@@ -87,7 +87,7 @@ html_theme_options = {
     "social": [
         {
             "icon": "fontawesome/brands/github",
-            "link": "https://github.com/{{ cookiecutter.github_username}}/{{ cookiecutter.project_slug }}/",
+            "link": "https://github.com/{{ github_username}}/{{ project_slug }}/",
             "name": "Source on github.com",
         },
     ],
