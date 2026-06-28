@@ -1,8 +1,8 @@
-# {{ cookiecutter.project_name }} Documentation
+# {{ project_name }} Documentation
 
-Welcome to the documentation of {{ cookiecutter.project_name }}!
+Welcome to the documentation of {{ project_name }}!
 
-{{ cookiecutter.project_description }}
+{{ project_description }}
 
 ```{tip}
 - Give a short introduction on what the project is about.
@@ -41,7 +41,7 @@ which python
 points to `.venv/bin/activate`.
 
 
-{% if cookiecutter.is_research_project -%}
+{% if is_research_project -%}
 ### Make data available
 
 You may need to make data available under `data`.
@@ -64,9 +64,9 @@ Describe the workflow that should be followed to reproduce the results of your p
 
 ## Contact
 
-For any questions or issues, please contact me via {{ cookiecutter.email }} or open an [issue](https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/issues).
+For any questions or issues, please contact me via {{ email }} or open an [issue](https://github.com/{{ github_username }}/{{ project_slug }}/issues).
 
-{% if cookiecutter.docs_engine|lower == 'sphinx' %}
+{% if docs_engine|lower == 'sphinx' %}
 ```{toctree}
 :hidden:
 :caption: Main navigation

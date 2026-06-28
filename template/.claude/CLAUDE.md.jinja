@@ -66,9 +66,9 @@ just build
 ### Package layout
 
 ```
-src/{{ cookiecutter.package_name }}/
+src/{{ package_name }}/
 ├── __init__.py       # exports BASE_DIR, LOG_DIR, DATA_DIR, PLOT_DIR, setup_logger, save
-├── cli.py            # Typer-based CLI entry point (registered as `{{ cookiecutter.package_name }}` command)
+├── cli.py            # Typer-based CLI entry point (registered as `{{ package_name }}` command)
 ├── submodule.py      # example submodule
 └── core/
     └── utils.py      # setup_logger, save (singledispatch for Figure/DataFrame/Dataset)

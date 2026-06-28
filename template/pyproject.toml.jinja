@@ -1,9 +1,9 @@
 [project]
-name = "{{ cookiecutter.package_name }}"
+name = "{{ package_name }}"
 version = "0.1.0"
-description = "{{ cookiecutter.project_description }}"
+description = "{{ project_description }}"
 authors = [
-  {name = "{{ cookiecutter.project_author }}", email = "{{ cookiecutter.email }}"},
+  {name = "{{ project_author }}", email = "{{ email }}"},
 ]
 readme = "README.md"
 license = {file = "LICENSE"}
@@ -38,7 +38,7 @@ dependencies = [
 
 
 [project.scripts]
-{{ cookiecutter.package_name }} = "{{ cookiecutter.package_name }}.cli:app"
+{{ package_name }} = "{{ package_name }}.cli:app"
 
 
 [dependency-groups]
@@ -57,7 +57,7 @@ test = [
   "safety",
 ]
 docs = [
-{% if cookiecutter.docs_engine|lower == 'sphinx' -%}
+{% if docs_engine|lower == 'sphinx' -%}
   "furo",
   "jupyter-book",
   "jupyterbook-latex",
@@ -87,10 +87,10 @@ docs = [
   "sphinxcontrib-images",
   "sphinxcontrib-mermaid",
   "sphinxcontrib-napoleon",
-{% elif cookiecutter.docs_engine|lower == 'zensical' -%}
+{% elif docs_engine|lower == 'zensical' -%}
   "zensical",
   "mkdocstrings-python",
-{% elif cookiecutter.docs_engine|lower == 'myst' -%}
+{% elif docs_engine|lower == 'myst' -%}
   "mystmd",
 {%- endif %}
 ]
