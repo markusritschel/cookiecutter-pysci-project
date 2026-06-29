@@ -1,5 +1,13 @@
 # Change Log
 
+## Unreleased
+
+- Migrated the template engine from cookiecutter (+ cruft for updates) to [copier](https://copier.readthedocs.io)
+- Project generation now uses `uvx --with jinja2-time copier copy gh:markusritschel/cookiecutter-pyproject my-project`
+- Template updates now use `copier update` (replacing `cruft update`), tracked via the generated `.copier-answers.yml`
+- Removed `cookiecutter.json` and the `hooks/` directory; prompts, conditional generation, and post-generation setup are now defined in `copier.yml`
+- Updated all user-facing documentation (README, docs site) to the copier workflow
+
 ## 1.0.0
 
 - Merged two repositories ([cookiecutter-pypackage](https://github.com/markusritschel/cookiecutter-pypackage) & [cookiecutter-pysci-project](https://github.com/markusritschel/cookiecutter-pysci-project))
