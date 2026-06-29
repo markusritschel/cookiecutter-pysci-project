@@ -25,21 +25,18 @@ This means routine maintenance (e.g. bumping `actions/checkout` from v3 to v4) h
     2. **Settings → Actions → General → Workflow permissions → Read and write permissions** <br />
     Allows the `GITHUB_TOKEN` to approve and merge PRs, and to update workflow files when Dependabot bumps GitHub Actions versions.
 
-## Keep your project up to date with cruft
+## Keep your project up to date with copier
 
-If this template is updated in the future, you can pull in the latest changes to your already-generated project using [cruft](https://cruft.github.io/cruft/):
+If this template is updated in the future, you can pull in the latest changes to your already-generated project using [copier](https://copier.readthedocs.io). Run this from inside your project directory:
 
 ```bash
-uvx cruft update
+uvx --with jinja2-time copier update --trust
 ```
 
-cruft tracks which version of the template your project was generated from and applies only the diff — similar to `git merge` for template updates. Run it periodically to stay current with improvements to the boilerplate.
+copier records the template version your project was generated from in the `.copier-answers.yml` file and applies only the diff — similar to `git merge` for template updates. Run it periodically to stay current with improvements to the boilerplate. Commit (or stash) any local changes first; copier refuses to update a dirty working tree.
 
-!!! tip
-    If you created your project with `cookiecutter` instead of `cruft`, you can still link it retroactively:
-    ```bash
-    uvx cruft link https://github.com/markusritschel/cookiecutter-pyproject
-    ```
+!!! tip "The answers file"
+    The `.copier-answers.yml` file at the root of your project stores the answers you gave to the [prompts](prompts.md) and the template version you generated from. Keep it under version control — copier reads it to reuse your answers and to compute the update diff. Editing it by hand is rarely necessary, but you can adjust an answer there before running `copier update`.
 
 
 ## A note on version controlling Jupyter notebooks
