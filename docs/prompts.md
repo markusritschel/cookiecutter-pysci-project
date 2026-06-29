@@ -4,7 +4,8 @@ icon: material/form-textbox
 
 # Prompts
 
-When creating your project from this template, CookieCutter will ask you a series of questions.
+When creating your project from this template, copier will ask you a series of questions.
+Your answers are recorded in a `.copier-answers.yml` file in the generated project, so they can be reused when you later run `copier update` (see [Tips](tips.md)).
 All answers can be changed afterward, but `package_name` in particular occurs in multiple places (including directory names), so choose it carefully upfront.
 
 ## Personal information
