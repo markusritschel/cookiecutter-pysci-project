@@ -1,19 +1,19 @@
-# Cookiecutter Py(thon)-Project Template <!-- omit in toc -->
+# Py(thon)-Project Template <!-- omit in toc -->
 
 ![build](https://github.com/markusritschel/cookiecutter-pyproject/actions/workflows/main.yml/badge.svg)
 [![License MIT](https://img.shields.io/github/license/markusritschel/cookiecutter-pyproject)](./LICENSE)
 
 > 👉 If you're tired of setting up the same directory and file structure for your new Python projects again and again, then this might be for you ;-)
 
-This repository provides a "template" of a directory structure for small to medium-sized (scientific) projects, making use of [CookieCutter](https://github.com/cookiecutter/cookiecutter), a templating engine for project structures.
-Check out the links at the [bottom of the page](#sources-of-inspiration) to create your own CookieCutter or use this one to start your project.
+This repository provides a "template" of a directory structure for small to medium-sized (scientific) projects, making use of [copier](https://copier.readthedocs.io), a templating engine for project structures.
+Check out the links at the [bottom of the page](#sources-of-inspiration) to create your own template or use this one to start your project.
 Also, feel free to fork the repository and adjust it to your own needs.
 
 ***
 
 ## <u>Table of contents</u> <!-- omit in toc -->
 
-- [Cookiecutter as your productivity booster](#cookiecutter-as-your-productivity-booster)
+- [Copier as your productivity booster](#copier-as-your-productivity-booster)
 - [Usage](#usage)
   - [✅ Requirements](#-requirements)
   - [🚀 Get started](#-get-started)
@@ -27,9 +27,9 @@ Also, feel free to fork the repository and adjust it to your own needs.
 
 ***
 
-## Cookiecutter as your productivity booster
+## Copier as your productivity booster
 
-By running *cookiecutter* with this repository, a new directory will be created with a pre-defined structure and some default files, making you all set to start a new Python project. 
+By running *copier* with this repository, a new directory will be created with a pre-defined structure and some default files, making you all set to start a new Python project. 
 No need to manually create the same files and directory structure over and over again.
 This includes
 
@@ -40,7 +40,7 @@ This includes
 - and so on... 🚀
 
 <!-- It is indeed so easy:<br />
-![cookiecutter](assets/cookiecutter.gif) -->
+![copier](assets/copier.gif) -->
 
 
 ## Usage
@@ -62,28 +62,27 @@ This includes
 
 
 ### 🚀 Get started
-The easiest way to get started is using [uv](https://docs.astral.sh/uv/0).
+The easiest way to get started is using [uv](https://docs.astral.sh/uv/).
 Make sure you have `uv` installed, and then run the following command to create a new project from this template:
 ```bash
-$ uvx cookiecutter gh:markusritschel/cookiecutter-pyproject
-
+$ uvx --with jinja2-time copier copy gh:markusritschel/cookiecutter-pyproject my-project
 ```
+This creates the project in a new `my-project/` directory (replace `my-project` with the path you want).
 
 <details>
 <summary>Alternatively, without uv</summary>
 
-install [CookieCutter](https://github.com/cookiecutter/cookiecutter) via pip or conda, and then run the following command to create a new project from this template:
+install [copier](https://copier.readthedocs.io) and the `jinja2-time` extension via pip or conda, and then run the following command to create a new project from this template:
 ```bash
-$ cookiecutter gh:markusritschel/cookiecutter-pyproject
+$ pip install copier jinja2-time
+$ copier copy gh:markusritschel/cookiecutter-pyproject my-project
 ```
 
 </details><br />
 
 <!-- Alternative URIs:
-$ cookiecutter gh:markusritschel/cookiecutter-pyproject
-$ cookiecutter https://github.com/markusritschel/cookiecutter-pyproject.git
-$ cookiecutter git+https://github.com/markusritschel/cookiecutter-pyproject
-$ cookiecutter git+ssh://git@github.com/markusritschel/cookiecutter-pyproject.git
+$ copier copy https://github.com/markusritschel/cookiecutter-pyproject.git my-project
+$ copier copy git+ssh://git@github.com/markusritschel/cookiecutter-pyproject.git my-project
 -->
 
 Once you have answered the questions, your directory structure will be created and you're set, ready to start working on your new project 🚀.
