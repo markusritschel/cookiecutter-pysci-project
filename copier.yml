@@ -8,6 +8,14 @@ _templates_suffix: ".jinja"
 _jinja_extensions:
   - jinja2_time.TimeExtension
 
+# Files left untouched by `copier update` once they exist in the generated
+# project (e.g. user-authored docs, tests and README).
+_skip_if_exists:
+  - "docs/**/*.md"
+  - "**/*.bib"
+  - "tests/**"
+  - "README.md"
+
 _message_before_copy: |
   ☝🏼 Important: You will now be asked to fill in some information about your project.
 
@@ -52,8 +60,7 @@ _message_after_copy: |
 
 # Tasks ------------------------------------------------------------------------
 # Ported from the old hooks/post_gen_project.py. Tasks require `--trust` and run
-# on `copier copy` only (guarded via `_copier_operation`), never on `copier update`
-# — this replaces the previous tempfile-based `is_cruft_update` detection.
+# on `copier copy` only (guarded via `_copier_operation`), never on `copier update`.
 _tasks:
   - command: |
       if command -v git >/dev/null 2>&1; then
@@ -61,7 +68,7 @@ _tasks:
         git branch -m main
         git add -A
         git rm --cached -q --ignore-unmatch notebooks/*.ipynb scripts/*.py "src/{{ package_name }}/cli.py" "src/{{ package_name }}/submodule.py" tests/*.py
-        git commit -q -m "Set up new project from cookiecutter template https://github.com/markusritschel/cookiecutter-pyproject"
+        git commit -q -m "Set up new project from copier template https://github.com/markusritschel/cookiecutter-pyproject"
       else
         echo "WARNING: 'git' not found. Initialize the repository manually:"
         echo "  git init && git branch -m main && git add . && git commit -m 'Initial commit'"
