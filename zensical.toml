@@ -26,7 +26,7 @@ nav = [
 # The site_name is shown in the page header and the browser window title
 #
 # Read more: https://zensical.org/docs/setup/basics/#site_name
-site_name = "Python Project Cookiecutter"
+site_name = "Python Project Template"
 
 # The site_description is included in the HTML head and should contain a
 # meaningful description of the site content for use by search engines.
