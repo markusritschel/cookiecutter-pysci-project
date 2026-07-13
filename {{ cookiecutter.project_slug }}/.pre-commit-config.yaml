@@ -15,3 +15,11 @@ repos:
       - id: uv-lock
         always_run: true
       - id: uv-export
+
+  # Lints and auto-fixes code style issues, then formats code
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.11
+    hooks:
+      - id: ruff-check
+        args: [ --fix ]
+      - id: ruff-format

@@ -33,9 +33,27 @@ To reproduce the project, clone this repository on your machine
 git clone https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
 ```
 
-### Setup
+### Reproducibility Setup
 
-For getting started in the fastest way possible, there are Make targets provided.
+The easiest way to get started is using [uv](https://docs.astral.sh/uv/0).
+Make sure you have `uv` installed, and then run the following command to create a new project from this template:
+```bash
+$ uvx cookiecutter gh:opinner/cookiecutter-pyproject
+$ cd ./{{ cookiecutter.project_slug }}
+```
+The virtual enviroment is then created with `$ uv venv` and activated on Linux/macOS with: `source .venv/bin/activate`.
+
+On windows, I, in order to enable the activation of the virtual enviroment,  needed to first run  
+```shell
+(Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned) ; (& .venv\Scripts\Activate.ps1)
+```
+and then
+```shell
+.\.venv\Scripts\activate
+```
+
+<!-- Commented as because just is used instead of make -->
+<!-- For getting started in the fastest way possible, there are Make targets provided.
 So, to set up the project, simply run the following commands from the main directory:
 
 First, run
@@ -70,7 +88,7 @@ to run the tests via `pytest` and build the documentation located in `docs`.
 The latter will create an HTML-rendered version of the documentation in `docs/_build/html/`.
 
 > [!NOTE]
-> If you experience that something is not working (e.g. creating the documentation via `make documentation`) try to perform an update via `mamba update --all`. This might solve the problem.
+> If you experience that something is not working (e.g. creating the documentation via `make documentation`) try to perform an update via `mamba update --all`. This might solve the problem. -->
 
 {% if cookiecutter.is_research_project %}
 ### Make data available
@@ -107,6 +125,8 @@ plt.style.use(BASE_DIR/'assets/mpl_styles/white_paper.mplstyle')
 
 
 ## Project Structure
+
+created automatically with [opinner/cookiecutter-pyproject](https://github.com/opinner/cookiecutter-pyproject)
 
     ├── assets             <- A place for assets like shapefiles or config files
     │   └── mpl_styles     <- Matplotlib style sheets

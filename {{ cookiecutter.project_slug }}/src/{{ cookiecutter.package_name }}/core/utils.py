@@ -185,15 +185,15 @@ def save(obj, *args, **kwargs):
     This function raises a :class:`NotImplementedError` because it is meant to be overridden by subclasses.
     To save objects of a specific type, please use the native method provided by that type.
 
-    Examples
+    Examples                                           # exempt examples from automatic testing
     --------
-    >>> pytest.skip()
-    >>> save(my_object)
+    >>> pytest.skip()                                  #doctest: +SKIP
+    >>> save(my_object)                                #doctest: +SKIP
     NotImplementedError: Cannot save object of type <class 'type'> using `save` method. Please use the native method.
 
-    >>> fig = plt.figure()
-    >>> ...
-    >>> save(fig, "/tmp/myfigure.png", dpi=175)
+    >>> fig = plt.figure()                             #doctest: +SKIP
+    >>> ...                                            #doctest: +SKIP
+    >>> save(fig, "/tmp/myfigure.png", dpi=175)        #doctest: +SKIP
     Save Figure to /tmp/myfigure.png with dpi=175
     """
     raise NotImplementedError(

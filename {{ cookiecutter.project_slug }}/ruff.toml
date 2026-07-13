@@ -5,8 +5,15 @@ indent-width = 4
 target-version = "py311"
 
 # Specify which files/directories to check
-include = ["src/**/*.py", "tests/**/*.py", "scripts/**/*.py"]
-exclude = ["docs/", "notebooks/", "build/", ".venv/", "venv/", "htmlcov/"]
+include = [
+    "src/**/*.py",
+    "tests/**/*.py",
+    "scripts/**/*.py",
+    "scripts/**/*.ipynb",   # now explicitly includes Jupyter in the scripts folder
+    "notebooks/**/*.py",    # as well in the notebooks folder
+    "notebooks/**/*.ipynb"  # and Marimo notebooks
+] 
+exclude = ["docs/", "build/", ".venv/", "venv/", "diagnostics/"] 
 
 # ── Formatter ──────────────────────────────────────────────────────────────────
 [format]
@@ -33,6 +40,7 @@ select = [
     "PERF", # Perflint                — performance anti-patterns (relevant for array-heavy code)
     "PT",   # flake8-pytest-style     — consistent pytest patterns across the test suite
     "RUF",  # Ruff-specific           — additional best-practice rules unique to Ruff
+    "PD",    # pandas-vet (enable if pandas is a core dependency in your project)
 ]
 
 # Rule families NOT included in baseline — enable per-project as needed:
@@ -44,8 +52,7 @@ select = [
 #   "FIX"   — fixme/todo markers (common in research iteration)
 #   "TD"    — structured TODO enforcement (same reason)
 #   "S"     — bandit security (relevant for web apps, rarely for research pipelines)
-#   "SIM"   — simplification suggestions (useful but can be noisy)
-#   "PD"    — pandas-vet (enable if pandas is a core dependency in your project)
+#   "SIM"   — simplification suggestions (useful but can be noisy) 
 
 ignore = [
     # Formatting — deferred to `ruff format`, which handles these automatically
@@ -94,6 +101,7 @@ ignore = [
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
+
 # ── Per-file exemptions ─────────────────────────────────────────────────────────
 [lint.per-file-ignores]
 # Tests: self-documenting via names; allow assertions and magic values
@@ -112,6 +120,7 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 # and unused imports are structural rather than accidental (F401)
 "**/*.ipynb"           = ["B018", "F401"]
 "notebooks/**/*.ipynb" = ["B018", "F401"]
+"notebooks/**/*.py"    = ["B018", "F401"] # marimo notebooks
 "scripts/**/*.ipynb"   = ["B018", "F401"]
 
 # ── Rule configuration ──────────────────────────────────────────────────────────

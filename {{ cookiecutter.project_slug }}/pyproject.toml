@@ -33,6 +33,7 @@ dependencies = [
   "rich",
   "tqdm",
   "typer",
+  "marimo",
   "xarray"
 ]
 

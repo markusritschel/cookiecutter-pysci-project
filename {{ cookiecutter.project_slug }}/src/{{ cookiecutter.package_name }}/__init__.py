@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parents[2]
 LOG_DIR = BASE_DIR / "logs"
 {% if cookiecutter.is_research_project -%}
 DATA_DIR = BASE_DIR / "data"
-PLOT_DIR = BASE_DIR / "reports/figures"
+PLOT_DIR = BASE_DIR / "figures"
 {% endif -%}
 jupyter_startup_script = BASE_DIR / "notebooks/jupyter_startup.ipy"
 
