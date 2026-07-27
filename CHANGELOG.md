@@ -6,6 +6,7 @@
 - Project generation now uses `uvx --with jinja2-time copier copy gh:markusritschel/cookiecutter-pyproject my-project`
 - Template updates now use `copier update` (replacing `cruft update`), tracked via the generated `.copier-answers.yml`
 - Removed `cookiecutter.json` and the `hooks/` directory; prompts, conditional generation, and post-generation setup are now defined in `copier.yml`
+- Replaced the inline POSIX-shell post-generation `_tasks` (git init/commit, `uv sync --dev`, pre-commit install) with a standalone `tasks/post_gen.py`, so project generation also works on native Windows without WSL/git-bash; the simpler inline-shell approach was considered but rejected for not being cross-platform
 - Updated all user-facing documentation (README, docs site) to the copier workflow
 
 ## 1.0.0
