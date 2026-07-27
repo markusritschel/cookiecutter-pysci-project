@@ -38,6 +38,20 @@ copier records the template version your project was generated from in the `.cop
 !!! tip "The answers file"
     The `.copier-answers.yml` file at the root of your project stores the answers you gave to the [prompts](prompts.md) and the template version you generated from. Keep it under version control — copier reads it to reuse your answers and to compute the update diff. Editing it by hand is rarely necessary, but you can adjust an answer there before running `copier update`.
 
+## Migrating an existing cookiecutter/cruft project to copier
+
+If your project was generated before the template moved to copier, it has a `.cruft.json` instead of a `.copier-answers.yml` and can't run `copier update` yet. [`scripts/migrate_cookiecutter_to_copier.py`](https://github.com/markusritschel/cookiecutter-pyproject/blob/main/scripts/migrate_cookiecutter_to_copier.py) bootstraps the answers file for you: it reads your project's `.cruft.json`, maps the old cookiecutter keys onto the current copier question keys (`project_author` → `user_name`, `email` → `user_email`, `github_username` → `github_user`), and writes `.copier-answers.yml`. It does not touch any other file.
+
+Run it from a checkout of this template, pointed at your project:
+
+```bash
+uv run scripts/migrate_cookiecutter_to_copier.py /path/to/your-project
+```
+
+Then commit the new `.copier-answers.yml` and run `copier update --trust` in your project as usual.
+
+!!! warning "Known limitation"
+    The script only bootstraps the answers file — it can't know about template files you've since deleted or heavily rewritten (e.g. example tests, placeholder docs). The first `copier update` may recreate a small number of such files; review the diff and remove anything you don't want, same as any other update.
 
 ## A note on version controlling Jupyter notebooks
 
