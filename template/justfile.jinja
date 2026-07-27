@@ -1,3 +1,4 @@
+{% raw -%}
 # See https://just.systems/ for more information
 
 [private]
@@ -50,14 +51,28 @@ VERSION := `grep -m1 '^version' pyproject.toml | sed -E 's/version = "(.*)"/\1/'
 version:
     @echo "Current version is {{VERSION}}"
 
+{% endraw %}
 # Compile the documentation
 docs:
+{%- if docs_engine|lower == 'sphinx' %}
     uv run --group docs sphinx-build -b html docs/ docs/_build/html
+{%- elif docs_engine|lower == 'zensical' %}
+    uv run --group docs zensical build
+{%- elif docs_engine|lower == 'myst' %}
+    cd docs && uv run --group docs myst build --html
+{%- endif %}
 
 # Serve the documentation with live reload
 docs-serve:
+{%- if docs_engine|lower == 'sphinx' %}
     uv run --group docs sphinx-autobuild --open-browser docs/ docs/_build/html
+{%- elif docs_engine|lower == 'zensical' %}
+    uv run --group docs zensical serve
+{%- elif docs_engine|lower == 'myst' %}
+    cd docs && uv run --group docs myst start
+{%- endif %}
 
+{% raw -%}
 # Tag the current version in git and put to github
 tag:
     @echo "Tagging version v{{VERSION}}"
@@ -102,3 +117,4 @@ test-gh-actions:
 publish:
     uv build
     uv publish
+{% endraw %}
