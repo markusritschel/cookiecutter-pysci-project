@@ -7,6 +7,7 @@
 - Template updates now use `copier update` (replacing `cruft update`), tracked via the generated `.copier-answers.yml`
 - Removed `cookiecutter.json` and the `hooks/` directory; prompts, conditional generation, and post-generation setup are now defined in `copier.yml`
 - Updated all user-facing documentation (README, docs site) to the copier workflow
+- Fixed the `package_name` validator in `copier.yml`: it used a regex (`^[_a-zA-Z][_a-zA-Z0-9]+$`) that required at least two characters and only allowed ASCII, so it rejected valid single-character (e.g. `x`) and non-ASCII (PEP 3131) package names. Replaced it with `package_name.isidentifier()`, which matches Python's own identifier grammar exactly. Rejected patching the regex in place (e.g. `[_a-zA-Z0-9]*`) since it would still be ASCII-only and require hand-updating for any future identifier edge case.
 
 ## 1.0.0
 
