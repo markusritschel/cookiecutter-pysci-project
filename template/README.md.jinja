@@ -1,8 +1,8 @@
 # {{project_name}} <!-- omit in toc -->
 
-[![build](https://github.com/{{ github_username }}/{{ project_slug }}/actions/workflows/main.yml/badge.svg)](https://github.com/{{ github_username }}/{{ project_slug }}/actions/)
+[![build](https://github.com/{{ github_user }}/{{ project_slug }}/actions/workflows/main.yml/badge.svg)](https://github.com/{{ github_user }}/{{ project_slug }}/actions/)
 {%- if project_license != "No License" -%}
-[![License {{ project_license }}](https://img.shields.io/github/license/{{ github_username }}/{{ project_slug }})](./LICENSE)
+[![License {{ project_license }}](https://img.shields.io/github/license/{{ github_user }}/{{ project_slug }})](./LICENSE)
 {% endif %}
 
 {{ project_description}}
@@ -30,7 +30,7 @@
 To reproduce the project, clone this repository on your machine
 
 ```bash
-git clone https://github.com/{{ github_username }}/{{ project_slug }}
+git clone https://github.com/{{ github_user }}/{{ project_slug }}
 ```
 
 ### Setup
@@ -159,12 +159,12 @@ plt.style.use(BASE_DIR/'assets/mpl_styles/white_paper.mplstyle')
 
 ## Maintainer
 
-- [{{ github_username }}](https://github.com/{{ github_username }})
+- [{{ github_user }}](https://github.com/{{ github_user }})
 
 ## Contact & Issues
 
-For any questions or issues, please contact me via {{ email }} or open an [issue](https://github.com/{{ github_username }}/{{ project_slug }}/issues).
+For any questions or issues, please contact me via {{ user_email }} or open an [issue](https://github.com/{{ github_user }}/{{ project_slug }}/issues).
 
 ---
 
-&copy; [{{ project_author }}](https://github.com/{{ github_username }}), {% now 'utc', '%Y' %}
+&copy; [{{ user_name }}](https://github.com/{{ github_user }}), {% now 'utc', '%Y' %}
