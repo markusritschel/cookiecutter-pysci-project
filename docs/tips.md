@@ -38,6 +38,9 @@ copier records the template version your project was generated from in the `.cop
 !!! tip "The answers file"
     The `.copier-answers.yml` file at the root of your project stores the answers you gave to the [prompts](prompts.md) and the template version you generated from. Keep it under version control — copier reads it to reuse your answers and to compute the update diff. Editing it by hand is rarely necessary, but you can adjust an answer there before running `copier update`.
 
+!!! info "Why `LICENSE` and `CITATION.cff` don't get rewritten on update"
+    The template stamps the copyright year in `LICENSE` and the `date-released` field in `CITATION.cff` using Jinja's `{% now %}` (via `jinja2_time`), which re-evaluates every time it runs. Without protection, a routine `copier update` would silently overwrite both dates with today's date. Both files are listed in `copier.yml`'s `_skip_if_exists`, the same mechanism already used for `README.md` and other user-owned files, so once they exist in your project `copier update` leaves them untouched. An earlier proposal replaced `jinja2_time` with a placeholder-and-post-gen-script convention instead; it was rejected because the actual scope — two known files — didn't justify a parallel mechanism when `_skip_if_exists` already solves exactly this problem. The tradeoff: `_skip_if_exists` freezes the whole file, so future structural changes to these templates won't propagate to already-generated projects either — acceptable here since neither file is expected to need auto-updates.
+
 
 ## A note on version controlling Jupyter notebooks
 
