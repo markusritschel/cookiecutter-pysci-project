@@ -38,9 +38,31 @@ copier records the template version your project was generated from in the `.cop
 !!! tip "The answers file"
     The `.copier-answers.yml` file at the root of your project stores the answers you gave to the [prompts](prompts.md) and the template version you generated from. Keep it under version control — copier reads it to reuse your answers and to compute the update diff. Editing it by hand is rarely necessary, but you can adjust an answer there before running `copier update`.
 
+## Migrating an existing cookiecutter/cruft project to copier
+
+If your project was generated before the template moved to copier, it has a `.cruft.json` instead of a `.copier-answers.yml` and can't run `copier update` yet. [`scripts/migrate_cookiecutter_to_copier.py`](https://github.com/markusritschel/cookiecutter-pyproject/blob/main/scripts/migrate_cookiecutter_to_copier.py) bootstraps the answers file for you: it reads your project's `.cruft.json`, maps the old cookiecutter keys onto the current copier question keys (`project_author` → `user_name`, `email` → `user_email`, `github_username` → `github_user`), and writes `.copier-answers.yml`. It does not touch any other file.
+
+Run it from a checkout of this template, pointed at your project:
+
+```bash
+uv run scripts/migrate_cookiecutter_to_copier.py /path/to/your-project
+```
+
+Then commit the new `.copier-answers.yml` and run `copier update --trust` in your project as usual.
+
+!!! note "No `.cruft.json`?"
+    If your project was generated with plain `cookiecutter` rather than `cruft`, it won't have a `.cruft.json` and the script will exit with an error telling you so. Create one first by linking the project to this template — this only records the template's current state, it doesn't touch any files:
+    ```bash
+    cd /path/to/your-project
+    uvx cruft link https://github.com/markusritschel/cookiecutter-pyproject
+    ```
+    Then re-run the migration script as above.
+
+!!! warning "Known limitation"
+    The script only bootstraps the answers file — it can't know about template files you've since deleted or heavily rewritten (e.g. example tests, placeholder docs). The first `copier update` may recreate a small number of such files; review the diff and remove anything you don't want, same as any other update.
+
 !!! info "Why `LICENSE` and `CITATION.cff` don't get rewritten on update"
     The template stamps the copyright year in `LICENSE` and the `date-released` field in `CITATION.cff` using Jinja's `{% now %}` (via `jinja2_time`), which re-evaluates every time it runs. Without protection, a routine `copier update` would silently overwrite both dates with today's date. Both files are listed in `copier.yml`'s `_skip_if_exists`, the same mechanism already used for `README.md` and other user-owned files, so once they exist in your project `copier update` leaves them untouched. An earlier proposal replaced `jinja2_time` with a placeholder-and-post-gen-script convention instead; it was rejected because the actual scope — two known files — didn't justify a parallel mechanism when `_skip_if_exists` already solves exactly this problem. The tradeoff: `_skip_if_exists` freezes the whole file, so future structural changes to these templates won't propagate to already-generated projects either — acceptable here since neither file is expected to need auto-updates.
-
 
 ## A note on version controlling Jupyter notebooks
 
