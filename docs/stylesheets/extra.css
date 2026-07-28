@@ -1,0 +1,16 @@
+/* Announcement bar (cookiecutter -> copier migration notice).
+
+   The "modern" variant styles .md-banner with
+   `--md-accent-fg-color--transparent`, which is deliberately subtle. Override
+   it with a solid orange so the notice actually reads as an announcement.
+   Colours are fixed rather than themed: dark text on bright orange keeps the
+   contrast ratio well above 4.5:1 in both the default and slate schemes. */
+.md-banner {
+  background-color: #ee9900;
+  color: #201600;
+}
+
+.md-banner a {
+  color: inherit;
+  text-decoration: underline;
+}

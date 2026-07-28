@@ -1,0 +1,17 @@
+{% extends "base.html" %} {# Transitional announcement for the cookiecutter ->
+copier engine migration. Remove this override (plus `custom_dir`, the
+`.md-banner` rules in docs/stylesheets/extra.css, and the `announce.dismiss`
+feature in zensical.toml) once the migration is old news. #} {% block announce
+%} This template has moved from <strong>Cookiecutter</strong> to
+<strong>Copier</strong> &mdash;
+Read 
+<a href="{{ 'tips/#why-copier-instead-of-cookiecutter-and-cruft' | url }}">
+  Why Copier instead of Cookiecutter and Cruft?
+</a> 
+and 
+<a
+  href="{{ 'tips/#migrating-an-existing-cookiecuttercruft-project-to-copier' | url }}"
+>
+  Migrating an existing project
+</a>
+{% endblock %}

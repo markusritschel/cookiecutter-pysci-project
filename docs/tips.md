@@ -38,6 +38,17 @@ copier records the template version your project was generated from in the `.cop
 !!! tip "The answers file"
     The `.copier-answers.yml` file at the root of your project stores the answers you gave to the [prompts](prompts.md) and the template version you generated from. Keep it under version control — copier reads it to reuse your answers and to compute the update diff. Editing it by hand is rarely necessary, but you can adjust an answer there before running `copier update`.
 
+## Why copier instead of cookiecutter and cruft?
+
+The template was originally created for [cookiecutter](https://cookiecutter.readthedocs.io) and used [cruft](https://cruft.github.io/cruft/) to pull in later template changes. [copier](https://copier.readthedocs.io) covers both jobs in one tool, which removed a stack of workarounds:
+
+- **Updates are a first-class feature.** cruft is a third-party layer bolted onto cookiecutter; copier ships `copier update` natively and tracks the template version in the project's `.copier-answers.yml`.
+- **Conditional generation happens at generation time.** Files that don't apply (the unused docs engine, the research-project directories) are gated by `{% if %}` in the path name, instead of being generated and then deleted again by a post-generation hook.
+- **Post-generation setup is declarative.** The `git init` / first commit / `uv sync` steps live in `_tasks` in `copier.yml`, guarded by `_copier_operation == 'copy'` so they never run on update — replacing a tempfile-based hack that tried to detect whether a run was an update.
+- **Renaming a question doesn't break existing projects.** copier's `_migrations` remap old answer keys on update, which is how `project_author` → `user_name`, `email` → `user_email` and `github_username` → `github_user` were rolled out.
+
+The repository keeps its name (`cookiecutter-pyproject`) so existing links, forks and clones stay valid.
+
 ## Migrating an existing cookiecutter/cruft project to copier
 
 If your project was generated before the template moved to copier, it has a `.cruft.json` instead of a `.copier-answers.yml` and can't run `copier update` yet. [`scripts/migrate_cookiecutter_to_copier.py`](https://github.com/markusritschel/cookiecutter-pyproject/blob/main/scripts/migrate_cookiecutter_to_copier.py) bootstraps the answers file for you: it reads your project's `.cruft.json`, maps the old cookiecutter keys onto the current copier question keys (`project_author` → `user_name`, `email` → `user_email`, `github_username` → `github_user`), and writes `.copier-answers.yml`. It does not touch any other file.

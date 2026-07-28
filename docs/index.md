@@ -3,7 +3,7 @@ icon: material/rocket-launch
 ---
 
 <!-- https://fpgmaas.github.io/cookiecutter-uv/ -->
-# PyProject Template :simple-pythonanywhere:
+# PyProject Template 
 
 
 This is a [copier](https://copier.readthedocs.io) template for Python projects.

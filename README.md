@@ -3,6 +3,12 @@
 ![build](https://github.com/markusritschel/cookiecutter-pyproject/actions/workflows/main.yml/badge.svg)
 [![License MIT](https://img.shields.io/github/license/markusritschel/cookiecutter-pyproject)](./LICENSE)
 
+> [!IMPORTANT]
+> **This template has moved from Cookiecutter to [Copier](https://copier.readthedocs.io).**
+> The repository keeps its name, but projects are now generated with `copier copy` (see [🚀 Get started](#-get-started)) and updated with `copier update` instead of `cruft update` ([why?](docs/tips.md#why-copier-instead-of-cookiecutter-and-cruft)).
+>
+> Already have a project generated with the old cookiecutter/cruft version? [`scripts/migrate_cookiecutter_to_copier.py`](scripts/migrate_cookiecutter_to_copier.py) bootstraps the `.copier-answers.yml` for you — see [Migrating an existing cookiecutter/cruft project](docs/tips.md#migrating-an-existing-cookiecuttercruft-project-to-copier) (or the [rendered version of the docs](https://markusritschel.github.io/cookiecutter-pyproject/tips/#migrating-an-existing-cookiecuttercruft-project-to-copier)).
+
 > 👉 If you're tired of setting up the same directory and file structure for your new Python projects again and again, then this might be for you ;-)
 
 This repository provides a "template" of a directory structure for small to medium-sized (scientific) projects, making use of [copier](https://copier.readthedocs.io), a templating engine for project structures.
