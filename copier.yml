@@ -122,8 +122,8 @@ package_name:
   help: The importable Python package name (derived from the project slug)
   default: "{{ project_slug|lower|replace('-', '_') }}"
   validator: >-
-    {% if not (package_name | regex_search('^[_a-zA-Z][_a-zA-Z0-9]+$')) %}
-    {{ package_name }} is not a valid Python package name!
+    {% if not package_name.isidentifier() %}
+    "{{ package_name }}" is not a valid Python package name!
     {% endif %}
 
 is_research_project:
