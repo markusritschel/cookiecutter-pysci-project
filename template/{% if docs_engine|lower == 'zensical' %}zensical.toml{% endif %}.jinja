@@ -22,7 +22,7 @@ site_description = "{{ project_description }}"
 # The site_author attribute. This is used in the HTML head element.
 #
 # Read more: https://zensical.org/docs/setup/basics/#site_author
-site_author = "{{ project_author }}"
+site_author = "{{ user_name }}"
 
 # The site_url is the canonical URL for your site. When building online
 # documentation you should set this.
@@ -34,7 +34,7 @@ site_author = "{{ project_author }}"
 #
 # Read more: https://zensical.org/docs/setup/basics/#copyright
 copyright = """
-Copyright &copy; {% now 'local', '%Y' %} {{ project_author }}
+Copyright &copy; {% now 'local', '%Y' %} {{ user_name }}
 """
 
 # Zensical supports both implicit navigation and explicitly defined navigation.
@@ -302,6 +302,6 @@ toggle.name = "Switch to light mode"
 # ----------------------------------------------------------------------------
 #[[project.extra.social]]
 #icon = "fontawesome/brands/github"
-#link = "https://github.com/{{ github_username }}/{{ project_slug }}"
+#link = "https://github.com/{{ github_user }}/{{ project_slug }}"
 
 

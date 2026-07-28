@@ -10,13 +10,13 @@ All answers can be changed afterward, but `package_name` in particular occurs in
 
 ## Personal information
 
-**`project_author`**
+**`user_name`**
 <br />   Your full name. Used in documentation and project metadata.
 
-**`email`**
+**`user_email`**
 <br />   Your e-mail address. Used for metadata and `pyproject.toml`.
 
-**`github_username`**
+**`github_user`**
 <br />   Your GitHub username. Used to generate repository links.
 
 ## Project naming

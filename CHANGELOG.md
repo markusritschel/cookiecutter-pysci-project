@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Renamed copier questions to copier's well-known variable names: `project_author` → `user_name`, `email` → `user_email`, `github_username` → `github_user`. Projects generated under the old names are remapped automatically on `copier update` via a `_migrations` entry in `copier.yml`.
 - Migrated the template engine from cookiecutter (+ cruft for updates) to [copier](https://copier.readthedocs.io)
 - Project generation now uses `uvx --with jinja2-time copier copy gh:markusritschel/cookiecutter-pyproject my-project`
 - Template updates now use `copier update` (replacing `cruft update`), tracked via the generated `.copier-answers.yml`

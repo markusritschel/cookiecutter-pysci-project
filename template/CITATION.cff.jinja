@@ -1,11 +1,11 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
-- family-names: "{{ project_author.split()[1] }}"
-  given-names: "{{ project_author.split()[0] }}"
+- family-names: "{{ user_name.split()[1] }}"
+  given-names: "{{ user_name.split()[0] }}"
   orcid: "https://orcid.org/0000-0000-0000-0000"
 title: "{{ project_name }}"
 version: {{ project_version }}
 doi: 00.0000/zenodo.0000
 date-released: {% now 'utc', '%Y-%m-%d' %}
-url: "https://github.com/{{ github_username }}/{{ project_slug }}"
+url: "https://github.com/{{ github_user }}/{{ project_slug }}"

@@ -47,7 +47,7 @@ _message_after_copy: |
        On Windows:     .\.venv\Scripts\activate
 
   3. Add a remote git repository (optional):
-       git remote add origin https://github.com/{{ github_username }}/{{ project_slug }}
+       git remote add origin https://github.com/{{ github_user }}/{{ project_slug }}
 
   4. To add packages, use:
        uv add <package_name>
@@ -69,18 +69,36 @@ _tasks:
   - command: "{{ _copier_python }} {{ _copier_conf.src_path }}/tasks/post_gen.py {{ package_name }}"
     when: "{{ _copier_operation == 'copy' }}"
 
+# Migrations ---------------------------------------------------------------------
+# Remaps answer keys from before the `user_name`/`user_email`/`github_user` rename
+# (formerly `project_author`/`email`/`github_username`) so `copier update` keeps
+# working for projects generated under the old names.
+_migrations:
+  - command: |
+      if command -v sed >/dev/null 2>&1; then
+        sed -i \
+          -e 's/^project_author:/user_name:/' \
+          -e 's/^email:/user_email:/' \
+          -e 's/^github_username:/github_user:/' \
+          "{{ _copier_conf.answers_file }}"
+      else
+        echo "WARNING: 'sed' not found. Rename these keys manually in {{ _copier_conf.answers_file }}:"
+        echo "  project_author -> user_name, email -> user_email, github_username -> github_user"
+      fi
+    when: "{{ _stage == 'before' }}"
+
 # Questions --------------------------------------------------------------------
-project_author:
+user_name:
   type: str
   help: Your full name
   default: John Doe
 
-email:
+user_email:
   type: str
   help: Your email address
   default: johndoe@github.com
 
-github_username:
+github_user:
   type: str
   help: Your GitHub username
   default: johndoe
