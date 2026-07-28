@@ -50,6 +50,14 @@ uv run scripts/migrate_cookiecutter_to_copier.py /path/to/your-project
 
 Then commit the new `.copier-answers.yml` and run `copier update --trust` in your project as usual.
 
+!!! note "No `.cruft.json`?"
+    If your project was generated with plain `cookiecutter` rather than `cruft`, it won't have a `.cruft.json` and the script will exit with an error telling you so. Create one first by linking the project to this template — this only records the template's current state, it doesn't touch any files:
+    ```bash
+    cd /path/to/your-project
+    uvx cruft link https://github.com/markusritschel/cookiecutter-pyproject
+    ```
+    Then re-run the migration script as above.
+
 !!! warning "Known limitation"
     The script only bootstraps the answers file — it can't know about template files you've since deleted or heavily rewritten (e.g. example tests, placeholder docs). The first `copier update` may recreate a small number of such files; review the diff and remove anything you don't want, same as any other update.
 
