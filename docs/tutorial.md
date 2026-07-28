@@ -19,45 +19,45 @@ icon: material/school
 ## Create a new project using the template
 Make sure to have `uv` installed, and then run the following command to create a new project from this template:
 ```bash
-uvx cookiecutter gh:markusritschel/cookiecutter-pyproject
+uvx --with jinja2-time copier copy gh:markusritschel/cookiecutter-pyproject my-project
 ```
+This generates the project in a new `my-project/` directory — replace `my-project` with the directory name you want.
+
 <!-- Alternative URIs:
-cookiecutter gh:markusritschel/cookiecutter-pyproject
-cookiecutter https://github.com/markusritschel/cookiecutter-pyproject.git
-cookiecutter git+https://github.com/markusritschel/cookiecutter-pyproject
-cookiecutter git+ssh://git@github.com/markusritschel/cookiecutter-pyproject.git
+copier copy https://github.com/markusritschel/cookiecutter-pyproject.git my-project
+copier copy git+ssh://git@github.com/markusritschel/cookiecutter-pyproject.git my-project
 -->
 
-Fill in the prompts to customize your project. For example:
+copier then asks you a series of questions to customize your project (see [Prompts](prompts.md) for what each one means).
+Free-text questions show their default in parentheses — press <kbd>Enter</kbd> to accept it or type your own value.
+Choice questions (CLI library, license, docs engine) are selected with the arrow keys.
+A typical run looks like this:
 
 ```
-  [1/12] project_author (Markus Ritschel): Your name
-  [2/12] email (git@markusritschel.de): your@e.mail
-  [3/12] github_username (markusritschel): your-github-username
-  [4/12] project_name (Python Boilerplate): My Cool Package
-  [5/12] project_slug (python-boilerplate): my-cool-package
-  [6/12] package_name (python_boilerplate): my_cool_package
-  [7/12] is_research_project [y/n] (y): 
-  [8/12] project_description (A boilerplate for scientific projects using Python): 
-  [9/12] project_version (0.1.0): 
-  [10/12] Select command_line_interface
-    1 - Click
-    2 - Docopt
-    3 - No command-line interface
-    Choose from [1/2/3] (1): 
-  [11/12] Select project_license
-    1 - MIT license
-    2 - BSD license
-    3 - ISC license
-    4 - Apache Software License 2.0
-    5 - GNU General Public License v3
-    6 - Not open source
-    Choose from [1/2/3/4/5/6] (1): 
-  [12/12] Select docs_engine
-    1 - Sphinx
-    2 - Zensical
-    3 - MyST
-    Choose from [1/2/3] (1):
+🎤 Your full name
+   Your Name
+🎤 Your email address
+   your@e.mail
+🎤 Your GitHub username
+   your-github-username
+🎤 The human-readable name of your project (spaces allowed)
+   My Cool Package
+🎤 The directory and repository name (derived from the project name)
+   my-cool-package
+🎤 The importable Python package name (derived from the project slug)
+   my_cool_package
+🎤 Is this a research project? (adds data/, notebooks/, references/, reports/, scripts/) (Y/n)
+   Yes
+🎤 A short description of your project
+   A boilerplate for scientific projects using Python
+🎤 The initial version of your project
+   0.1.0
+🎤 Which command-line interface library would you like to use?
+   Typer
+🎤 Choose a license for your project
+   MIT license
+🎤 Which documentation engine would you like to use?
+   Sphinx
 ```
 
 If everything goes well, you should see a message like this at the end of the setup process:
@@ -67,7 +67,7 @@ If everything goes well, you should see a message like this at the end of the se
 ----------------------------------------------
 
 1. Change directory into your project (if you aren't already):
-     cd /tmp/<package-slug>/ 
+     cd my-project/ 
 
 2. Activate your virtual environment (see the README.md for more details):
      On Linux/macOS: source .venv/bin/activate 

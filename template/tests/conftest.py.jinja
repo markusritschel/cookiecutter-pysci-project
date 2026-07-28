@@ -1,0 +1,12 @@
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Author: {{ user_name }}
+# eMail:  {{ user_email }}
+# Date:   {% now 'local', '%Y-%m-%d' %}
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#
+import pytest
+
+
+@pytest.fixture
+def global_fixture(request):
+    return "Test"

@@ -7,37 +7,22 @@
 # ============================================================================
 
 [project]
-nav = [
-  {"Home" = "index.md"},
-  "tutorial.md",
-  "prompts.md",
-  {"Features" = [
-    "features/development.md",
-    "features/justfile.md",
-    "features/uv.md",
-    "features/code-quality.md",
-    "features/documentation.md",
-    "features/github-actions.md",
-    "features/publish-package.md",
-    "features/research-projects.md",
-  ]},
-  "tips.md"
-]
+
 # The site_name is shown in the page header and the browser window title
 #
 # Read more: https://zensical.org/docs/setup/basics/#site_name
-site_name = "Python Project Template"
+site_name = "{{ project_name }}"
 
 # The site_description is included in the HTML head and should contain a
 # meaningful description of the site content for use by search engines.
 #
 # Read more: https://zensical.org/docs/setup/basics/#site_description
-site_description = "A new project generated from the default template project."
+site_description = "{{ project_description }}"
 
 # The site_author attribute. This is used in the HTML head element.
 #
 # Read more: https://zensical.org/docs/setup/basics/#site_author
-site_author = "Markus Ritschel"
+site_author = "{{ user_name }}"
 
 # The site_url is the canonical URL for your site. When building online
 # documentation you should set this.
@@ -49,7 +34,7 @@ site_author = "Markus Ritschel"
 #
 # Read more: https://zensical.org/docs/setup/basics/#copyright
 copyright = """
-Copyright &copy; 2026 Markus Ritschel
+Copyright &copy; {% now 'local', '%Y' %} {{ user_name }}
 """
 
 # Zensical supports both implicit navigation and explicitly defined navigation.
@@ -184,7 +169,7 @@ features = [
     # Turn on this feature to expand all collapsible sections in the
     # navigation sidebar by default.
     # https://zensical.org/docs/setup/navigation/#navigation-expansion
-    "navigation.expand",
+    # "navigation.expand",
 
     # This feature turns on navigation elements in the footer that allow the
     # user to navigate to a next or previous page.
@@ -225,17 +210,17 @@ features = [
     # When sections are enabled, top-level sections are rendered as groups in
     # the sidebar for viewports above 1220px, but remain as-is on mobile.
     # https://zensical.org/docs/setup/navigation/#navigation-sections
-    #"navigation.sections",
+    "navigation.sections",
 
     # When tabs are enabled, top-level sections are rendered in a menu layer
     # below the header for viewports above 1220px, but remain as-is on mobile.
     # https://zensical.org/docs/setup/navigation/#navigation-tabs
-    # "navigation.tabs",
+    #"navigation.tabs",
 
     # When sticky tabs are enabled, navigation tabs will lock below the header
     # and always remain visible when scrolling down.
     # https://zensical.org/docs/setup/navigation/#sticky-navigation-tabs
-    # "navigation.tabs.sticky",
+    #"navigation.tabs.sticky",
 
     # A back-to-top button can be shown when the user, after scrolling down,
     # starts to scroll up again.
@@ -256,7 +241,7 @@ features = [
     # When anchor following for the table of contents is enabled, the sidebar
     # is automatically scrolled so that the active anchor is always visible.
     # https://zensical.org/docs/setup/navigation/#anchor-following
-    #"toc.follow",
+    # "toc.follow",
 
     # When navigation integration for the table of contents is enabled, it is
     # always rendered as part of the navigation sidebar on the left.
@@ -308,48 +293,15 @@ toggle.name = "Switch to light mode"
 # - https://zensical.org/docs/setup/logo-and-icons
 # - https://zensical.org/docs/authoring/icons-emojis/#search
 # ----------------------------------------------------------------------------
-[project.theme.icon]
-#logo = "material/language-python"
-logo = "simple/pythonanywhere"
-repo = "lucide/smile"
+#[project.theme.icon]
+#logo = "lucide/smile"
+#repo = "lucide/smile"
 
 # ----------------------------------------------------------------------------
 # The "extra" section contains miscellaneous settings.
 # ----------------------------------------------------------------------------
-[[project.extra.social]]
-icon = "fontawesome/brands/github"
-link = "https://github.com/markusritschel/cookiecutter-pyproject"
-
-
-[project.markdown_extensions.admonition]
-[project.markdown_extensions.footnotes]
-[project.markdown_extensions.pymdownx.details]
-[project.markdown_extensions.pymdownx.superfences]
-
-[project.markdown_extensions.pymdownx.tabbed]
-alternate_style = true
-
-[project.markdown_extensions.pymdownx.tabbed.slugify]
-object = "pymdownx.slugs.slugify"
-kwds = { case = "lower" }
-
-
-[project.theme.icon.admonition]
-note = "fontawesome/solid/note-sticky"
-abstract = "fontawesome/solid/book"
-info = "fontawesome/solid/circle-info"
-tip = "fontawesome/solid/bullhorn"
-success = "fontawesome/solid/check"
-question = "fontawesome/solid/circle-question"
-warning = "fontawesome/solid/triangle-exclamation"
-failure = "fontawesome/solid/bomb"
-danger = "fontawesome/solid/skull"
-bug = "fontawesome/solid/robot"
-example = "fontawesome/solid/flask"
-quote = "fontawesome/solid/quote-left"
-
-[project.markdown_extensions.pymdownx.emoji]
-emoji_index = "zensical.extensions.emoji.twemoji" 
-emoji_generator = "zensical.extensions.emoji.to_svg"
+#[[project.extra.social]]
+#icon = "fontawesome/brands/github"
+#link = "https://github.com/{{ github_user }}/{{ project_slug }}"
 
 
