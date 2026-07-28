@@ -61,6 +61,9 @@ Then commit the new `.copier-answers.yml` and run `copier update --trust` in you
 !!! warning "Known limitation"
     The script only bootstraps the answers file — it can't know about template files you've since deleted or heavily rewritten (e.g. example tests, placeholder docs). The first `copier update` may recreate a small number of such files; review the diff and remove anything you don't want, same as any other update.
 
+!!! info "Why `LICENSE` and `CITATION.cff` don't get rewritten on update"
+    The template stamps the copyright year in `LICENSE` and the `date-released` field in `CITATION.cff` using Jinja's `{% now %}` (via `jinja2_time`), which re-evaluates every time it runs. Without protection, a routine `copier update` would silently overwrite both dates with today's date. Both files are listed in `copier.yml`'s `_skip_if_exists`, the same mechanism already used for `README.md` and other user-owned files, so once they exist in your project `copier update` leaves them untouched. An earlier proposal replaced `jinja2_time` with a placeholder-and-post-gen-script convention instead; it was rejected because the actual scope — two known files — didn't justify a parallel mechanism when `_skip_if_exists` already solves exactly this problem. The tradeoff: `_skip_if_exists` freezes the whole file, so future structural changes to these templates won't propagate to already-generated projects either — acceptable here since neither file is expected to need auto-updates.
+
 ## A note on version controlling Jupyter notebooks
 
 It is very ugly to keep Jupyter Notebooks under version control as they are in principle a very large JSON file, containing lots of metadata, output of your cells, etc.

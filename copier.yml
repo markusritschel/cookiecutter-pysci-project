@@ -15,6 +15,8 @@ _skip_if_exists:
   - "**/*.bib"
   - "tests/**"
   - "README.md"
+  - "LICENSE"
+  - "CITATION.cff"
 
 _message_before_copy: |
   ☝🏼 Important: You will now be asked to fill in some information about your project.
@@ -61,32 +63,10 @@ _message_after_copy: |
 # Tasks ------------------------------------------------------------------------
 # Ported from the old hooks/post_gen_project.py. Tasks require `--trust` and run
 # on `copier copy` only (guarded via `_copier_operation`), never on `copier update`.
+# Runs as a standalone script (rather than inline POSIX shell) so generation
+# also works on native Windows, without requiring WSL/git-bash.
 _tasks:
-  - command: |
-      if command -v git >/dev/null 2>&1; then
-        git init -q
-        git branch -m main
-        git add -A
-        git rm --cached -q --ignore-unmatch notebooks/*.ipynb scripts/*.py "src/{{ package_name }}/cli.py" "src/{{ package_name }}/submodule.py" tests/*.py
-        git commit -q -m "Set up new project from copier template https://github.com/markusritschel/cookiecutter-pyproject"
-      else
-        echo "WARNING: 'git' not found. Initialize the repository manually:"
-        echo "  git init && git branch -m main && git add . && git commit -m 'Initial commit'"
-      fi
-    when: "{{ _copier_operation == 'copy' }}"
-  - command: |
-      if command -v uv >/dev/null 2>&1; then
-        uv sync --dev
-        uv run pre-commit install
-        if command -v git >/dev/null 2>&1; then
-          git add uv.lock pyproject.toml
-          git commit -q -m "Set up pre-commit hooks and install dev dependencies"
-        fi
-      else
-        echo "WARNING: 'uv' not found. Run the following manually after installation:"
-        echo "  uv sync --dev"
-        echo "  uv run pre-commit install"
-      fi
+  - command: "{{ _copier_python }} {{ _copier_conf.src_path }}/tasks/post_gen.py {{ package_name }}"
     when: "{{ _copier_operation == 'copy' }}"
 
 # Migrations ---------------------------------------------------------------------
@@ -138,8 +118,8 @@ package_name:
   help: The importable Python package name (derived from the project slug)
   default: "{{ project_slug|lower|replace('-', '_') }}"
   validator: >-
-    {% if not (package_name | regex_search('^[_a-zA-Z][_a-zA-Z0-9]+$')) %}
-    {{ package_name }} is not a valid Python package name!
+    {% if not package_name.isidentifier() %}
+    "{{ package_name }}" is not a valid Python package name!
     {% endif %}
 
 is_research_project:
