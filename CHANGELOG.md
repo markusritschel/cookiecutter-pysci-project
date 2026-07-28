@@ -7,6 +7,7 @@
 - Template updates now use `copier update` (replacing `cruft update`), tracked via the generated `.copier-answers.yml`
 - Removed `cookiecutter.json` and the `hooks/` directory; prompts, conditional generation, and post-generation setup are now defined in `copier.yml`
 - Updated all user-facing documentation (README, docs site) to the copier workflow
+- Added `LICENSE` and `CITATION.cff` to `copier.yml`'s `_skip_if_exists` so their `{% now %}`-stamped copyright year / release date aren't silently rewritten on `copier update`
 
 ## 1.0.0
 
