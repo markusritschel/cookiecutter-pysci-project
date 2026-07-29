@@ -26,8 +26,11 @@ jobs:
       - name: Install the project
         run: uv sync --locked --dev
 
-      - name: Lint code, no auto-fixing, clear failure messages
-        run: uv run ruff check .
+      - name: Lint code, output in GitHub Actions format, no auto-fixing
+        run: uv run ruff check . --output-format=github
+
+      - name: Format check, no auto-fixing
+        run: uv run ruff format --check .
         # NOTE: Formatting should be handled manually and should not break the CI/CD pipeline. This ensures that formatting issues are addressed in a controlled manner.
 
       - name: Run tests
