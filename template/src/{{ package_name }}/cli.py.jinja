@@ -7,6 +7,7 @@ app = typer.Typer()
 console = Console()
 
 
+{% if _copier_conf.operation == "copy" %}
 @app.command()
 def main():
     """CLI script for {{ package_name }}."""
@@ -27,6 +28,7 @@ def main():
     # https://patorjk.com/software/taag/
     console.print("Replace this message by putting your code into {{ package_name }}.cli.main")
     console.print("See Typer documentation at https://typer.tiangolo.com/")
+{% endif %}
 
 
 if __name__ == "__main__":
