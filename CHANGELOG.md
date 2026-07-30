@@ -1,6 +1,8 @@
 # Change Log
 
-## Unreleased
+## 2.0.0
+
+Finalized the migration from cookiecutter (+ cruft) to copier, and made the template more robust and user-friendly. The following changes were made:
 
 - **Fixed:** the example/boilerplate files (`submodule.py`, `docs/example.md`, the demo notebook, everything in `tests/`) were missing from *every* generated project, and `cli.py` was emitted as a CLI app with no commands behind a registered entry point. They had been guarded with `{% if _copier_operation == 'copy' %}` — in the filename for the former, around the body for the latter — but copier only defines `_copier_operation` when evaluating `_tasks`/`_migrations` conditions; during path and content rendering it is undefined, so the condition was always false, filenames rendered to an empty stem and the guarded body rendered empty. Intent is now expressed via `_skip_if_exists`, which does not resurrect files the user deleted because `copier update` applies a template-side diff. Added `tests/` at the repo root, which renders the template and asserts on the generated tree, and wired the template's own tests into CI — the existing pipeline could not catch this, since `pytest` in a generated project exits 0 on the `src/` doctests even with an empty `tests/`
 - The `command_line_interface` question now has an effect. Previously all four answers produced the same Typer `cli.py`, entry point and dependency set; now each generates the matching CLI and only the selected library, and "No command-line interface" omits `cli.py` and `[project.scripts]` altogether
