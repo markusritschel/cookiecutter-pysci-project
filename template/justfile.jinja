@@ -118,3 +118,54 @@ publish:
     uv build
     uv publish
 {% endraw %}
+{%- if is_research_project %}
+{% raw %}
+
+# ── Figure processing ───────────────────────────────────────────────────────────
+# Conveniences for preparing figures for reports — delete them if your project
+# does not produce figures. They require ImageMagick, and `crop-pdf` additionally
+# requires `pdfcrop` from TeX Live.
+
+IMAGEDIR := "reports/figures"
+# ImageMagick 7 renamed `convert` to `magick` and warns on the old name.
+MAGICK := `command -v magick || command -v convert || echo magick`
+
+# Remove PNG files that were derived from a PDF or JPG of the same name
+clear-images:
+    @echo "Removing PNGs in {{IMAGEDIR}} that have a PDF or JPG parent"
+    @find {{IMAGEDIR}} -type f \( -iname '*.pdf' -o -iname '*.jpg' -o -iname '*.jpeg' \) \
+        | while read -r src; do rm -f "${src%.*}.png"; done
+
+# Convert JPG and PDF figures to PNG, discarding conversions that compress badly
+# NOTE: deliberate — the PNG is kept only if it is less than half the size of its
+# source. That is the point for oversized vector PDFs, but a PNG rarely beats an
+# already-compressed JPG by 2x, so JPG sources are usually converted and then
+# discarded. Drop the size check below if you want to keep every conversion.
+convert-images:
+    @find {{IMAGEDIR}} -type f \( -iname '*.pdf' -o -iname '*.jpg' -o -iname '*.jpeg' \) \
+        | while read -r src; do \
+            out="${src%.*}.png"; \
+            {{MAGICK}} -density 400 "$src" -resize 800x800 -quality 85% "$out" || continue; \
+            echo "converted $src"; \
+            if [ "$(stat -c%s "$src")" -lt "$(( $(stat -c%s "$out") * 2 ))" ]; then \
+                echo "  discarding $out (less than 2x smaller than its source)"; rm -f "$out"; \
+            fi; \
+        done
+
+# Crop whitespace from all PDF figures in place
+crop-pdf:
+    @echo "Cropping PDFs in {{IMAGEDIR}}"
+    @find {{IMAGEDIR}} -type f -iname '*.pdf' \
+        | while read -r f; do pdfcrop "$f" "$f" >/dev/null && echo "cropped $f"; done
+
+# Crop PNG figures in place, leaving a white border
+crop-png:
+    @echo "Cropping PNGs in {{IMAGEDIR}}"
+    @find {{IMAGEDIR}} -type f -iname '*.png' \
+        | while read -r f; do {{MAGICK}} "$f" -trim -bordercolor White -border 25x25 "$f" && echo "cropped $f"; done
+
+# Regenerate all figures: clear stale PNGs, crop sources, convert, crop results
+figures: clear-images crop-pdf convert-images crop-png
+    @echo "Finished creating figures"
+{% endraw %}
+{%- endif %}

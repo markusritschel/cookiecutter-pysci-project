@@ -196,9 +196,12 @@ would refer to the subdirectory instead of the installed version. -->
     │
     ├── scripts            <- High-level scripts that use (low-level) source code from `src/`
     ├── src                <- Source code (and only source code!) for use in this project
-    │   ├── core           <- Provides some core functionalities
-    │   ├── tests          <- Contains tests for the code in `src/`
-    │   └── __init__.py    <- Makes src a Python module and provides some standard variables
+    │   └── <package_name>
+    │       ├── core       <- Provides some core functionalities
+    │       ├── cli.py     <- Command-line entry point
+    │       └── __init__.py  <- Provides the global path variables and utility functions
+    │
+    ├── tests              <- Contains the tests for the code in `src/`
     │
     ├── .env               <- In this file, specify all your custom environment variables
     │                         Keep this out of version control! (i.e. have it in your .gitignore)
@@ -206,13 +209,12 @@ would refer to the subdirectory instead of the installed version. -->
     │                         keep out of git version control.    
     ├── CHANGELOG.md       <- All major changes should go in there
     ├── CITATION.cff       <- The citation information for this project (update your ORCID ID!)
-    ├── environment.yml    <- The conda environment file for reproducing the environment
+    ├── justfile           <- Task runner recipes; run `just` to list them
     ├── LICENSE            <- The license used for this project
-    ├── Makefile           <- A self-documenting Makefile for standard CLI tasks
-    ├── pyproject.toml     <- Configuration file for the project
+    ├── pyproject.toml     <- Configuration file for the project (manages all dependencies)
     ├── README.md          <- The top-level README of this project
-    └── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-                              generated with `pip freeze > requirements.txt`
+    ├── ruff.toml          <- Linter and formatter configuration
+    └── uv.lock            <- Lock file for reproducible dependency resolution (managed by uv)
   ```
 
 </details><br />

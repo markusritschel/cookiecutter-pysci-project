@@ -88,7 +88,7 @@ except:
 try:
     from {{ package_name }} import BASE_DIR, LOG_DIR, PLOT_DIR, DATA_DIR
 except:
-    raise Exception("Could not find {{ package_name }}. Did you `make src-available`?")
+    raise Exception("Could not find {{ package_name }}. Did you run `uv sync --dev`?")
 
 
 # ---------------------------------------------
