@@ -2,7 +2,9 @@
 # Philosophy: minimal, non-noisy baseline. Expand rule families consciously.
 line-length = 100
 indent-width = 4
-target-version = "py311"
+# Must not exceed `requires-python` in pyproject.toml: the UP rules rewrite to
+# syntax of this version, and CI also tests the lowest supported interpreter.
+target-version = "py310"
 
 # Specify which files/directories to check
 include = ["src/**/*.py", "tests/**/*.py", "scripts/**/*.py"]
@@ -85,7 +87,7 @@ ignore = [
     "D401",  # First line should be in imperative mood  — not universally applicable
 
     # pyupgrade
-    "UP035", # deprecated typing imports       — target is Python ≥ 3.11 but enforcing this is disruptive
+    "UP035", # deprecated typing imports       — enforcing this is disruptive on existing code
 
     # NumPy
     "NPY002", # legacy np.random.* calls       — common in existing code; migrate gradually
@@ -96,23 +98,24 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 # ── Per-file exemptions ─────────────────────────────────────────────────────────
 [lint.per-file-ignores]
-# Tests: self-documenting via names; allow assertions and magic values
+# Tests: self-documenting via names; allow assertions and magic values.
+# S101/PLR2004 are listed for when you enable the S and PL families above.
 "tests/**/*.py"        = ["D", "E741", "S101", "PLR2004"]
 
 # CLI entry points: docstrings add little value on __main__ and Typer/Click apps
 "**/__main__.py"       = ["D"]
 "**/cli.py"            = ["D101", "D102", "D103"]
 
-# Notebooks (jupytext .py representations) and scripts: no docstring enforcement,
-# allow print statements and top-of-file import ordering violations
-"notebooks/**"         = ["D", "E402", "T201"]
+# Scripts: no docstring enforcement, allow print statements (T201 applies once
+# you enable the T20 family above)
 "scripts/**"           = ["D", "T201"]
 
 # Jupyter/Marimo notebooks: standalone expressions are the execution model (B018),
-# and unused imports are structural rather than accidental (F401)
+# and unused imports are structural rather than accidental (F401).
+# NOTE: inert as configured — `include` above matches only *.py, and `exclude`
+# lists notebooks/. These take effect if you widen either.
 "**/*.ipynb"           = ["B018", "F401"]
-"notebooks/**/*.ipynb" = ["B018", "F401"]
-"scripts/**/*.ipynb"   = ["B018", "F401"]
+"notebooks/**"         = ["D", "E402", "T201", "B018", "F401"]
 
 # ── Rule configuration ──────────────────────────────────────────────────────────
 [lint.mccabe]

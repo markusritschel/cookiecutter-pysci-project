@@ -9,36 +9,37 @@ license = {file = "LICENSE"}
 version = "0.1.0"
 requires-python = ">=3.10"
 dependencies = [
-  "click",
   "colorama",
   "dask",
   "Deprecated",
-  "docopt",
   "ipykernel",
   "ipython",
   "ipywidgets",
-  "jupytext",
-  "jupyterbook-latex",
   "jupyterlab",
   "jupytext",
   "marimo",
   "markdown",
   "matplotlib",
-  "mystmd",
-  "nodejs",
   "numpy",
   "pandas",
-  "pandoc",
   "python-dotenv",
   "rich",
   "tqdm",
+  "xarray",
+{%- if command_line_interface == 'Typer' %}
   "typer",
-  "xarray"
+{%- elif command_line_interface == 'Click' %}
+  "click",
+{%- elif command_line_interface == 'Docopt' %}
+  "docopt",
+{%- endif %}
 ]
 
-
+{% if command_line_interface != 'No command-line interface' %}
+# All three CLI flavours expose the entry point as `app`.
 [project.scripts]
 {{ project_slug }} = "{{ package_name }}.cli:app"
+{% endif %}
 
 
 [dependency-groups]
@@ -115,7 +116,10 @@ testpaths = [
 addopts = [
   "--doctest-modules",
   "--doctest-continue-on-failure",
-  "-ra -v",
+  # NOTE: one flag per list entry. "-ra -v" as a single entry is parsed as
+  # `-r` with the value "a -v", which silently swallows the -v.
+  "-ra",
+  "-v",
   "--cov=./src",
   "--cov-report=xml",
   "--cov-report=html",

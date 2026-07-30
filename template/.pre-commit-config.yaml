@@ -11,7 +11,9 @@ repos:
   - repo: https://github.com/astral-sh/uv-pre-commit
     rev: 0.11.6
     hooks:
-      # Update the uv lockfile whenever there are changes made to pyproject.toml
+      # Keep uv.lock in sync. `always_run` makes this run on every commit rather
+      # than only when pyproject.toml is staged, which also catches a lockfile
+      # left stale by a manual edit.
       - id: uv-lock
         always_run: true
       - id: uv-export

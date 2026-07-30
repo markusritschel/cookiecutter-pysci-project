@@ -55,6 +55,7 @@ jobs:
       id-token: write
     steps:
       - name: Deploy documentation
+        id: deployment  # referenced by the environment url above
         if: {% raw %}${{ !env.ACT }}{% endraw %}
         uses: actions/deploy-pages@v4
         with:

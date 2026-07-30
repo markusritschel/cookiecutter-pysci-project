@@ -87,6 +87,9 @@ COMMON_EXAMPLE_FILES = [
     "tests/conftest.py",
     "tests/test_submodule.py",
 ]
+
+# (answer, module the generated cli.py must import)
+CLI_CHOICES = [("Typer", "typer"), ("Click", "click"), ("Docopt", "docopt")]
 RESEARCH_EXAMPLE_FILES = [
     "notebooks/01-minimal-example.ipynb",
     "scripts/01-test.py",
@@ -107,6 +110,47 @@ def test_cli_defines_a_command(research_project):
     """A Typer app with no command raises when the entry point is invoked."""
     cli = (research_project / "src/python_boilerplate/cli.py").read_text()
     assert "@app.command()" in cli
+
+
+@pytest.mark.parametrize(("choice", "module"), CLI_CHOICES)
+def test_cli_choice_selects_the_library(template_src, tmp_path, choice, module):
+    """Every `command_line_interface` answer must change what is generated."""
+    proj = _generate(
+        template_src, tmp_path / "proj", command_line_interface=choice, is_research_project=False
+    )
+    cli = (proj / "src/python_boilerplate/cli.py").read_text()
+    pyproject = (proj / "pyproject.toml").read_text()
+
+    assert f"import {module}" in cli or f"from {module} import" in cli
+    # the other CLI libraries must not be pulled in as dependencies
+    for other in {m for _, m in CLI_CHOICES} - {module}:
+        assert f'"{other}"' not in pyproject
+    assert "[project.scripts]" in pyproject
+
+
+def test_no_cli_choice_omits_the_entry_point(template_src, tmp_path):
+    """A registered entry point pointing at a missing module fails at runtime."""
+    proj = _generate(
+        template_src,
+        tmp_path / "proj",
+        command_line_interface="No command-line interface",
+        is_research_project=False,
+    )
+    assert not (proj / "src/python_boilerplate/cli.py").exists()
+    assert "[project.scripts]" not in (proj / "pyproject.toml").read_text()
+
+
+def test_docopt_usage_is_the_module_docstring(template_src, tmp_path):
+    """docopt parses __doc__, so the usage text must be the first statement."""
+    proj = _generate(
+        template_src,
+        tmp_path / "proj",
+        command_line_interface="Docopt",
+        is_research_project=False,
+    )
+    cli = (proj / "src/python_boilerplate/cli.py").read_text()
+    assert cli.lstrip().startswith('"""')
+    assert "Usage:" in cli.split('"""')[1]
 
 
 def test_example_script_imports_a_module_that_exists(research_project):

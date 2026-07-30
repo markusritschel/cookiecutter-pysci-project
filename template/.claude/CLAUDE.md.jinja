@@ -68,7 +68,9 @@ just build
 ```
 src/{{ package_name }}/
 ├── __init__.py       # exports BASE_DIR, LOG_DIR, DATA_DIR, PLOT_DIR, setup_logger, save
-├── cli.py            # Typer-based CLI entry point (registered as `{{ package_name }}` command)
+{% if command_line_interface != 'No command-line interface' -%}
+├── cli.py            # {{ command_line_interface }}-based CLI entry point (registered as the `{{ project_slug }}` command)
+{% endif -%}
 ├── submodule.py      # example submodule
 └── core/
     └── utils.py      # setup_logger, save (singledispatch for Figure/DataFrame/Dataset)
@@ -80,7 +82,15 @@ src/{{ package_name }}/
 
 **`save()` utility** — `core/utils.py` provides a `@functools.singledispatch` `save()` function that dispatches on object type (`plt.Figure` → `savefig`, `pd.DataFrame` → `to_csv`, `xr.Dataset` → `to_netcdf`). The `@add_metadata` decorator automatically appends the git commit hash to filenames and logs provenance.
 
-**CLI** — `cli.py` uses [Typer](https://typer.tiangolo.com/). The app is registered as an entry point in `pyproject.toml` under `[project.scripts]`.
+{% if command_line_interface == 'Typer' -%}
+**CLI** — `cli.py` uses [Typer](https://typer.tiangolo.com/). The app is registered as an entry point in `pyproject.toml` under `[project.scripts]`, exposed as the `{{ project_slug }}` command.
+{%- elif command_line_interface == 'Click' -%}
+**CLI** — `cli.py` uses [Click](https://click.palletsprojects.com/). The `app` command is registered as an entry point in `pyproject.toml` under `[project.scripts]`, exposed as the `{{ project_slug }}` command.
+{%- elif command_line_interface == 'Docopt' -%}
+**CLI** — `cli.py` uses [docopt](http://docopt.org/), which derives the argument parser from the module docstring — keep that docstring in sync with the options the CLI accepts. Registered under `[project.scripts]` as the `{{ project_slug }}` command.
+{%- else -%}
+**CLI** — this project was generated without a command-line interface, so there is no `cli.py` and no `[project.scripts]` entry.
+{%- endif %}
 
 **Environment variables** — `.env` in the project root is loaded automatically at import time via `python-dotenv`. The `LOGLEVEL` variable controls log verbosity (default: `INFO`).
 

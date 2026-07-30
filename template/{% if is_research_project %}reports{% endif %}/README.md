@@ -19,7 +19,7 @@ jupyter book init
 ```
 
 > [!note]
-> You may need to install `jupyter-book` first.
+> You may need to add it first: `uv add --group docs jupyter-book`
 
 More info [here](https://jupyterbook.org/en/stable/start/create.html).
 
@@ -34,7 +34,7 @@ myst init
 ```
 
 > [!note]
-> You may need to install `mystmd` first.
+> You may need to add it first: `uv add --group docs mystmd`
 
 More info [here](https://mystmd.org/guide/quickstart).
 
