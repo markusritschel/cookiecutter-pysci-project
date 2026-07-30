@@ -15,3 +15,9 @@ dev = [
     "jinja2-time",
     "pytest>=8",
 ]
+
+[tool.pytest.ini_options]
+# `tests/` renders the template and asserts on the generated tree; `scripts/`
+# covers the cookiecutter->copier migration helper. Listed explicitly so a bare
+# `pytest` does not try to collect a generated project left lying around.
+testpaths = ["tests", "scripts"]

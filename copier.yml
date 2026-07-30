@@ -10,6 +10,16 @@ _jinja_extensions:
 
 # Files left untouched by `copier update` once they exist in the generated
 # project (e.g. user-authored docs, tests and README).
+#
+# The example/boilerplate files (submodule.py, cli.py, the demo notebook and
+# script) are listed here too. They must NOT be guarded by
+# `{% if _copier_operation == 'copy' %}` in their filename: `_copier_operation`
+# is only defined while evaluating `_tasks`/`_migrations` conditions, not during
+# path or content rendering, so such a guard renders to the empty string and
+# silently drops the file from every generation. Listing them here is what keeps
+# `copier update` from overwriting a user's edits; a file the user *deleted*
+# stays deleted because `copier update` applies a template-side diff rather than
+# re-rendering the whole tree.
 _skip_if_exists:
   - "docs/**/*.md"
   - "**/*.bib"
@@ -17,6 +27,10 @@ _skip_if_exists:
   - "README.md"
   - "LICENSE"
   - "CITATION.cff"
+  - "src/*/submodule.py"
+  - "src/*/cli.py"
+  - "notebooks/*.ipynb"
+  - "scripts/*.py"
 
 _message_before_copy: |
   ☝🏼 Important: You will now be asked to fill in some information about your project.

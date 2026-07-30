@@ -29,6 +29,15 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global init.defaultBranch main
 
+    - name: Install the template's own dev dependencies
+      run: uv sync --locked --dev
+
+    - name: Test the template
+      # Renders the template and asserts on the generated file tree. The
+      # generate-and-test steps below cannot catch a dropped file: pytest in the
+      # generated project exits 0 on the src/ doctests even with an empty tests/.
+      run: uv run pytest -q
+
     - name: Generate a project with Copier
       # `--trust` is required because the template runs tasks and uses the
       # jinja2-time extension; `--with jinja2-time` provides that extension.
