@@ -80,10 +80,11 @@ def library_project(template_src, tmp_path_factory):
 
 # Example/boilerplate files a freshly generated project must contain. Keep in
 # sync with `example_files` in tasks/post_gen.py, which un-stages them.
+# Note: cli.py is deliberately absent — `command_line_interface` defaults to
+# "No command-line interface". The CLI flavours are covered separately below.
 COMMON_EXAMPLE_FILES = [
     "docs/example.md",
     "src/python_boilerplate/submodule.py",
-    "src/python_boilerplate/cli.py",
     "tests/conftest.py",
     "tests/test_submodule.py",
 ]
@@ -106,9 +107,16 @@ def test_library_project_has_example_file(library_project, relpath):
     assert (library_project / relpath).is_file()
 
 
-def test_cli_defines_a_command(research_project):
+def test_default_answers_omit_the_cli(research_project):
+    """`command_line_interface` defaults to "No command-line interface"."""
+    assert not (research_project / "src/python_boilerplate/cli.py").exists()
+    assert "[project.scripts]" not in (research_project / "pyproject.toml").read_text()
+
+
+def test_typer_app_defines_a_command(template_src, tmp_path):
     """A Typer app with no command raises when the entry point is invoked."""
-    cli = (research_project / "src/python_boilerplate/cli.py").read_text()
+    proj = _generate(template_src, tmp_path / "proj", command_line_interface="Typer")
+    cli = (proj / "src/python_boilerplate/cli.py").read_text()
     assert "@app.command()" in cli
 
 
