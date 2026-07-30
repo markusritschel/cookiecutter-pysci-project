@@ -63,7 +63,14 @@ This includes
   ```
   
   </details>
-- [just](https://just.systems/) (optional but recommended)
+- [just](https://just.systems/) — the task runner the generated project uses.
+  Install it with the toolchain you already have: `uv tool install rust-just`.
+  <details><summary>Strictly optional</summary>
+
+  Every recipe in the generated `justfile` is a thin wrapper around a `uv` command, so you can run
+  those directly instead. The generated project's README lists the equivalents for the common tasks.
+
+  </details>
 - [GitHub](https://github.com/) account (optional)
 
 

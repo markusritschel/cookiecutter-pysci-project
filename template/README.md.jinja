@@ -64,6 +64,37 @@ just docs
 `just docs` renders the documentation in `docs/` to {% if docs_engine|lower == 'zensical' %}`site/`{% else %}`docs/_build/html/`{% endif %}, and `just docs-serve` serves it with live reload.
 Run `just` with no arguments for the full list of available tasks.
 
+<details>
+<summary>Don't have <code>just</code>? Run the tasks directly</summary>
+
+Every recipe is a thin wrapper around a `uv` command, so `just` is a convenience rather than a
+hard requirement. Either install it with the toolchain you already have —
+
+```bash
+uv tool install rust-just
+```
+
+— or run the underlying commands directly:
+
+| Task                  | With `just`      | Directly                                                                              |
+| --------------------- | ---------------- | ------------------------------------------------------------------------------------- |
+| Run the tests         | `just test`      | `uv run --group test pytest`                                                          |
+| Format and autofix    | `just format`    | `uv run --group dev ruff format . && uv run --group dev ruff check --fix .`            |
+| Lint without changing | `just lint`      | `uv run --group dev ruff format --check . && uv run --group dev ruff check .`          |
+| Coverage report       | `just coverage`  | `uv run --group test coverage run -m pytest . && uv run --group test coverage report -m && uv run --group test coverage html` |
+{% if docs_engine|lower == 'sphinx' -%}
+| Build the docs        | `just docs`      | `uv run --group docs sphinx-build -b html docs/ docs/_build/html`                      |
+{% elif docs_engine|lower == 'zensical' -%}
+| Build the docs        | `just docs`      | `uv run --group docs zensical build`                                                  |
+{% elif docs_engine|lower == 'myst' -%}
+| Build the docs        | `just docs`      | `cd docs && uv run --group docs myst build --html`                                     |
+{% endif -%}
+| Build the package     | `just build`     | `rm -rf build dist && uv build`                                                       |
+
+The `justfile` is the authoritative list — read it for anything not covered here.
+
+</details>
+
 > [!TIP]
 > To add a dependency, use `uv add <package>` rather than editing `pyproject.toml` by hand —
 > that keeps `uv.lock` in sync. Use `uv add --group dev <package>` for development-only tools.

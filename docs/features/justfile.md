@@ -11,6 +11,22 @@ uv run --group docs sphinx-build -b html docs/ docs/_build/html
 ``` 
 to `just docs` :rocket: 
 
+## Installing just
+
+`just` is a single binary. The quickest route, since the generated project already requires `uv`:
+
+```bash
+uv tool install rust-just
+```
+
+Other options (Homebrew, Scoop, winget, Cargo, distro packages) are listed in the
+[just documentation](https://just.systems/man/en/packages.html).
+
+!!! tip "Not installed? You are not blocked"
+    Every recipe is a thin wrapper around a `uv` command, so you can always read the `justfile` and
+    run the command directly. The generated project's README lists the equivalents for the common
+    tasks.
+
 ## Task overview
 Run `just` in your terminal, and it will list all the recipies available for execution:
 
@@ -22,10 +38,16 @@ Available recipes:
   clean-docs       # Remove documentation build artifacts
   clean-pyc        # Remove Python file artifacts
   clean-test       # Remove test and coverage artifacts
+  clear-images     # Remove PNG files that were derived from a PDF or JPG of the same name
+  convert-images   # Convert JPG and PDF figures to PNG, discarding conversions that compress badly
   coverage         # Run coverage, and build to HTML
+  crop-pdf         # Crop whitespace from all PDF figures in place
+  crop-png         # Crop PNG figures in place, leaving a white border
   docs             # Compile the documentation
   docs-serve       # Serve the documentation with live reload
-  lint *ARGS       # Run ruff check for linting without modifying files
+  figures          # Regenerate all figures: clear stale PNGs, crop sources, convert, crop results
+  format           # Run ruff formatter, modifying files and fixing lint errors
+  lint             # Run ruff linter without modifying files
   pdb *ARGS        # Run all the tests, but on failure, drop into the debugger
   publish          # Publish to PyPI (manual alternative to GitHub Actions)
   qa               # Run all the formatting, linting, and testing commands
@@ -37,6 +59,11 @@ Available recipes:
 
 Some commands allow for arguments to be passed.
 For the exact commands, have a look at the justfile in the project directory.
+
+!!! note "Figure recipes"
+    `clear-images`, `convert-images`, `crop-pdf`, `crop-png` and `figures` operate on
+    `reports/figures/` and are therefore only generated for research projects. They shell out to
+    ImageMagick, and `crop-pdf` additionally needs `pdfcrop` from TeX Live.
 
 
 ## Add your own tasks
