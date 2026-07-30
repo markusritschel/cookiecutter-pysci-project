@@ -1,0 +1,131 @@
+[project]
+name = "{{ project_slug }}"
+description = "{{ project_description }}"
+authors = [
+  {name = "{{ user_name }}", email = "{{ user_email }}"},
+]
+readme = "README.md"
+license = {file = "LICENSE"}
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+  "colorama",
+  "dask",
+  "Deprecated",
+  "ipykernel",
+  "ipython",
+  "ipywidgets",
+  "jupyterlab",
+  "jupytext",
+  "marimo",
+  "markdown",
+  "matplotlib",
+  "numpy",
+  "pandas",
+  "python-dotenv",
+  "rich",
+  "tqdm",
+  "xarray",
+{%- if command_line_interface == 'Typer' %}
+  "typer",
+{%- elif command_line_interface == 'Click' %}
+  "click",
+{%- elif command_line_interface == 'Docopt' %}
+  "docopt",
+{%- endif %}
+]
+
+{% if command_line_interface != 'No command-line interface' %}
+# All three CLI flavours expose the entry point as `app`.
+[project.scripts]
+{{ project_slug }} = "{{ package_name }}.cli:app"
+{% endif %}
+
+
+[dependency-groups]
+dev = [
+  {include-group = "lint"},
+  {include-group = "test"},
+  "pre-commit"
+]
+lint = [
+  "ruff",
+  "ty",
+]
+test = [
+  "pytest",
+  "pytest-cov",
+  "safety",
+]
+docs = [
+{% if docs_engine|lower == 'sphinx' -%}
+  "furo",
+  "jupyter-book",
+  "jupyterbook-latex",
+  "linkify-it-py",
+  "lxml_html_clean",
+  "myst-parser",
+  "nbsphinx",
+  "pydata-sphinx-theme",
+  "rinohtype",
+  "sphinx",
+  "sphinx-autoapi",
+  "sphinx-autobuild",
+  "sphinx-autodoc-defaultargs",
+  "sphinx-autodoc-typehints",
+  "sphinx-book-theme",
+  "sphinx-comments",
+  "sphinx-copybutton",
+  "sphinx-design",
+  "sphinx-immaterial",
+  "sphinx-issues",
+  "sphinx-rtd-theme",
+  "sphinx-tabs",
+  "sphinx-toolbox",
+  "sphinxcontrib-apidoc",
+  "sphinxcontrib-bibtex",
+  "sphinxcontrib-htmlhelp",
+  "sphinxcontrib-images",
+  "sphinxcontrib-mermaid",
+  "sphinxcontrib-napoleon",
+{% elif docs_engine|lower == 'zensical' -%}
+  "zensical",
+  "mkdocstrings-python",
+{% elif docs_engine|lower == 'myst' -%}
+  "mystmd",
+{%- endif %}
+]
+
+
+[build-system]
+requires = ["uv_build>=0.10.2,<0.11.0"]
+build-backend = "uv_build"
+
+
+
+[tool.jupytext]
+formats = "ipynb,py:percent,md:myst"
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = [
+  "tests",
+  "src",
+]
+addopts = [
+  "--doctest-modules",
+  "--doctest-continue-on-failure",
+  # NOTE: one flag per list entry. "-ra -v" as a single entry is parsed as
+  # `-r` with the value "a -v", which silently swallows the -v.
+  "-ra",
+  "-v",
+  "--cov=./src",
+  "--cov-report=xml",
+  "--cov-report=html",
+  "--cov-report=term-missing"
+]
+
+
+[tool.uv]
+package = true

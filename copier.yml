@@ -1,0 +1,184 @@
+# Copier configuration for the cookiecutter-pyproject template.
+#
+# Run with:  uvx --with jinja2-time copier copy gh:markusritschel/cookiecutter-pyproject my-project
+#
+# Settings ---------------------------------------------------------------------
+_subdirectory: template
+_templates_suffix: ".jinja"
+_jinja_extensions:
+  - jinja2_time.TimeExtension
+
+# Files left untouched by `copier update` once they exist in the generated
+# project (e.g. user-authored docs, tests and README).
+#
+# The example/boilerplate files (submodule.py, cli.py, the demo notebook and
+# script) are listed here too. They must NOT be guarded by
+# `{% if _copier_operation == 'copy' %}` in their filename: `_copier_operation`
+# is only defined while evaluating `_tasks`/`_migrations` conditions, not during
+# path or content rendering, so such a guard renders to the empty string and
+# silently drops the file from every generation. Listing them here is what keeps
+# `copier update` from overwriting a user's edits; a file the user *deleted*
+# stays deleted because `copier update` applies a template-side diff rather than
+# re-rendering the whole tree.
+_skip_if_exists:
+  - "docs/**/*.md"
+  - "**/*.bib"
+  - "tests/**"
+  - "README.md"
+  - "LICENSE"
+  - "CITATION.cff"
+  - "src/*/submodule.py"
+  - "src/*/cli.py"
+  - "notebooks/*.ipynb"
+  - "scripts/*.py"
+
+_message_before_copy: |
+  ☝🏼 Important: You will now be asked to fill in some information about your project.
+
+  For the project name, you may use a normal name with spaces, e.g. "My new Project".
+  The project slug (used for the directory name) is derived from it automatically by
+  replacing spaces with dashes and converting to lowercase, e.g. "my-new-project" — you 
+  can still edit it. For the Python package name, remaining dashes are replaced with 
+  underscores ("my_new_project") to keep it importable.
+
+  👉🏼 Research Projects: If you answer "yes" to "Is this a research project?", these additional
+  directories will be created for you: data, notebooks, references, reports and scripts.
+  If you answer "no", they are left out.
+
+  If you are uncertain about a choice (e.g. the command-line interface), go with the default.
+
+  Let's go 😃
+
+_message_after_copy: |
+  🎉 Project setup complete! How to get started:
+  ----------------------------------------------
+
+  1. Change directory into your project (if you aren't already):
+       cd {{ _copier_conf.dst_path }}/
+
+  2. Activate your virtual environment (see the README.md for more details):
+       On Linux/macOS: source .venv/bin/activate
+       On Windows:     .\.venv\Scripts\activate
+
+  3. Add a remote git repository (optional):
+       git remote add origin https://github.com/{{ github_user }}/{{ project_slug }}
+
+  4. To add packages, use:
+       uv add <package_name>
+
+  5. To run scripts, use:
+       uv run python <script.py>
+
+  6. To build documentation:
+       just docs
+
+  Happy coding! 🚀
+
+# Tasks ------------------------------------------------------------------------
+# Ported from the old hooks/post_gen_project.py. Tasks require `--trust` and run
+# on `copier copy` only (guarded via `_copier_operation`), never on `copier update`.
+# Runs as a standalone script (rather than inline POSIX shell) so generation
+# also works on native Windows, without requiring WSL/git-bash.
+_tasks:
+  - command: "{{ _copier_python }} {{ _copier_conf.src_path }}/tasks/post_gen.py {{ package_name }}"
+    when: "{{ _copier_operation == 'copy' }}"
+
+# Migrations ---------------------------------------------------------------------
+# Remaps answer keys from before the `user_name`/`user_email`/`github_user` rename
+# (formerly `project_author`/`email`/`github_username`) so `copier update` keeps
+# working for projects generated under the old names.
+_migrations:
+  - command: |
+      if command -v sed >/dev/null 2>&1; then
+        sed -i \
+          -e 's/^project_author:/user_name:/' \
+          -e 's/^email:/user_email:/' \
+          -e 's/^github_username:/github_user:/' \
+          "{{ _copier_conf.answers_file }}"
+      else
+        echo "WARNING: 'sed' not found. Rename these keys manually in {{ _copier_conf.answers_file }}:"
+        echo "  project_author -> user_name, email -> user_email, github_username -> github_user"
+      fi
+    when: "{{ _stage == 'before' }}"
+
+# Questions --------------------------------------------------------------------
+user_name:
+  type: str
+  help: Your full name
+  default: John Doe
+
+user_email:
+  type: str
+  help: Your email address
+  default: johndoe@github.com
+
+github_user:
+  type: str
+  help: Your GitHub username
+  default: johndoe
+
+project_name:
+  type: str
+  help: The human-readable name of your project (spaces allowed)
+  default: Python Boilerplate
+
+project_slug:
+  type: str
+  help: The directory and repository name (derived from the project name)
+  default: "{{ project_name|lower|replace(' ', '-') }}"
+
+package_name:
+  type: str
+  help: The importable Python package name (derived from the project slug)
+  default: "{{ project_slug|lower|replace('-', '_') }}"
+  # when: "{{ not (project_slug|lower|replace('-', '_')).isidentifier() }}"
+  validator: >-
+    {% if not package_name.isidentifier() %}
+    "{{ package_name }}" is not a valid Python package name!
+    {% endif %}
+
+is_research_project:
+  type: bool
+  help: Is this a research project? (adds data/, notebooks/, references/, reports/, scripts/)
+  default: true
+
+project_description:
+  type: str
+  help: A short description of your project
+  default: A boilerplate for scientific projects using Python
+
+project_version:
+  type: str
+  help: The initial version of your project
+  default: 0.1.0
+
+command_line_interface:
+  type: str
+  help: Which command-line interface library would you like to use?
+  choices:
+    - Typer
+    - Click
+    - Docopt
+    - No command-line interface
+  default: No command-line interface
+
+project_license:
+  type: str
+  help: Choose a license for your project
+  choices:
+    - MIT license
+    - BSD license
+    - ISC license
+    - Apache Software License 2.0
+    - GNU General Public License v3
+    - Not open source
+  default: MIT license
+
+docs_engine:
+  type: str
+  help: Which documentation engine would you like to use?
+  choices:
+    - Sphinx
+    - Zensical
+    - MyST
+  default: Sphinx

@@ -3,30 +3,31 @@ icon: material/rocket-launch
 ---
 
 <!-- https://fpgmaas.github.io/cookiecutter-uv/ -->
-# PyProject Cookiecutter Template :simple-pythonanywhere:
+# PyProject Template 
 
 
-This is a [CookieCutter](https://www.cookiecutter.io/) template for Python projects.
+This is a [copier](https://copier.readthedocs.io) template for Python projects.
 It uses modern tools for development, testing, and packaging.
 Depending on the responses to the [initial prompts](prompts), it can create a boilerplate for data science projects or for a general Python package.
 
 ??? note "Requirements"
-    To use this template, you need to have [CookieCutter](https://www.cookiecutter.io/) available on your machine.
+    To use this template, you need to have [copier](https://copier.readthedocs.io) available on your machine.
     Either install it globally via pip or conda, or use `uv` to run it without the need of installing it.
     The latter is recommended.
 
 ## Quickstart
 To get started, simply run
 ```bash
-uvx cookiecutter gh:markusritschel/cookiecutter-pyproject
+uvx --with jinja2-time copier copy gh:markusritschel/cookiecutter-pyproject my-project
 ```
 and follow the [prompts](prompts) to customize your project.
-Once finished, navigate into the created directory to start working on your new Python project!
+Once finished, navigate into the created `my-project/` directory to start working on your new Python project!
 
 ??? note "Without uv"
-    If you don't want to use uv, you can also install CookieCutter globally and run it with the following command:
+    If you don't want to use uv, you can also install copier globally and run it with the following commands:
     ```bash
-    cookiecutter gh:markusritschel/cookiecutter-pyproject
+    pip install copier jinja2-time
+    copier copy gh:markusritschel/cookiecutter-pyproject my-project
     ```
 
 

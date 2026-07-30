@@ -1,19 +1,25 @@
-# Cookiecutter Py(thon)-Project Template <!-- omit in toc -->
+# Py(thon)-Project Template <!-- omit in toc -->
 
 ![build](https://github.com/markusritschel/cookiecutter-pyproject/actions/workflows/main.yml/badge.svg)
 [![License MIT](https://img.shields.io/github/license/markusritschel/cookiecutter-pyproject)](./LICENSE)
 
+> [!IMPORTANT]
+> **This template has moved from Cookiecutter to [Copier](https://copier.readthedocs.io).**
+> The repository keeps its name, but projects are now generated with `copier copy` (see [🚀 Get started](#-get-started)) and updated with `copier update` instead of `cruft update` ([why?](docs/tips.md#why-copier-instead-of-cookiecutter-and-cruft)).
+>
+> Already have a project generated with the old cookiecutter/cruft version? [`scripts/migrate_cookiecutter_to_copier.py`](scripts/migrate_cookiecutter_to_copier.py) bootstraps the `.copier-answers.yml` for you — see [Migrating an existing cookiecutter/cruft project](docs/tips.md#migrating-an-existing-cookiecuttercruft-project-to-copier) (or the [rendered version of the docs](https://markusritschel.github.io/cookiecutter-pyproject/tips/#migrating-an-existing-cookiecuttercruft-project-to-copier)).
+
 > 👉 If you're tired of setting up the same directory and file structure for your new Python projects again and again, then this might be for you ;-)
 
-This repository provides a "template" of a directory structure for small to medium-sized (scientific) projects, making use of [CookieCutter](https://github.com/cookiecutter/cookiecutter), a templating engine for project structures.
-Check out the links at the [bottom of the page](#sources-of-inspiration) to create your own CookieCutter or use this one to start your project.
+This repository provides a "template" of a directory structure for small to medium-sized (scientific) projects, making use of [copier](https://copier.readthedocs.io), a templating engine for project structures.
+Check out the links at the [bottom of the page](#sources-of-inspiration) to create your own template or use this one to start your project.
 Also, feel free to fork the repository and adjust it to your own needs.
 
 ***
 
 ## <u>Table of contents</u> <!-- omit in toc -->
 
-- [Cookiecutter as your productivity booster](#cookiecutter-as-your-productivity-booster)
+- [Copier as your productivity booster](#copier-as-your-productivity-booster)
 - [Usage](#usage)
   - [✅ Requirements](#-requirements)
   - [🚀 Get started](#-get-started)
@@ -27,9 +33,9 @@ Also, feel free to fork the repository and adjust it to your own needs.
 
 ***
 
-## Cookiecutter as your productivity booster
+## Copier as your productivity booster
 
-By running *cookiecutter* with this repository, a new directory will be created with a pre-defined structure and some default files, making you all set to start a new Python project. 
+By running *copier* with this repository, a new directory will be created with a pre-defined structure and some default files, making you all set to start a new Python project. 
 No need to manually create the same files and directory structure over and over again.
 This includes
 
@@ -40,7 +46,7 @@ This includes
 - and so on... 🚀
 
 <!-- It is indeed so easy:<br />
-![cookiecutter](assets/cookiecutter.gif) -->
+![copier](assets/copier.gif) -->
 
 
 ## Usage
@@ -57,33 +63,39 @@ This includes
   ```
   
   </details>
-- [just](https://just.systems/) (optional but recommended)
+- [just](https://just.systems/) — the task runner the generated project uses.
+  Install it with the toolchain you already have: `uv tool install rust-just`.
+  <details><summary>Strictly optional</summary>
+
+  Every recipe in the generated `justfile` is a thin wrapper around a `uv` command, so you can run
+  those directly instead. The generated project's README lists the equivalents for the common tasks.
+
+  </details>
 - [GitHub](https://github.com/) account (optional)
 
 
 ### 🚀 Get started
-The easiest way to get started is using [uv](https://docs.astral.sh/uv/0).
+The easiest way to get started is using [uv](https://docs.astral.sh/uv/).
 Make sure you have `uv` installed, and then run the following command to create a new project from this template:
 ```bash
-$ uvx cookiecutter gh:markusritschel/cookiecutter-pyproject
-
+$ uvx --with jinja2-time copier copy gh:markusritschel/cookiecutter-pyproject my-project
 ```
+This creates the project in a new `my-project/` directory (replace `my-project` with the path you want).
 
 <details>
 <summary>Alternatively, without uv</summary>
 
-install [CookieCutter](https://github.com/cookiecutter/cookiecutter) via pip or conda, and then run the following command to create a new project from this template:
+install [copier](https://copier.readthedocs.io) and the `jinja2-time` extension via pip or conda, and then run the following command to create a new project from this template:
 ```bash
-$ cookiecutter gh:markusritschel/cookiecutter-pyproject
+$ pip install copier jinja2-time
+$ copier copy gh:markusritschel/cookiecutter-pyproject my-project
 ```
 
 </details><br />
 
 <!-- Alternative URIs:
-$ cookiecutter gh:markusritschel/cookiecutter-pyproject
-$ cookiecutter https://github.com/markusritschel/cookiecutter-pyproject.git
-$ cookiecutter git+https://github.com/markusritschel/cookiecutter-pyproject
-$ cookiecutter git+ssh://git@github.com/markusritschel/cookiecutter-pyproject.git
+$ copier copy https://github.com/markusritschel/cookiecutter-pyproject.git my-project
+$ copier copy git+ssh://git@github.com/markusritschel/cookiecutter-pyproject.git my-project
 -->
 
 Once you have answered the questions, your directory structure will be created and you're set, ready to start working on your new project 🚀.
@@ -191,9 +203,12 @@ would refer to the subdirectory instead of the installed version. -->
     │
     ├── scripts            <- High-level scripts that use (low-level) source code from `src/`
     ├── src                <- Source code (and only source code!) for use in this project
-    │   ├── core           <- Provides some core functionalities
-    │   ├── tests          <- Contains tests for the code in `src/`
-    │   └── __init__.py    <- Makes src a Python module and provides some standard variables
+    │   └── <package_name>
+    │       ├── core       <- Provides some core functionalities
+    │       ├── cli.py     <- Command-line entry point
+    │       └── __init__.py  <- Provides the global path variables and utility functions
+    │
+    ├── tests              <- Contains the tests for the code in `src/`
     │
     ├── .env               <- In this file, specify all your custom environment variables
     │                         Keep this out of version control! (i.e. have it in your .gitignore)
@@ -201,13 +216,12 @@ would refer to the subdirectory instead of the installed version. -->
     │                         keep out of git version control.    
     ├── CHANGELOG.md       <- All major changes should go in there
     ├── CITATION.cff       <- The citation information for this project (update your ORCID ID!)
-    ├── environment.yml    <- The conda environment file for reproducing the environment
+    ├── justfile           <- Task runner recipes; run `just` to list them
     ├── LICENSE            <- The license used for this project
-    ├── Makefile           <- A self-documenting Makefile for standard CLI tasks
-    ├── pyproject.toml     <- Configuration file for the project
+    ├── pyproject.toml     <- Configuration file for the project (manages all dependencies)
     ├── README.md          <- The top-level README of this project
-    └── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-                              generated with `pip freeze > requirements.txt`
+    ├── ruff.toml          <- Linter and formatter configuration
+    └── uv.lock            <- Lock file for reproducible dependency resolution (managed by uv)
   ```
 
 </details><br />

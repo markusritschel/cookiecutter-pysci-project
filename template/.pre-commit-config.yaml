@@ -1,0 +1,19 @@
+# See https://docs.astral.sh/uv/guides/integration/pre-commit/
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.13
+    hooks:
+    # Linter runs first (may rewrite imports etc.), formatter runs second to clean up the result.
+      - id: ruff         # run with autofix (equivalent to running `ruff check --fix`)
+        args: [--fix]
+      - id: ruff-format  # format code (equivalent to running `ruff format`)
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.11.6
+    hooks:
+      # Keep uv.lock in sync. `always_run` makes this run on every commit rather
+      # than only when pyproject.toml is staged, which also catches a lockfile
+      # left stale by a manual edit.
+      - id: uv-lock
+        always_run: true
+      - id: uv-export

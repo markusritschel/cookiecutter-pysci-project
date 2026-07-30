@@ -1,0 +1,129 @@
+# See https://docs.astral.sh/ruff/ for settings
+# Philosophy: minimal, non-noisy baseline. Expand rule families consciously.
+line-length = 100
+indent-width = 4
+# Must not exceed `requires-python` in pyproject.toml: the UP rules rewrite to
+# syntax of this version, and CI also tests the lowest supported interpreter.
+target-version = "py310"
+
+# Specify which files/directories to check
+include = ["src/**/*.py", "tests/**/*.py", "scripts/**/*.py"]
+exclude = ["docs/", "notebooks/", "build/", ".venv/", "venv/", "htmlcov/"]
+
+# ── Formatter ──────────────────────────────────────────────────────────────────
+[format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+
+# ── Linter ─────────────────────────────────────────────────────────────────────
+[lint]
+select = [
+    "D",    # pydocstyle              — docstring presence and formatting (NumPy convention, see below)
+    "E",    # pycodestyle errors      — PEP 8 style errors
+    "W",    # pycodestyle warnings    — PEP 8 style warnings
+    "F",    # Pyflakes                — undefined names, unused imports, redefinitions
+    "I",    # isort                   — import ordering and grouping
+    "B",    # flake8-bugbear          — likely bugs and opinionated design issues
+    "C4",   # flake8-comprehensions   — prefer comprehensions over map/filter/list()
+    "C901", # McCabe complexity       — flag functions exceeding the complexity threshold (see below)
+    "N",    # pep8-naming             — enforce PEP 8 naming conventions
+    "UP",   # pyupgrade               — modernize to newer Python syntax automatically
+    "PIE",  # flake8-pie              — miscellaneous lint rules (unnecessary pass, prefer isinstance, etc.)
+    "DTZ",  # flake8-datetimez        — enforce timezone-aware datetimes (critical for scientific data pipelines)
+    "NPY",  # NumPy                   — NumPy-specific anti-patterns (numpy is a core dependency)
+    "PERF", # Perflint                — performance anti-patterns (relevant for array-heavy code)
+    "PT",   # flake8-pytest-style     — consistent pytest patterns across the test suite
+    "RUF",  # Ruff-specific           — additional best-practice rules unique to Ruff
+]
+
+# Rule families NOT included in baseline — enable per-project as needed:
+#
+#   "ANN"   — type annotation enforcement (too strict for exploratory research code)
+#   "ERA"   — commented-out code detection (researchers comment out experiments)
+#   "T20"   — print statement detection (ubiquitous in scripts/pipelines)
+#   "PL"    — pylint rules incl. PLR0913 too-many-arguments (complex scientific APIs)
+#   "FIX"   — fixme/todo markers (common in research iteration)
+#   "TD"    — structured TODO enforcement (same reason)
+#   "S"     — bandit security (relevant for web apps, rarely for research pipelines)
+#   "SIM"   — simplification suggestions (useful but can be noisy)
+#   "PD"    — pandas-vet (enable if pandas is a core dependency in your project)
+
+ignore = [
+    # Formatting — deferred to `ruff format`, which handles these automatically
+    "E501",  # line too long          — formatter wraps where possible; long strings/URLs are acceptable
+    "E701",  # multiple statements    — formatter handles this
+    "W291",  # trailing whitespace    — stripped automatically by the formatter
+    "W293",  # whitespace blank lines — harmless and stripped by the formatter
+
+    # Q (flake8-quotes) is intentionally not selected: quote style is owned by `ruff format`
+    # (quote-style = "double"). Enabling Q alongside the formatter causes conflicts.
+
+    # Style choices
+    "E402",  # module-level import not at top — path manipulation before imports is common in data science code
+    "E711",  # comparison to None     — `x == None` can be intentional in ORM/pandas query contexts
+    "E731",  # lambda assignment      — occasionally clearer than a named one-liner
+
+    # flake8-bugbear
+    "B008",  # function calls in default args  — common pattern in Typer/Click CLIs
+    "B011",  # `assert False`                  — acceptable; we do not use Python's -O optimization flag
+    "B903",  # suggest @dataclass              — too opinionated and lacks an autofix
+    "B905",  # zip() without strict=           — often intentional in data code
+
+    # flake8-comprehensions (C4 selected; intentional exceptions)
+    "C408",  # rewrite dict(a=1) as {"a": 1}  — dict() with kwargs aids readability
+    "C409",  # unnecessary tuple in list       — see https://github.com/astral-sh/ruff/issues/12912
+    "C419",  # list comprehension in any/all   — see https://github.com/astral-sh/ruff/issues/10838
+    "C420",  # dict.fromkeys() over comprehension — fromkeys is explicit and widely understood
+
+    # flake8-pie
+    "PIE790", # unnecessary pass              — pass is occasionally useful for explicitness
+
+    # pydocstyle
+    "D203",  # one-blank-line-before-class     — conflicts with D211
+    "D205",  # blank line after summary        — not required by the NumPy convention
+    "D213",  # multi-line summary second line  — conflicts with D212
+    "D400",  # First lines should end with a period  — often omitted in one-line docstrings
+    "D401",  # First line should be in imperative mood  — not universally applicable
+
+    # pyupgrade
+    "UP035", # deprecated typing imports       — enforcing this is disruptive on existing code
+
+    # NumPy
+    "NPY002", # legacy np.random.* calls       — common in existing code; migrate gradually
+]
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+# ── Per-file exemptions ─────────────────────────────────────────────────────────
+[lint.per-file-ignores]
+# Tests: self-documenting via names; allow assertions and magic values.
+# S101/PLR2004 are listed for when you enable the S and PL families above.
+"tests/**/*.py"        = ["D", "E741", "S101", "PLR2004"]
+
+# CLI entry points: docstrings add little value on __main__ and Typer/Click apps
+"**/__main__.py"       = ["D"]
+"**/cli.py"            = ["D101", "D102", "D103"]
+
+# Scripts: no docstring enforcement, allow print statements (T201 applies once
+# you enable the T20 family above)
+"scripts/**"           = ["D", "T201"]
+
+# Jupyter/Marimo notebooks: standalone expressions are the execution model (B018),
+# and unused imports are structural rather than accidental (F401).
+# NOTE: inert as configured — `include` above matches only *.py, and `exclude`
+# lists notebooks/. These take effect if you widen either.
+"**/*.ipynb"           = ["B018", "F401"]
+"notebooks/**"         = ["D", "E402", "T201", "B018", "F401"]
+
+# ── Rule configuration ──────────────────────────────────────────────────────────
+[lint.mccabe]
+max-complexity = 10
+
+[lint.isort]
+known-first-party = ["{{ package_name }}"]
+force-sort-within-sections = true
+
+[lint.pydocstyle]
+convention = "numpy"

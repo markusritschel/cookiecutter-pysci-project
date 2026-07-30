@@ -1,0 +1,23 @@
+# Development tooling for the template repository itself.
+#
+# This file declares the tools needed to *develop and test* the template
+# (i.e. to run `copier copy` against it). It is NOT part of the generated
+# project — that lives under `template/`.
+[project]
+name = "cookiecutter-pyproject"
+version = "2.0.0"
+description = "Copier template for scientific Python projects"
+requires-python = ">=3.10"
+
+[dependency-groups]
+dev = [
+    "copier>=9",
+    "jinja2-time",
+    "pytest>=8",
+]
+
+[tool.pytest.ini_options]
+# `tests/` renders the template and asserts on the generated tree; `scripts/`
+# covers the cookiecutter->copier migration helper. Listed explicitly so a bare
+# `pytest` does not try to collect a generated project left lying around.
+testpaths = ["tests", "scripts"]

@@ -1,0 +1,47 @@
+name: CI/CD Workflow
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.12']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Install uv and set the Python version
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install the project
+        run: uv sync --locked --dev
+
+      - name: Lint code, output in GitHub Actions format, no auto-fixing
+        run: uv run ruff check . --output-format=github
+
+      - name: Format check, no auto-fixing
+        run: uv run ruff format --check .
+        # NOTE: Formatting should be handled manually and should not break the CI/CD pipeline. This ensures that formatting issues are addressed in a controlled manner.
+
+      - name: Run tests
+        run: uv run pytest -v
+
+      - name: Upload coverage to Codecov
+        if: ${{ !env.ACT }}
+        uses: codecov/codecov-action@v6
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Auto-apply labels
+        uses: actions/labeler@v5
+        # NOTE: requires a .github/labeler.yml file with appropriate rules

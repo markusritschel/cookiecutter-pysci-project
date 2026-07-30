@@ -1,13 +1,13 @@
 name: CI/CD Workflow
 
-on: 
+on:
   push:
     branches: [ main, develop ]
   pull_request:
     branches: [ main ]
 
 jobs:
-  build: 
+  generate-and-test:
 
     runs-on: ubuntu-latest
     strategy:
@@ -16,56 +16,44 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Install uv and set the Python version
       uses: astral-sh/setup-uv@v7
       with:
         python-version: ${{ matrix.python-version }}
-    
+
     - name: Configure Git identity
       run: |
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git config --global user.name "github-actions[bot]"
         git config --global init.defaultBranch main
 
-    - name: Install CookieCutter & run setup
-      run: |
-        uvx cookiecutter . --no-input
-    
-    - name: Upload generated project
-      uses: actions/upload-artifact@v7
-      with:
-        name: generated-project-${{ matrix.python-version }}
-        path: python-boilerplate/
+    - name: Install the template's own dev dependencies
+      run: uv sync --locked --dev
 
-  build-package:
-    runs-on: ubuntu-latest
-    needs: build
-    strategy:
-      matrix:
-        python-version: ['3.10', '3.12']
-    defaults:
-      run:
-        working-directory: ./python-boilerplate
-    
-    steps:
-    - name: Download generated project
-      uses: actions/download-artifact@v8
-      with:
-        name: generated-project-${{ matrix.python-version }}
-        path: python-boilerplate/
-    
-    - name: Install uv and set the Python version
-      uses: astral-sh/setup-uv@v7
-      with:
-        python-version: ${{ matrix.python-version }}
-    
-    - name: Install dependencies
+    - name: Test the template
+      # Renders the template and asserts on the generated file tree. The
+      # generate-and-test steps below cannot catch a dropped file: pytest in the
+      # generated project exits 0 on the src/ doctests even with an empty tests/.
+      run: uv run pytest -q
+
+    - name: Generate a project with Copier
+      # `--trust` is required because the template runs tasks and uses the
+      # jinja2-time extension; `--with jinja2-time` provides that extension.
+      # `--vcs-ref HEAD` generates from the commit under test rather than the
+      # latest git tag (copier's default for a local git source).
       run: |
-        uv sync --all-extras
-        uv sync --dev
-      
-    - name: Run tests
-      run: |
-        uv run pytest
+        uvx --with jinja2-time copier copy --defaults --trust --vcs-ref HEAD . python-boilerplate
+
+    - name: Install the generated project
+      working-directory: ./python-boilerplate
+      run: uv sync --locked --dev
+
+    - name: Lint the generated project
+      working-directory: ./python-boilerplate
+      run: uv run ruff check .
+
+    - name: Run the generated project's tests
+      working-directory: ./python-boilerplate
+      run: uv run pytest -v

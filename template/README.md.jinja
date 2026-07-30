@@ -1,0 +1,200 @@
+# {{project_name}} <!-- omit in toc -->
+
+[![build](https://github.com/{{ github_user }}/{{ project_slug }}/actions/workflows/main.yml/badge.svg)](https://github.com/{{ github_user }}/{{ project_slug }}/actions/)
+{%- if project_license != "Not open source" %}
+[![License {{ project_license }}](https://img.shields.io/github/license/{{ github_user }}/{{ project_slug }})](./LICENSE)
+{%- endif %}
+
+{{ project_description}}
+
+
+
+## <u>Table of Contents</u> <!-- omit in toc -->
+<!-- Automatically created in VSCode with the `Markdown All in One` extension -->
+
+- [Preparation](#preparation)
+  - [Cloning the project to your local machine](#cloning-the-project-to-your-local-machine)
+  - [Setup](#setup)
+{%- if is_research_project %}
+  - [Make data available](#make-data-available)
+{%- endif %}
+- [Tips](#tips)
+  - [Plotting](#plotting)
+- [Project Structure](#project-structure)
+- [Maintainer](#maintainer)
+- [Contact \& Issues](#contact--issues)
+
+
+## Preparation
+
+### Cloning the project to your local machine
+
+To reproduce the project, clone this repository on your machine
+
+```bash
+git clone https://github.com/{{ github_user }}/{{ project_slug }}
+```
+
+### Setup
+
+This project uses [uv](https://docs.astral.sh/uv/) for dependency management and
+[just](https://just.systems/) as a task runner.
+
+Install the dependencies — this creates the virtual environment in `.venv/` and makes the
+project's own code (located in `src/`) importable, so no separate editable install is needed:
+
+```bash
+uv sync --dev
+```
+
+Activate the environment:
+
+```bash
+source .venv/bin/activate   # Linux/macOS
+.\.venv\Scripts\activate    # Windows
+```
+
+Then run the tests and build the documentation:
+
+```bash
+just test
+just docs
+```
+
+`just docs` renders the documentation in `docs/` to {% if docs_engine|lower == 'zensical' %}`site/`{% else %}`docs/_build/html/`{% endif %}, and `just docs-serve` serves it with live reload.
+Run `just` with no arguments for the full list of available tasks.
+
+<details>
+<summary>Don't have <code>just</code>? Run the tasks directly</summary>
+
+Every recipe is a thin wrapper around a `uv` command, so `just` is a convenience rather than a
+hard requirement. Either install it with the toolchain you already have —
+
+```bash
+uv tool install rust-just
+```
+
+— or run the underlying commands directly:
+
+| Task                  | With `just`      | Directly                                                                              |
+| --------------------- | ---------------- | ------------------------------------------------------------------------------------- |
+| Run the tests         | `just test`      | `uv run --group test pytest`                                                          |
+| Format and autofix    | `just format`    | `uv run --group dev ruff format . && uv run --group dev ruff check --fix .`            |
+| Lint without changing | `just lint`      | `uv run --group dev ruff format --check . && uv run --group dev ruff check .`          |
+| Coverage report       | `just coverage`  | `uv run --group test coverage run -m pytest . && uv run --group test coverage report -m && uv run --group test coverage html` |
+{% if docs_engine|lower == 'sphinx' -%}
+| Build the docs        | `just docs`      | `uv run --group docs sphinx-build -b html docs/ docs/_build/html`                      |
+{% elif docs_engine|lower == 'zensical' -%}
+| Build the docs        | `just docs`      | `uv run --group docs zensical build`                                                  |
+{% elif docs_engine|lower == 'myst' -%}
+| Build the docs        | `just docs`      | `cd docs && uv run --group docs myst build --html`                                     |
+{% endif -%}
+| Build the package     | `just build`     | `rm -rf build dist && uv build`                                                       |
+
+The `justfile` is the authoritative list — read it for anything not covered here.
+
+</details>
+
+> [!TIP]
+> To add a dependency, use `uv add <package>` rather than editing `pyproject.toml` by hand —
+> that keeps `uv.lock` in sync. Use `uv add --group dev <package>` for development-only tools.
+
+{% if is_research_project %}
+### Make data available
+
+Next, make the data available or accessible under `data/` (see project structure below and details in the documentation).
+If the project is dealing with large amounts of data that reside somewhere outside your home directory,
+I would suggest that you link the respective subdirectories inside `data/`.
+The Python scripts should be able to follow symlinks.
+
+
+<u>A recommendation for long-running tasks:</u><br>
+Some tasks like data processing will need a long time.
+It is highly recommended that you use a detachable terminal environment like `screen` or [`tmux`](https://github.com/tmux/tmux/wiki).
+This way you can detach from the session (even close your terminal) without losing or ending the process.
+Alternatively, if you work on a high-performance computer, make use of the queuing system to submit jobs.
+{% endif %}
+
+## Tips
+
+### Plotting
+
+To make your plots look more uniform, use a style sheet and apply it to all your plotting scripts.
+In the `./assets/mpl_styles/` directory, you find two basic style sheets that you can use as a starting point.
+More information on how to use style sheets can be found in the [Matplotlib documentation](https://matplotlib.org/stable/tutorials/introductory/customizing.html).
+Matplotlib also provides [a set of default stylesheets](https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html), which you can also use.
+At the beginning of your plotting script, add the following lines:
+
+```python
+from {{ package_name }} import BASE_DIR
+import matplotlib.pyplot as plt
+plt.style.use(BASE_DIR/'assets/mpl_styles/white_paper.mplstyle')
+```
+
+
+## Project Structure
+
+    ├── assets             <- A place for assets like shapefiles or config files
+    │   └── mpl_styles     <- Matplotlib style sheets
+    │
+{%- if is_research_project %}
+    ├── data               <- Contains all data used for the analyses in this project.
+    │   │                     The sub-directories can be links to the actual location of your data.
+    │   │                     However, they should never be under version control! (-> .gitignore)
+    │   ├── interim        <- Intermediate data that have been transformed from the raw data
+    │   ├── processed      <- The final, processed data used for the actual analyses
+    │   └── raw            <- The original, immutable(!) data
+{%- endif %}
+    │
+    ├── docs               <- The technical documentation (engine: {{ docs_engine }}).
+    │                         This should contain only documentation of the code and the assets.
+{%- if is_research_project %}
+    │                         A report of the actual project should be placed in `reports/`.
+{%- endif %}
+    │
+    ├── logs               <- Storage location for the log files being generated by scripts (tip: use `lnav` to view)
+    │
+{%- if is_research_project %}
+    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
+    │   │                     and a short `-` or `_` delimited description, e.g. `01-initial-analyses`
+    │   ├── exploratory    <- Notebooks for exploratory tasks
+    │   └── reports        <- Notebooks generating reports and figures
+    │
+    ├── references         <- Data descriptions, manuals, and all other explanatory materials
+    │
+    ├── reports            <- Generated reports (e.g. HTML, PDF, LaTeX, etc.)
+    │   └── figures        <- Generated graphics and figures to be used in reporting
+    │
+    ├── scripts            <- High-level scripts that use (low-level) source code from `src/`
+{%- endif %}
+    ├── src                <- Source code (and only source code!) for use in this project
+    │   └── {{ package_name }}
+    │       ├── __init__.py  <- Provides the global path variables and utility functions
+    │       ├── cli.py       <- Command-line entry point
+    │       └── core         <- Core functionality (logging setup, `save()` helper)
+    │
+    ├── tests              <- Contains the tests for the code in `src/`
+    │
+    ├── .env               <- In this file, specify all your custom environment variables
+    │                         Keep this out of version control!
+    ├── CHANGELOG.md       <- All major changes should go in there
+    ├── CITATION.cff       <- The citation information for this project (update your ORCID ID!)
+    ├── justfile           <- Task runner recipes; run `just` to list them
+    ├── LICENSE            <- The license used for this project
+    ├── pyproject.toml     <- Configuration file for the Python project (manages all dependencies)
+    ├── README.md          <- The top-level README of this project
+    ├── ruff.toml          <- Linter and formatter configuration
+    └── uv.lock            <- Lock file for reproducible dependency resolution (managed by uv)
+
+
+## Maintainer
+
+- [{{ github_user }}](https://github.com/{{ github_user }})
+
+## Contact & Issues
+
+For any questions or issues, please contact me via {{ user_email }} or open an [issue](https://github.com/{{ github_user }}/{{ project_slug }}/issues).
+
+---
+
+&copy; [{{ user_name }}](https://github.com/{{ github_user }}), {% now 'utc', '%Y' %}

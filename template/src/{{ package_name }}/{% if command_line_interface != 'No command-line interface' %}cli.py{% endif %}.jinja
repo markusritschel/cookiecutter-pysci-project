@@ -1,0 +1,90 @@
+{%- set banner -%}
+  $$\      $$\           $$\
+  $$ | $\  $$ |          $$ |
+  $$ |$$$\ $$ | $$$$$$\  $$ | $$$$$$$\  $$$$$$\  $$$$$$\$$$$\   $$$$$$\
+  $$ $$ $$\$$ |$$  __$$\ $$ |$$  _____|$$  __$$\ $$  _$$  _$$\ $$  __$$\
+  $$$$  _$$$$ |$$$$$$$$ |$$ |$$ /      $$ /  $$ |$$ / $$ / $$ |$$$$$$$$ |
+  $$$  / \$$$ |$$   ____|$$ |$$ |      $$ |  $$ |$$ | $$ | $$ |$$   ____|
+  $$  /   \$$ |\$$$$$$$\ $$ |\$$$$$$$\ \$$$$$$  |$$ | $$ | $$ |\$$$$$$$\
+  \__/     \__| \_______|\__| \_______| \______/ \__| \__| \__| \_______|
+{%- endset -%}
+{% if command_line_interface == 'Typer' -%}
+"""CLI script for {{ package_name }}."""
+
+from rich.console import Console
+import typer
+
+app = typer.Typer()
+console = Console()
+
+
+@app.command()
+def main():
+    """Print a placeholder banner."""
+    console.print(
+        r"""
+{{ banner }}
+    """,
+        style="green",
+    )
+    # https://patorjk.com/software/taag/
+    console.print("Replace this message by putting your code into {{ package_name }}.cli.main")
+    console.print("See Typer documentation at https://typer.tiangolo.com/")
+{%- elif command_line_interface == 'Click' -%}
+"""CLI script for {{ package_name }}."""
+
+import click
+from rich.console import Console
+
+console = Console()
+
+
+@click.command()
+def app():
+    """Print a placeholder banner."""
+    console.print(
+        r"""
+{{ banner }}
+    """,
+        style="green",
+    )
+    # https://patorjk.com/software/taag/
+    console.print("Replace this message by putting your code into {{ package_name }}.cli.app")
+    console.print("See Click documentation at https://click.palletsprojects.com/")
+{%- elif command_line_interface == 'Docopt' -%}
+"""{{ project_slug }}.
+
+docopt derives the parser from this module docstring, so keep it in sync with the
+options the CLI accepts.
+
+Usage:
+  {{ project_slug }}
+  {{ project_slug }} (-h | --help)
+
+Options:
+  -h --help    Show this message.
+"""
+
+from docopt import docopt
+from rich.console import Console
+
+console = Console()
+
+
+def app():
+    """Print a placeholder banner."""
+    docopt(__doc__)
+    console.print(
+        r"""
+{{ banner }}
+    """,
+        style="green",
+    )
+    # https://patorjk.com/software/taag/
+    console.print("Replace this message by putting your code into {{ package_name }}.cli.app")
+    console.print("See docopt documentation at http://docopt.org/")
+{%- endif %}
+
+
+if __name__ == "__main__":
+    app()

@@ -1,0 +1,62 @@
+name: Documentation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - "src/**"
+      - "*.md"
+  workflow_dispatch:
+
+jobs:
+  build-documentation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Install uv and set the Python version
+        uses: astral-sh/setup-uv@v7
+{% if docs_engine|lower != 'zensical' %}
+      - name: Install Pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+{% endif %}
+      - name: Install documentation dependencies
+        run: uv sync --group docs
+
+      - name: Build documentation
+{%- if docs_engine|lower == 'sphinx' %}
+        run: uv run --group docs sphinx-build -b html docs/ docs/_build/html
+{%- elif docs_engine|lower == 'zensical' %}
+        run: uv run --group docs zensical build
+{%- elif docs_engine|lower == 'myst' %}
+        run: cd docs && uv run --group docs myst build --html
+{%- endif %}
+
+      - name: Upload documentation artifacts
+        uses: actions/upload-pages-artifact@v4
+        with:
+          name: documentation
+{%- if docs_engine|lower == 'zensical' %}
+          path: site/
+{%- else %}
+          path: docs/_build/html/
+{%- endif %}
+
+  deploy-documentation:
+    runs-on: ubuntu-latest
+    needs: build-documentation
+    environment:
+      name: github-pages
+      url: {% raw %}${{ steps.deployment.outputs.page_url }}{% endraw %}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy documentation
+        id: deployment  # referenced by the environment url above
+        if: {% raw %}${{ !env.ACT }}{% endraw %}
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: documentation
