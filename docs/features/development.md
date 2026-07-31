@@ -17,7 +17,7 @@ This template provides a full, modern development environment with integrated to
 | **pytest**     | [Testing & coverage](./code-quality.md)             |
 | **pre-commit** | [Git hooks for automated checks](./code-quality.md) |
 | **Just**       | [Task automation](./justfile.md)                    |
-| **Sphinx**     | [Documentation](./documentation.md)                 |
+| **Sphinx**, **Zensical** or **MyST** | [Documentation](./documentation.md) — whichever you chose at generation |
 
 
 ## Getting Started

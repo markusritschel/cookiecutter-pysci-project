@@ -60,11 +60,13 @@ All answers can be changed afterward, but `package_name` in particular occurs in
 **`project_license`**
 <br />   The license to include. Choices: `MIT`, `BSD`, `ISC`, `Apache 2.0`, `GPL v3`, `Not open source`.
 
-**`docs_engine`**
-<br />   Documentation toolchain to set up:
+**`docs_engine`** *(default: `Sphinx`)*
+<br />   Documentation toolchain to set up. This determines the contents of `docs/`, the `docs`
+    dependency group, the commands behind `just docs`, and the generated documentation workflow —
+    see [Documentation](features/documentation.md) for a full comparison.
 
-| Choice    | Description                                  |
-| --------- | -------------------------------------------- |
-| `Sphinx`  | Classic Python docs with MyST Markdown       |
-| `Zensical`| MkDocs Material-based, modern look           |
-| `MyST`    | Lightweight Markdown-first Sphinx variant    |
+| Choice    | Description                                                                 |
+| --------- | --------------------------------------------------------------------------- |
+| `Sphinx`  | Classic Python docs, written in Markdown via MyST. The only option with API docs generated from your docstrings, and the right default for a package |
+| `Zensical`| Successor to Material for MkDocs. Fastest builds and the most polished default site; no API docs and no BibTeX |
+| `MyST`    | [MyST-MD](https://mystmd.org/), a separate Markdown-first toolchain for scientific writing (*not* a Sphinx variant). Native citations, no API docs |
