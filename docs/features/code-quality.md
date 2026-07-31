@@ -155,7 +155,7 @@ addopts = [
 ]
 ```
 
-1. These are the paths where `pytest` will search for tests.
+1. Note that `src` is included alongside `tests` — see [Doctests](#doctests-your-docstrings-are-tests) below.
 
 
 
@@ -180,6 +180,51 @@ addopts = [
     - all public functions
     - edge cases and error conditions
     - critical code paths
+
+
+### Doctests: your docstrings are tests
+
+`testpaths` includes `src`, and `addopts` enables `--doctest-modules`. Together these mean **every
+`>>>` example in your source docstrings is collected and executed as a test**. This is easy to
+overlook and is a common first surprise: adding an illustrative example to a docstring can turn a
+green test suite red.
+
+```python
+def add(a: int, b: int) -> int:
+    """Add two numbers.
+
+    Examples
+    --------
+    >>> add(2, 3)
+    5
+    """
+    return a + b
+```
+
+`--doctest-continue-on-failure` means a failing line does not abort the remaining examples in the
+same docstring, so you see every mismatch in one run rather than one per iteration.
+
+**Skipping an illustrative example.** Not every example is meant to run — some reference files that
+do not exist, or objects the reader is expected to supply. The generated project's root
+`conftest.py` injects `pytest` into the doctest namespace precisely for this case, so you can bail
+out of an example from inside the docstring:
+
+```python
+    Examples
+    --------
+    >>> pytest.skip()
+    >>> save(my_object, "/tmp/out.nc")
+    Save Dataset to /tmp/out.nc
+```
+
+Everything after `pytest.skip()` is reported as skipped rather than failed. Without that
+`conftest.py` fixture, `pytest` would be an undefined name inside the doctest namespace and the
+example would error instead.
+
+!!! info "Consequence for empty test suites"
+    Because the doctests in `src/` are collected, `pytest` exits 0 in a freshly generated project
+    even before you have written a single test in `tests/`. A green run is therefore not by itself
+    evidence that your own tests exist.
 
 
 ## Pre-commit Hooks
@@ -295,17 +340,6 @@ possibly-unresolved-reference = "error"
 possibly-missing-attribute = "error"
 ```
 
-## Further Reading
-
-- [Ruff Documentation](https://docs.astral.sh/ruff/)
-- [Ruff Rules Reference](https://docs.astral.sh/ruff/rules/)
-- [ty Documentation](https://docs.astral.sh/ty/)
-- [pytest Documentation](https://pytest.org/)
-- [Python Type Hints](https://docs.python.org/3/library/typing.html)
-- [PEP 8 Style Guide](https://www.python.org/dev/peps/pep-0008/)
-- [PEP 257 Docstring Conventions](https://www.python.org/dev/peps/pep-0257/)
-- [pre-commit Documentation](https://pre-commit.com/)
-- [uv pre-commit integration](https://docs.astral.sh/uv/guides/integration/pre-commit/)
 1. Only needed to check against a different version than the interpreter in your environment.
    `ty` otherwise infers it from `requires-python`.
 
@@ -317,3 +351,14 @@ is visible. See the [ty rules reference](https://docs.astral.sh/ty/rules/) for t
     subtables. Putting a key directly under `[tool.ty]` is a hard error — `ty` refuses to run and
     reports the whole `pyproject.toml` as invalid.
 
+## Further Reading
+
+- [Ruff Documentation](https://docs.astral.sh/ruff/)
+- [Ruff Rules Reference](https://docs.astral.sh/ruff/rules/)
+- [ty Documentation](https://docs.astral.sh/ty/)
+- [pytest Documentation](https://pytest.org/)
+- [Python Type Hints](https://docs.python.org/3/library/typing.html)
+- [PEP 8 Style Guide](https://www.python.org/dev/peps/pep-0008/)
+- [PEP 257 Docstring Conventions](https://www.python.org/dev/peps/pep-0257/)
+- [pre-commit Documentation](https://pre-commit.com/)
+- [uv pre-commit integration](https://docs.astral.sh/uv/guides/integration/pre-commit/)
