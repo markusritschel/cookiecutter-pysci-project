@@ -54,6 +54,7 @@ The package's `__init__.py` pre-defines a set of path variables that are availab
 | Variable   | Points to              | Available when          |
 | ---------- | ---------------------- | ----------------------- |
 | `BASE_DIR` | project root directory | always                  |
+| `LOG_DIR`  | `logs/`                | always                  |
 | `DATA_DIR` | `data/`                | `is_research_project`   |
 | `PLOT_DIR` | `reports/figures/`     | `is_research_project`   |
 
@@ -65,6 +66,10 @@ from mypackage import DATA_DIR, PLOT_DIR
 df = pd.read_csv(DATA_DIR / "raw" / "input.csv")
 fig.savefig(PLOT_DIR / "result.png")
 ```
+
+For research projects, `scripts/` is also appended to `sys.path` at import time, so modules in there
+can be imported from notebooks directly. See [Package Conventions](./package-conventions.md) for the
+logging setup and the `save()` helper that goes with these paths.
 
 ## Data Management
 

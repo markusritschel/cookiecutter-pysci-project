@@ -189,3 +189,4 @@ The `src/` layout ensures tests run against installed package.
 
 
 
+- [Package Conventions](./package-conventions.md) - Path variables, logging, `save()`
