@@ -8,19 +8,21 @@ icon: material/package-variant-closed
 
 ## Virtual Environment
 
-uv automatically creates and manages virtual environments. When you run commands with `uv`, it creates a `.venv` directory if one doesn't exist:
+uv automatically creates and manages virtual environments. 
 
-=== "macOS/Linux"
+To initialize and activate a virtual environment:
+
+=== ":fontawesome-brands-apple: MacOS/:fontawesome-brands-linux: Linux"
     ```bash
-    # Initialize and activate the virtual environment
     uv venv
+    # If a venv already exists, say "no" and just activate it:
     source .venv/bin/activate
     ```
 
-=== "Windows"
+=== ":fontawesome-brands-windows: Windows"
     ```powershell
-    # Initialize and activate the virtual environment
     uv venv
+    # If a venv already exists, say "no" and just activate it:
     .\.venv\Scripts\activate
     ```
 
@@ -30,17 +32,31 @@ The template defines dependencies in `pyproject.toml` with organized dependency 
 
 ```toml title="pyproject.toml"
 [project]
-dependencies = [
-  "click",
+dependencies = [  # (1)!
   "colorama",
-  "pandas",
+  "dask",
+  "Deprecated",
+  "ipykernel",
+  "ipython",
+  "ipywidgets",
+  "jupyterlab",
+  "jupytext",
+  "marimo",
+  "markdown",
+  "matplotlib",
   "numpy",
+  "pandas",
+  "python-dotenv",
+  "rich",
+  "tqdm",
+  "xarray",
 ]
 
 [dependency-groups]
 dev = [
   {include-group = "lint"},
-  {include-group = "test"}
+  {include-group = "test"},
+  "pre-commit"
 ]
 lint = [
   "ruff",
@@ -48,14 +64,19 @@ lint = [
 ]
 test = [
   "pytest",
-  "pytest-cov"
+  "pytest-cov",
+  "safety"
 ]
-docs = [
-  "sphinx",
-  "sphinx-autoapi",
-  "myst-parser"
+docs = [  # (2)!
+  # ...
 ]
 ```
+
+1. A scientific baseline, installed in every generated project. Prune what you don't need —
+   `uv remove <package>` keeps `uv.lock` in sync. If you chose a CLI library during generation
+   (Typer, Click or Docopt), it is added here as well.
+2. The contents depend on the `docs_engine` you chose: the full Sphinx toolchain, `zensical` +
+   `mkdocstrings-python`, or `mystmd`. See [Documentation](./documentation.md).
 
 ## Common uv Commands
 
@@ -85,16 +106,19 @@ uv build
 
 ## Dependency Resolution
 
-uv automatically resolves dependency conflicts and creates a `uv.lock` file that pins exact versions for reproducible builds. This lock file should be committed to version control to ensure all team members use identical dependency versions.
+uv automatically resolves dependency conflicts and creates a `uv.lock` file that pins exact versions for reproducible builds. This lock file should be committed to version control to ensure all collaborators use identical dependency versions.
 
 ## Integration with Tasks
 
 The template's `justfile` tasks use `uv run` with specific dependency groups:
 
-- `just lint` - Runs `ruff check` via the `test` group
-- `just test` - Runs `pytest` via the `test` group
-- `just qa` - Runs format, lint, type check, and tests via the `test` group
-- `just docs` - Builds Sphinx docs via the `docs` group
+- `just format` / `just lint` – Run `ruff` via the `dev` group
+- `just qa` – Runs format, lint, import sorting, type check and tests via the `dev` group
+- `just test` / `just pdb` / `just coverage` – Run `pytest` via the `test` group
+- `just docs` / `just docs-serve` – Build the documentation via the `docs` group
+
+The split matters when you install selectively: `dev` includes both `lint` and `test`, so
+`uv sync --dev` covers everything you need for `just qa`.
 
 See [Task Automation with Just](./justfile.md) for complete task documentation.
 

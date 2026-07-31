@@ -89,7 +89,7 @@ The `git rm --cached` step is why example files land in the working tree but not
 
 `src/` layout; `BASE_DIR`/`LOG_DIR`/`DATA_DIR`/`PLOT_DIR` exported from the package `__init__` so scripts and notebooks resolve paths from the project root; a `singledispatch` `save()` in `core/utils.py`; `justfile` as the task runner (`just qa`, `just test`, `just docs`); ruff + ty + pytest (`--doctest-modules`, so `src/` docstrings are tests); jupytext triple-format notebook pairing. `template/.claude/CLAUDE.md.jinja` documents all of this for the generated project and is the authoritative description — update it whenever the generated structure changes.
 
-Note `template/justfile.jinja` and `template/Makefile.jinja` wrap most of their bodies in `{% raw %}` because `just`/`make` use `{{ }}` for their own variables; only the `docs_engine` branches sit outside the raw blocks.
+Note `template/justfile.jinja` wraps most of its body in `{% raw %}` because `just` uses `{{ }}` for its own variables; only the `docs_engine` branches (`docs`, `docs-serve`, `clean-docs`) sit outside the raw blocks.
 
 ## Conventions
 

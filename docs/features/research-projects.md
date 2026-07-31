@@ -54,6 +54,7 @@ The package's `__init__.py` pre-defines a set of path variables that are availab
 | Variable   | Points to              | Available when          |
 | ---------- | ---------------------- | ----------------------- |
 | `BASE_DIR` | project root directory | always                  |
+| `LOG_DIR`  | `logs/`                | always                  |
 | `DATA_DIR` | `data/`                | `is_research_project`   |
 | `PLOT_DIR` | `reports/figures/`     | `is_research_project`   |
 
@@ -65,6 +66,10 @@ from mypackage import DATA_DIR, PLOT_DIR
 df = pd.read_csv(DATA_DIR / "raw" / "input.csv")
 fig.savefig(PLOT_DIR / "result.png")
 ```
+
+For research projects, `scripts/` is also appended to `sys.path` at import time, so modules in there
+can be imported from notebooks directly. See [Package Conventions](./package-conventions.md) for the
+logging setup and the `save()` helper that goes with these paths.
 
 ## Data Management
 
@@ -93,6 +98,43 @@ data/interim/**/*.pkl
 
 - `notebooks/exploratory/` - Quick experimentation
 - `notebooks/reports/` - Publication-ready notebooks
+
+### Version control with jupytext
+
+Notebooks are large JSON files carrying metadata and cell outputs, which makes their diffs
+unreadable and their merges painful. The template already configures
+[jupytext](https://jupytext.readthedocs.io/) to solve this:
+
+```toml title="pyproject.toml"
+[tool.jupytext]
+formats = "ipynb,py:percent,md:myst"
+```
+
+Each notebook is paired with a plain Python file (`py:percent`) and a MyST Markdown file. Those
+carry the *code* without the outputs and metadata, so they diff and merge like ordinary source
+files. Sync after editing:
+
+```bash
+uv run jupytext --sync notebooks/*.ipynb
+```
+
+jupytext also integrates into Jupyter as a plugin, which syncs on save.
+
+!!! tip "What to commit"
+    Commit the paired `.py`/`.md` files and keep the `.ipynb` out of version control — or commit it
+    with outputs stripped. The paired files are enough to reconstruct the notebook.
+
+### The startup script
+
+Research projects get `notebooks/jupyter_startup.ipy`. Begin each notebook with:
+
+```python
+%run ../jupyter_startup.ipy
+```
+
+It enables autoreload (so edits to `src/` take effect without restarting the kernel), sets sensible
+pandas and xarray display options, applies the default matplotlib style from `assets/mpl_styles/`,
+and makes `BASE_DIR`, `LOG_DIR`, `DATA_DIR` and `PLOT_DIR` available.
 
 Typical notebook structure:
 

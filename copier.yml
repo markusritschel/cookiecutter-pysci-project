@@ -1,6 +1,9 @@
 # Copier configuration for the cookiecutter-pyproject template.
 #
-# Run with:  uvx --with jinja2-time copier copy gh:markusritschel/cookiecutter-pyproject my-project
+# Run with:  uvx --with jinja2-time copier copy --trust gh:markusritschel/cookiecutter-pyproject my-project
+#
+# `--trust` is mandatory: `_jinja_extensions` and `_tasks` below are both classified as unsafe by
+# copier, which aborts generation entirely if the flag is missing.
 #
 # Settings ---------------------------------------------------------------------
 _subdirectory: template
@@ -33,7 +36,17 @@ _skip_if_exists:
   - "scripts/*.py"
 
 _message_before_copy: |
-  ☝🏼 Important: You will now be asked to fill in some information about your project.
+  ·____           ____                                   __      
+  /\  _`\        /\  _`\               __               /\ \__   
+  \ \ \L\ \__  __\ \ \L\ \_ __   ___  /\_\     __    ___\ \ ,_\  
+   \ \ ,__/\ \/\ \\ \ ,__/\`'__\/ __`\\/\ \  /'__`\ /'___\ \ \/  
+    \ \ \/\ \ \_\ \\ \ \/\ \ \//\ \L\ \\ \ \/\  __//\ \__/\ \ \_ 
+     \ \_\ \/`____ \\ \_\ \ \_\\ \____/_\ \ \ \____\ \____\\ \__\
+      \/_/  `/___/> \\/_/  \/_/ \/___//\ \_\ \/____/\/____/ \/__/
+               /\___/                 \ \____/                   
+               \/__/                   \/___/                    
+
+  You will now be asked to fill in some information about your project.
 
   For the project name, you may use a normal name with spaces, e.g. "My new Project".
   The project slug (used for the directory name) is derived from it automatically by

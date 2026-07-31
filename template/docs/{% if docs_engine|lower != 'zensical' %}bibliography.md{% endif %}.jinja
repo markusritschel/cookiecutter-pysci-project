@@ -1,0 +1,14 @@
+# Bibliography
+
+The following bibliography is a list of resources that I applied in some of the functions here.
+
+{% if docs_engine|lower == 'sphinx' -%}
+```{bibliography}
+:all:
+:style: plain
+```
+{%- elif docs_engine|lower == 'myst' -%}
+MyST renders the references of each page automatically wherever you cite with
+``{cite}`yourCitekey` ``, drawing on the `references.bib` declared in `myst.yml`. Entries you never
+cite do not appear anywhere — keep this page as a landing spot for citation notes, or delete it.
+{%- endif %}

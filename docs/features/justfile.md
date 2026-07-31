@@ -20,7 +20,7 @@ uv tool install rust-just
 ```
 
 Other options (Homebrew, Scoop, winget, Cargo, distro packages) are listed in the
-[just documentation](https://just.systems/man/en/packages.html).
+[official documentation](https://just.systems/man/en/packages.html).
 
 !!! tip "Not installed? You are not blocked"
     Every recipe is a thin wrapper around a `uv` command, so you can always read the `justfile` and
@@ -77,7 +77,7 @@ my-new-task:
     # Add your commands
 ```
 
-For more details on Just, read the [Just documentation](https://just.systems/man/en/).
+For more details on Just, read the [official documentation](https://just.systems/man/en/).
 
 
 
@@ -87,7 +87,7 @@ I usually structure my data-processing workflow such that I can run a single pro
 ```bash
 python scripts/process-raw-data.py -i data/raw/input_data.csv  -o ./data/interim/ --clean-data --fill_nan
 ```
-[^CLI]: The Python packages [click](https://click.palletsprojects.com/), [fire](https://google.github.io/python-fire/), and [docopt](http://docopt.org/) provide neat functionalities to convert your scripts into interactive command-line interfaces.
+[^CLI]: The Python packages [Typer](https://typer.tiangolo.com/), [Click](https://click.palletsprojects.com/) and [docopt](http://docopt.org/) provide neat functionalities to convert your scripts into interactive command-line interfaces. The template can scaffold any of the three for your package — see the `command_line_interface` [prompt](../prompts.md#tool-choices).
 
 These commands I set as targets in the justfile, for example:
 

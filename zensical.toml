@@ -16,6 +16,8 @@ nav = [
     "features/justfile.md",
     "features/uv.md",
     "features/code-quality.md",
+    "features/package-conventions.md",
+    "features/cli.md",
     "features/documentation.md",
     "features/github-actions.md",
     "features/publish-package.md",
@@ -42,7 +44,7 @@ site_author = "Markus Ritschel"
 # The site_url is the canonical URL for your site. When building online
 # documentation you should set this.
 # Read more: https://zensical.org/docs/setup/basics/#site_url
-#site_url = "https://www.example.com/"
+site_url = "https://markusritschel.github.io/cookiecutter-pyproject/"
 
 # The copyright notice appears in the page footer and can contain an HTML
 # fragment.
@@ -353,3 +355,12 @@ emoji_index = "zensical.extensions.emoji.twemoji"
 emoji_generator = "zensical.extensions.emoji.to_svg"
 
 
+[project.validation]
+invalid_links = true
+invalid_link_anchors = true
+
+
+[project.extra.version]
+provider = "mike"
+default = "stable"
+alias = true

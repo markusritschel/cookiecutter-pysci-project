@@ -15,22 +15,27 @@ The template uses two separate workflow files:
 
 ### `main.yml` — CI
 
-Runs on every push to `main` or `develop`, and on pull requests targeting `main`.
+Runs on every push to `main` or `develop`, on pull requests targeting `main`, and on demand via the GitHub Actions UI (`workflow_dispatch`).
 
 **`build` job** (matrix: Python 3.10, 3.12):
 
 1. **Setup**: Installs uv and syncs all dev dependencies (`uv sync --locked --dev`)
-2. **Format check & lint**: Runs `ruff format --check` followed by `ruff check` — both must pass; no auto-fixing
-3. **Testing**: Runs `pytest -v`
-4. **Coverage**: Uploads coverage data to [Codecov](https://codecov.io/) (requires `CODECOV_TOKEN` secret)
+2. **Lint**: Runs `ruff check . --output-format=github`, so violations appear as inline annotations on the diff
+3. **Format check**: Runs `ruff format --check .` — no auto-fixing[^ci-format]
+4. **Testing**: Runs `pytest -v`
+5. **Coverage**: Uploads coverage data to [Codecov](https://codecov.io/) (requires `CODECOV_TOKEN` secret)
+6. **Labeling**: Applies labels via [`actions/labeler`](https://github.com/actions/labeler) according to the rules in `.github/labeler.yml`
+
+[^ci-format]: Formatting is deliberately kept out of CI's control: it should be applied locally
+    (`just format`, or the pre-commit hook) rather than committed back by a workflow.
 
 ### `docs.yml` — Documentation
 
 Runs only on pushes to `main` when documentation-related files change (`docs/**`, `src/**`, `*.md`). Can also be triggered manually via the GitHub Actions UI (`workflow_dispatch`).
 
-**`build-documentation` job**: Installs Pandoc and builds Sphinx docs
+**`build-documentation` job**: Installs uv, syncs the `docs` dependency group, and builds the documentation with the engine you chose during generation. The workflow is generated to match that choice — Sphinx and MyST additionally get Pandoc installed, and the artifact is uploaded from `docs/_build/html/` for Sphinx and MyST, or from `site/` for Zensical.
 
-**`deploy-documentation` job** (runs after `build-documentation`): Deploys built docs to GitHub Pages
+**`deploy-documentation` job** (runs after `build-documentation`): Deploys the uploaded artifact to GitHub Pages
 
 
 ## Workflow Status

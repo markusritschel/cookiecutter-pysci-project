@@ -19,13 +19,20 @@ icon: material/school
 ## Create a new project using the template
 Make sure to have `uv` installed, and then run the following command to create a new project from this template:
 ```bash
-uvx --with jinja2-time copier copy gh:markusritschel/cookiecutter-pyproject my-project
+uvx --with jinja2-time copier copy --trust gh:markusritschel/cookiecutter-pyproject my-project
 ```
 This generates the project in a new `my-project/` directory — replace `my-project` with the directory name you want.
 
+!!! warning "`--trust` is required"
+    The template uses the `jinja2-time` Jinja extension (for the copyright year in `LICENSE` and
+    `CITATION.cff`) and runs a post-generation task (`git init` + first commit, `uv sync --dev`,
+    pre-commit installation). copier treats both as unsafe and aborts with
+    `Template uses potentially unsafe features: jinja_extensions, tasks` unless you pass `--trust`.
+    Nothing is generated in that case.
+
 <!-- Alternative URIs:
-copier copy https://github.com/markusritschel/cookiecutter-pyproject.git my-project
-copier copy git+ssh://git@github.com/markusritschel/cookiecutter-pyproject.git my-project
+copier copy --trust https://github.com/markusritschel/cookiecutter-pyproject.git my-project
+copier copy --trust git+ssh://git@github.com/markusritschel/cookiecutter-pyproject.git my-project
 -->
 
 copier then asks you a series of questions to customize your project (see [Prompts](prompts.md) for what each one means).
@@ -53,12 +60,18 @@ A typical run looks like this:
 🎤 The initial version of your project
    0.1.0
 🎤 Which command-line interface library would you like to use?
-   Typer
+   No command-line interface
 🎤 Choose a license for your project
    MIT license
 🎤 Which documentation engine would you like to use?
    Sphinx
 ```
+
+The values shown are the defaults. For the two choice questions with real alternatives, pick
+deliberately: `command_line_interface` decides whether a `cli.py` and a `[project.scripts]` entry
+point are generated (Typer, Click or Docopt), and `docs_engine` selects between Sphinx, Zensical and
+MyST — which determines the contents of `docs/`, the `docs` dependency group and the build commands
+behind `just docs`. See [Prompts](prompts.md) for the full reference.
 
 If everything goes well, you should see a message like this at the end of the setup process:
 
