@@ -1,6 +1,9 @@
 # Copier configuration for the cookiecutter-pyproject template.
 #
-# Run with:  uvx --with jinja2-time copier copy gh:markusritschel/cookiecutter-pyproject my-project
+# Run with:  uvx --with jinja2-time copier copy --trust gh:markusritschel/cookiecutter-pyproject my-project
+#
+# `--trust` is mandatory: `_jinja_extensions` and `_tasks` below are both classified as unsafe by
+# copier, which aborts generation entirely if the flag is missing.
 #
 # Settings ---------------------------------------------------------------------
 _subdirectory: template

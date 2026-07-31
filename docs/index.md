@@ -18,16 +18,28 @@ Depending on the responses to the [initial prompts](prompts), it can create a bo
 ## Quickstart
 To get started, simply run
 ```bash
-uvx --with jinja2-time copier copy gh:markusritschel/cookiecutter-pyproject my-project
+uvx --with jinja2-time copier copy --trust gh:markusritschel/cookiecutter-pyproject my-project
 ```
 and follow the [prompts](prompts) to customize your project.
 Once finished, navigate into the created `my-project/` directory to start working on your new Python project!
+
+!!! warning "`--trust` is required"
+    copier classifies two of the features this template relies on as unsafe and refuses to run
+    without `--trust`:
+
+    - the **`jinja2-time` extension**, which stamps the current year into `LICENSE` and `CITATION.cff`, and
+    - a **post-generation task**, which initializes the git repository, makes the first commit,
+      runs `uv sync --dev` and installs the pre-commit hooks.
+
+    Omitting the flag aborts generation with
+    `Template uses potentially unsafe features: jinja_extensions, tasks` — no project directory
+    is created. The same applies to [`copier update`](tips.md#keep-your-project-up-to-date-with-copier).
 
 ??? note "Without uv"
     If you don't want to use uv, you can also install copier globally and run it with the following commands:
     ```bash
     pip install copier jinja2-time
-    copier copy gh:markusritschel/cookiecutter-pyproject my-project
+    copier copy --trust gh:markusritschel/cookiecutter-pyproject my-project
     ```
 
 

@@ -78,9 +78,16 @@ This includes
 The easiest way to get started is using [uv](https://docs.astral.sh/uv/).
 Make sure you have `uv` installed, and then run the following command to create a new project from this template:
 ```bash
-$ uvx --with jinja2-time copier copy gh:markusritschel/cookiecutter-pyproject my-project
+$ uvx --with jinja2-time copier copy --trust gh:markusritschel/cookiecutter-pyproject my-project
 ```
 This creates the project in a new `my-project/` directory (replace `my-project` with the path you want).
+
+> [!IMPORTANT]
+> `--trust` is not optional. The template uses the `jinja2-time` Jinja extension (for the copyright
+> year in `LICENSE` and `CITATION.cff`) and a post-generation task (`git init` + first commit,
+> `uv sync --dev`, pre-commit installation). copier considers both unsafe and aborts with
+> `Template uses potentially unsafe features: jinja_extensions, tasks` if the flag is missing —
+> without creating anything. `copier update` needs it for the same reason.
 
 <details>
 <summary>Alternatively, without uv</summary>
@@ -88,14 +95,14 @@ This creates the project in a new `my-project/` directory (replace `my-project` 
 install [copier](https://copier.readthedocs.io) and the `jinja2-time` extension via pip or conda, and then run the following command to create a new project from this template:
 ```bash
 $ pip install copier jinja2-time
-$ copier copy gh:markusritschel/cookiecutter-pyproject my-project
+$ copier copy --trust gh:markusritschel/cookiecutter-pyproject my-project
 ```
 
 </details><br />
 
 <!-- Alternative URIs:
-$ copier copy https://github.com/markusritschel/cookiecutter-pyproject.git my-project
-$ copier copy git+ssh://git@github.com/markusritschel/cookiecutter-pyproject.git my-project
+$ copier copy --trust https://github.com/markusritschel/cookiecutter-pyproject.git my-project
+$ copier copy --trust git+ssh://git@github.com/markusritschel/cookiecutter-pyproject.git my-project
 -->
 
 Once you have answered the questions, your directory structure will be created and you're set, ready to start working on your new project 🚀.
