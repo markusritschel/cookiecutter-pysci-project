@@ -7,7 +7,6 @@ The script must be included at the very beginning of a Jupyter notebook via
 print("Load standard packages and some magic commands, set up logger and matplotlib rcParams.")
 
 %load_ext autoreload
-%load_ext jupyternotify
 
 # Load numpy and matplotlib to work interactively.
 # %pylab --no-import-all 
@@ -112,7 +111,6 @@ def alert(msg="All done!"):
 
 # ---------------------------------------------
 %autoreload 2
-# %autonotify -a 30 -o
 
 
 # ---------------------------------------------
