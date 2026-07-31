@@ -23,7 +23,7 @@ This template provides a full, modern development environment with integrated to
 ## Getting Started
 
 I recommend you to use `uv` as a dependency and environment manager.
-Read the [corresponding section of the documentation](./uv).
+Read the [corresponding section of the documentation](./uv.md).
 In your project's directory, run the following commands 
 
 === ":fontawesome-brands-apple: macOS / :fontawesome-brands-linux: Linux"
@@ -46,7 +46,7 @@ In your project's directory, run the following commands
     just qa                    # Verify setup
     ```
 
-To get more familiar with `uv`, I recommend you to have a look at [their documentation](https://docs.astral.sh/uv/).
+To get more familiar with `uv`, I recommend you to have a look at the [official documentation](https://docs.astral.sh/uv/).
 
 ***
 
@@ -95,7 +95,7 @@ git add .
 git commit -m "Add user_data function"
 ```
 
-Pre-commit hooks run automatically at this point — they update `uv.lock` and `requirements.txt` if needed. If a hook modifies a file, the commit is aborted; re-stage the changes and commit again.
+Pre-commit hooks run automatically at this point — they autofix lint violations with `ruff check --fix`, reformat with `ruff format`, and update `uv.lock` and `requirements.txt` if needed. If a hook modifies a file, the commit is aborted; re-stage the changes and commit again.
 
 !!! tip "Best practice"
     Make atomic commits. That is, commit every logical "bite" that does something meaningful in your code.
@@ -104,7 +104,7 @@ Pre-commit hooks run automatically at this point — they update `uv.lock` and `
 
 ### 5. Update Documentation
 
-Keep your project's [documentation](./documentation) up-to-date. Edit the markdown files in `docs/` and preview the rendered version, running
+Keep your project's [documentation](./documentation.md) up-to-date. Edit the markdown files in `docs/` and preview the rendered version, running
 ```bash
 just docs-serve    # View at http://localhost:8000
 ```
@@ -138,13 +138,17 @@ If GitHub pages is configured, your documentation will be served online on `http
 
 The template ships with a set of demo files to help you get started:
 
-| File                         | Purpose                                   |
-| ---------------------------- | ----------------------------------------- |
-| `src/mypackage/cli.py`       | Example CLI entry point using Typer       |
-| `src/mypackage/submodule.py` | Example module with a documented function |
-| `tests/test_*.py`            | Minimal test stubs                        |
-| `scripts/*.py`               | Example helper scripts                    |
-| `notebooks/`                 | Example notebooks                         |
+| File                         | Purpose                                                     |
+| ---------------------------- | ----------------------------------------------------------- |
+| `src/mypackage/cli.py`       | Example CLI entry point — only if you chose a CLI library[^cli] |
+| `src/mypackage/submodule.py` | Example module with a documented function                   |
+| `tests/*.py`                 | Minimal test stubs, including `conftest.py`                 |
+| `scripts/*.py`               | Example helper scripts (research projects only)             |
+| `notebooks/*.ipynb`          | Example notebooks (research projects only)                  |
+
+[^cli]: The `command_line_interface` prompt defaults to **No command-line interface**, in which case
+    neither `cli.py` nor the `[project.scripts]` entry point is generated. Choosing Typer, Click or
+    Docopt generates the matching flavour — all three expose the entry point as `app`.
 
 These files are deliberately **excluded from the initial git commit** by the post-generation hook. They exist in your working tree so you have something to reference, but they won't appear in your project's history. Replace or delete them as you build out your own code.
 

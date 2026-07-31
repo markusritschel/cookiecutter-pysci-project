@@ -60,12 +60,18 @@ A typical run looks like this:
 🎤 The initial version of your project
    0.1.0
 🎤 Which command-line interface library would you like to use?
-   Typer
+   No command-line interface
 🎤 Choose a license for your project
    MIT license
 🎤 Which documentation engine would you like to use?
    Sphinx
 ```
+
+The values shown are the defaults. For the two choice questions with real alternatives, pick
+deliberately: `command_line_interface` decides whether a `cli.py` and a `[project.scripts]` entry
+point are generated (Typer, Click or Docopt), and `docs_engine` selects between Sphinx, Zensical and
+MyST — which determines the contents of `docs/`, the `docs` dependency group and the build commands
+behind `just docs`. See [Prompts](prompts.md) for the full reference.
 
 If everything goes well, you should see a message like this at the end of the setup process:
 
