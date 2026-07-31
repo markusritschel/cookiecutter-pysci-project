@@ -358,3 +358,9 @@ emoji_generator = "zensical.extensions.emoji.to_svg"
 [project.validation]
 invalid_links = true
 invalid_link_anchors = true
+
+
+[project.extra.version]
+provider = "mike"
+default = "stable"
+alias = true

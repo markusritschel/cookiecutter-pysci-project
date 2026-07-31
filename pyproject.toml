@@ -13,6 +13,7 @@ requires-python = ">=3.10"
 dev = [
     "copier>=9",
     "jinja2-time",
+    "mike",
     "pytest>=8",
 ]
 
@@ -21,3 +22,6 @@ dev = [
 # covers the cookiecutter->copier migration helper. Listed explicitly so a bare
 # `pytest` does not try to collect a generated project left lying around.
 testpaths = ["tests", "scripts"]
+
+[tool.uv.sources]
+mike = { git = "https://github.com/squidfunk/mike" }
