@@ -89,10 +89,16 @@ clean-build:
     @find . -name '*.egg-info' -exec rm -fr {} +
     @find . -name '*.egg' -exec rm -f {} +
 
+{% endraw %}
 # Remove documentation build artifacts
 clean-docs:
     @echo "Cleaning documentation build artifacts..."
+{%- if docs_engine|lower == 'zensical' %}
+    @rm -fr site/
+{%- else %}
     @rm -fr docs/_build/ docs/api/
+{%- endif %}
+{% raw %}
 
 # Remove Python file artifacts
 clean-pyc:
