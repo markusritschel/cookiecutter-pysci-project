@@ -174,8 +174,63 @@ The `src/` layout ensures tests run against installed package.
 4. The justfile holds default tasks that can run simply like `just docs`.
 
 
+## Project Scaffolding
+
+Besides the code, the template generates the supporting files a maintained project is expected to
+have. Most need one edit from you at some point:
+
+| File | Purpose | Needs your attention |
+| --- | --- | --- |
+| `CITATION.cff` | Machine-readable citation metadata; GitHub renders a "Cite this repository" button | **Yes** — add your ORCID iD |
+| `CHANGELOG.md` | Record of user-visible changes | With each release |
+| `AUTHORS.md` | Contributors | When someone joins |
+| `LICENSE` | The license you chose at generation | No |
+| `.github/ISSUE_TEMPLATE.md` | Prompts for reporters to include the useful details | Optional |
+| `.github/PULL_REQUEST_TEMPLATE.md` | Checklist shown when opening a PR | Optional |
+| `.github/labeler.yml` | Path-based rules for automatic PR labels | When your layout changes |
+| `.github/dependabot.yml` | Weekly dependency update PRs | No — see [Tips](../tips.md) |
+
+!!! note "`LICENSE` and `CITATION.cff` are frozen after generation"
+    Both embed the current year, so they are listed in the template's `_skip_if_exists` to stop
+    `copier update` from silently rewriting the date. The consequence is that later structural
+    improvements to these two files do not reach existing projects either.
+
+
+## DevContainer
+
+`.devcontainer/` defines a reproducible container environment for
+[VS Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) and GitHub
+Codespaces. Opening the project in a supported editor offers to reopen it in the container.
+
+It is based on the official Microsoft Python image and, on creation, installs `uv`, runs `uv sync`,
+and installs the pre-commit hooks. The VS Code settings point the Python interpreter and pytest at
+the in-container `.venv`, so test discovery works without further configuration.
+
+Use it when you want the toolchain isolated from your machine, or to give a collaborator a
+working environment without a setup call. It is entirely optional — delete the directory if you
+develop natively.
+
+
+## AI Coding Agents
+
+The generated project includes a `.claude/CLAUDE.md` describing its own structure: the package
+layout, the path variables and `save()` helper, the testing and doctest conventions, the linting
+rules, and how template updates work. Agents that read repository instructions pick this up
+automatically, which saves re-explaining the project's shape in every session.
+
+It ships with a **TBD** placeholder at the top, along with an instruction telling the agent to
+interview you about the project's purpose and conventions and rewrite that section before doing
+anything else. Fill it in early — the rest of the file describes the template, but only you know
+what the project is for.
+
+!!! tip
+    Keep it current when the structure changes. A stale description is worse than none, since it is
+    followed confidently.
+
+
 ## See Also
 
+- [Package Conventions](./package-conventions.md) - Path variables, logging, `save()`
 - [Code Quality](./code-quality.md) - Linting, type checking, testing
 - [Task Automation](./justfile.md) - Available tasks
 - [Documentation](./documentation.md) - Building docs
@@ -189,4 +244,3 @@ The `src/` layout ensures tests run against installed package.
 
 
 
-- [Package Conventions](./package-conventions.md) - Path variables, logging, `save()`
