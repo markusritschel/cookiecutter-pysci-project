@@ -47,15 +47,17 @@ All answers can be changed afterward, but `package_name` in particular occurs in
 
 ## Tool choices
 
-**`command_line_interface`**
-<br />   Scaffolds a CLI module in your package using the selected framework:
+**`command_line_interface`** *(default: `No command-line interface`)*
+<br />   Scaffolds `src/<package>/cli.py` and a `[project.scripts]` entry point using the selected
+    framework. All three flavours expose the entry point as `app`. See [Command-Line
+    Interface](features/cli.md).
 
 | Choice   | Description                          |
 | -------- | ------------------------------------ |
 | `Typer`  | Modern, type-hint-based CLI          |
 | `Click`  | Decorator-based, widely used         |
 | `Docopt` | Docstring-driven argument parsing    |
-| `None`   | No CLI module generated              |
+| `No command-line interface` | No `cli.py` and no entry point (default) |
 
 **`project_license`**
 <br />   The license to include. Choices: `MIT`, `BSD`, `ISC`, `Apache 2.0`, `GPL v3`, `Not open source`.

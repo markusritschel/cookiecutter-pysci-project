@@ -17,6 +17,7 @@ nav = [
     "features/uv.md",
     "features/code-quality.md",
     "features/package-conventions.md",
+    "features/cli.md",
     "features/documentation.md",
     "features/github-actions.md",
     "features/publish-package.md",
